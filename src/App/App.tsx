@@ -2,7 +2,7 @@ import * as React from "react";
 
 class App extends React.Component
 {
-    constructor(props)
+    constructor(props: any)
     {
         super(props)
         {
@@ -13,7 +13,7 @@ class App extends React.Component
     render()
     {
         return (
-            <h1>app</h1>
+            <h1>app class</h1>
         )
     }
 }
