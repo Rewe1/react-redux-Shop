@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as redux from 'redux';
 
 class App extends React.Component
 {
