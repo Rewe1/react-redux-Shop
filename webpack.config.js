@@ -8,7 +8,6 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js'
     },
-
     module: 
     {
         rules: 
@@ -32,5 +31,5 @@ module.exports = {
     {
         extensions: [ '.ts', '.tsx', '.js'],
     },
-    plugins: [new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'src', 'index.html') })]
+    plugins: [new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'src', 'index.html') })],
 };
