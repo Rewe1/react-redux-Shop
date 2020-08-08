@@ -1,23 +1,23 @@
 import * as React from "react";
+import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 import * as actions from './actions'
 import './sass/App.scss';
 
-interface iCounter
-{
-    counter: number
-};
+import Nav from './Nav';
+import Counter from './Counter';
 
-function App()
+export default function App()
 {
     const dispatch = useDispatch();
     return (
-        <div>
-            <h1>{useSelector((state: iCounter) => state.counter)}</h1>
-            <button onClick={() => dispatch(actions.decrement())}>Decrement</button>
-            <button onClick={() => dispatch(actions.increment())}>Increment</button>
-        </div>
+        <Router>
+            <div>
+                <Nav/>
+                <Switch>
+                    <Route path='/counter' component={Counter}/>
+                </Switch>
+            </div>
+        </Router>
     )
 }
-
-export default App;
