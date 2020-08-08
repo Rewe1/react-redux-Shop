@@ -1,12 +1,21 @@
 import * as React from "react";
-import { Router, Switch, Route} from 'react-router-dom';
-import {useSelector, useDispatch} from 'react-redux';
-import * as actions from './actions'
+import {Link} from 'react-router-dom';
 
 export default function Nav()
 {
-    const dispatch = useDispatch();
     return (
-            <h1>Nav</h1>
+        <nav className='appNav'>
+            <ul>
+                <Link to='/'>
+                    <li>Home</li>
+                </Link>
+                <Link to='/shop'>
+                    <li>Shop</li>
+                </Link>
+                <Link to='/cart'>
+                    <li>Cart</li>
+                </Link>
+            </ul>
+        </nav>
     )
 }
