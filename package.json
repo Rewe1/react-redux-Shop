@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --open",
+    "start": "webpack-dev-server --host 0.0.0.0",
     "build": "webpack"
   },
   "author": "",
@@ -24,7 +24,11 @@
     "@babel/preset-react": "^7.10.4",
     "@types/html-webpack-plugin": "^3.2.3",
     "babel-loader": "^8.1.0",
+    "css-loader": "^4.2.1",
     "html-webpack-plugin": "^4.3.0",
+    "sass": "^1.26.10",
+    "sass-loader": "^9.0.3",
+    "style-loader": "^1.2.1",
     "ts-loader": "^8.0.2",
     "typescript": "^3.9.7",
     "webpack": "^4.44.1",
