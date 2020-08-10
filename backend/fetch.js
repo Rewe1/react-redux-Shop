@@ -4,6 +4,7 @@ const handleError = require('./handleError');
 
 router.get('/', (req, res) =>
 {
+    console.log('Fetching');
     items.find((err, resp) =>
     {
         if(err)
