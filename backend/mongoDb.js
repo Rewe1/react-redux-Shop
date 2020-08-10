@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
 const uri = 'mongodb+srv://rewe:WSVwD9zJGjhL@cluster0-lojkm.gcp.mongodb.net/shopAppDb?retryWrites=true&w=majority';
+
+// Connect to database
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, (err) =>
 {
     try
@@ -16,19 +18,16 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, (err)
     }
 });
 
-const connection = mongoose.connection;
-module.exports = connection;
-
-/* const messageSchema = new mongoose.Schema(
+// Create schema
+const itemSchema = new mongoose.Schema(
     {
-        name: String,
-        email: String,
-        phone: String,
-        message: String,
+        title: String,
+        category: String,
+        price: Number
     }
 );
-    
-const messages = mongoose.model('Messages', messageSchema);
-    
-const bodyParser = require('body-parser');
-const urlencodedParser = bodyParser.urlencoded({ extended: true }); */
+
+// Create model
+const items = mongoose.model('items', itemSchema);
+
+module.exports = items;
