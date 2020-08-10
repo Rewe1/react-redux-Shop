@@ -1,12 +1,6 @@
 const express = require('express');
 const app = express();
 
-// Root route
-app.get('/', (req, res) =>
-{
-    res.send('Hi');
-});
-
 // Fetch route
 const fetch = require('./fetch');
 app.use('/fetch', fetch);
