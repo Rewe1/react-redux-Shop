@@ -3,7 +3,7 @@
     $imgWidth: 128px;
     $imgMargin: 16px;
 
-    max-height: calc($imgWidth + $imgMargin);
+    max-height: calc(#{$imgWidth} + #{$imgMargin});
     text-align: left;
     display: flex;
     flex-direction: row;
@@ -37,6 +37,5 @@
     {
         font-weight: bold;
         color: $priceColor;
-        float: right;
     }
 }

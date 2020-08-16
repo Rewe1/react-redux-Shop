@@ -20,7 +20,7 @@
     ul
     {
         position: relative;
-        left: calc((-$imageWidth - $imageMargin)/2);
+        left: calc((-#{$imageWidth} - #{$imageMargin})/2);
         padding: 0;
         margin: 0;
         list-style-type: none;
