@@ -1,5 +1,14 @@
-$font: 21px sans-serif;
+$font: 18px sans-serif;
 $anchorFont: bold $font;
-$color: white;
-$primary: skyblue;
-$secondary: rgb(61, 60, 99);
+
+// Colors
+
+    $backgroundColor: #eee;
+    $primary: #76D6A6;
+    $secondary: #0C3040;
+
+    // Font Colors
+
+        $darkFontColor: #333;
+        $lightFontColor: #eee;
+        $priceColor: #257E52;

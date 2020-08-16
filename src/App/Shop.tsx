@@ -2,6 +2,8 @@ import React, {useState, useEffect} from "react";
 import {Link} from 'react-router-dom';
 import backendURL from "../../backend/serverURL";
 
+import ListShopItem from './ListShopItem'
+
 const itemSchema = 
 {
     title: String,
@@ -56,16 +58,14 @@ export default function Shop()
     return (
         <div className='appShop'>
             <h1>Shop</h1>
-            <Link to='/postItem'><span>Post an item</span></Link>
-            {
-                items.map(item =>
-                    <div className='appItem'>
-                        <h2>{`${item.title}`}</h2>
-                        <span>{`Category: ${item.category}`}</span>
-                        <span>{`Price: $${item.price}`}</span>
-                    </div>
-                )
-            }
+            <Link to='/postItem'><span id='postItem'>Post an item</span></Link>
+            <div className='items'>
+                {
+                    items.map(item =>
+                        <ListShopItem item={item}/>
+                    )
+                }
+            </div>
         </div>
     )
 }

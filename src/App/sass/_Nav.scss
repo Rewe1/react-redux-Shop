@@ -1,5 +1,7 @@
 .appNav
 {
+    width: 100%;
+    background-color: $primary;
     padding-top: 64px;
     
     ul
@@ -18,6 +20,6 @@
     a
     {
         font: $anchorFont;
-        color: $color;
+        color: $darkFontColor;
     }
 }

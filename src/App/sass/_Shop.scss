@@ -1,17 +1,16 @@
 .appShop
 {
+    display: grid;
+
     a
     {
         font: $anchorFont;
-        color: $color;
+        color: $darkFontColor;
     }
 
-    .appItem
+    .items
     {
-        background-color: rgba(255,255,255,0.2);
-        display: grid;
-        padding: 16px;
         margin-top: 32px;
-        border-radius: 16px;
+        border-top: 1px solid $darkFontColor;
     }
 }
