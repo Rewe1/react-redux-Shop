@@ -5,6 +5,7 @@ export default function Nav()
 {
     return (
         <nav className='appNav'>
+            <img></img>
             <ul>
                 <Link to='/'>
                     <li>Home</li>
