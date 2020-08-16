@@ -18,7 +18,7 @@ export default (props: {item: iItem}) =>
             <div>
                 <div className='head'>
                     <h2>{`${props.item.title}`}</h2>
-                    <span>{`Price: $${props.item.price}`}</span>
+                    <span>{`$${props.item.price.toFixed(2)}`}</span>
                 </div>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </div>

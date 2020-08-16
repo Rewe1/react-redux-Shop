@@ -1,6 +1,9 @@
 .appItem
 {
-    max-height: calc(128px + 2* 32px);
+    $imgWidth: 128px;
+    $imgMargin: 16px;
+
+    max-height: calc($imgWidth + $imgMargin);
     text-align: left;
     display: flex;
     flex-direction: row;
@@ -17,9 +20,9 @@
 
     img
     {
-        width: 128px;
+        width: $imgWidth;
         height: 128px;
-        margin: 0 16px 0 0;
+        margin: 0 $imgMargin 0 0;
     }
 
     .head
