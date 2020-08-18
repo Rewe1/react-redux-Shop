@@ -1,6 +1,6 @@
 import * as React from "react";
 import {useSelector, useDispatch} from 'react-redux';
-import * as actions from './actions'
+import counter from './redux/counter'
 
 interface iCounter
 {
@@ -13,8 +13,8 @@ export default function Cart()
     return (
         <div className='appCart'>
             <h1>{useSelector((state: iCounter) => state.counter)}</h1>
-            <button onClick={() => dispatch(actions.decrement())}>Decrement</button>
-            <button onClick={() => dispatch(actions.increment())}>Increment</button>
+            <button onClick={() => dispatch(counter.actions.decrement())}>Decrement</button>
+            <button onClick={() => dispatch(counter.actions.increment())}>Increment</button>
         </div>
     )
 }

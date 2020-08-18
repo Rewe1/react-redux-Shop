@@ -1,7 +1,5 @@
 import * as React from "react";
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import {useSelector, useDispatch} from 'react-redux';
-import * as actions from './actions'
 import './sass/index.scss';
 
 import Home from './Home';
@@ -12,7 +10,6 @@ import Cart from './Cart';
 
 export default function App()
 {
-    const dispatch = useDispatch();
     return (
         <Router>
             <div className='App'>

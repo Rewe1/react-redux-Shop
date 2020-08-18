@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import App from './App/App';
 import {createStore, compose} from 'redux';
 import {Provider} from 'react-redux';
-import root from './App/reducers';
+import reduxStore from './App/redux';
 
 declare global
 {
@@ -15,7 +15,7 @@ declare global
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
-    root, 
+    reduxStore.reducers, 
     composeEnhancers());
 
 ReactDOM.render
