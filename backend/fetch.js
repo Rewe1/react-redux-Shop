@@ -8,9 +8,14 @@ router.get('/', (req, res) =>
     items.find((err, resp) =>
     {
         if(err)
+        {
             handleError(err, res);
+        }
         else
+        {
+            console.log('Fetched')
             res.status(200).end(JSON.stringify(resp));
+        }
     })
 });
 

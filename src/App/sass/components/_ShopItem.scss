@@ -1,0 +1,48 @@
+.appItem
+{
+    background-color: #0C3040;
+    margin-top: 64px;
+    text-align: left;
+    padding: 16px;
+    color: $lightFontColor;
+
+    h2
+    {
+        margin-bottom: -6px;
+    }
+
+    #category
+    {
+        font-size: 14px;
+        margin-left: 16px;
+        font-weight: normal;
+    }
+
+    img
+    {
+        width: 512px;
+        height: 288px;
+        background-color: #333;
+    }
+
+    #price
+    {
+        color: $lightPriceColor;
+        font-weight: bold;
+    }
+
+    p
+    {
+        font-weight: normal;
+    }
+
+    @media only screen and (max-width: 804px)
+    {
+        $imageSize: 80vw;
+        img
+        {
+            width: $imageSize;
+            height: ($imageSize /16 * 9)
+        }
+    }
+}
