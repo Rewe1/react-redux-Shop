@@ -21,7 +21,7 @@ export default function Cart()
                 {
                     cartItemsState.items.map((cartItem) =>
                     {
-                        //console.log('Cart cartItem', shopItemsStore.methods.getItemById(cartItem.itemID))
+                        console.log('Cart cartItem', cartItem)
                         if(shopItemsStore.methods.getItemById(cartItem.itemID)._id === '-1')
                             return 'Item not found :c'
                         else

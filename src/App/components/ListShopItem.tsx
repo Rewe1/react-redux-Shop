@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom';
 
 export default (props: {item: iShopItem}) =>
 {
-    console.log(props.item)
     return (
         <div className='appListItem'>
             <img/>

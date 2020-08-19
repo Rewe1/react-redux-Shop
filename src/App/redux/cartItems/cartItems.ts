@@ -29,13 +29,31 @@ let defaultState =
 
 export default (state: iCartItemsState = defaultState, action: iCartItemsAction) =>
 {
+    let nState: iCartItemsState
+    let isNewItem: boolean = true
     switch(action.type)
     {
         case 'ADD_CART_ITEMS':
-            action.payload.items.map((item) =>
+            nState = 
             {
-                state.items.push(item);
+                items: [...state.items]
+            };
+
+            action.payload.items.map((nCartItem) =>
+            {
+                nState.items.map((cartItem) =>
+                {
+                    if(cartItem.itemID === nCartItem.itemID)
+                    {
+                        cartItem.amount += nCartItem.amount
+                        isNewItem = false
+                    }
+                })
+                if(isNewItem)
+                    nState.items.push(nCartItem)
             })
+
+            return nState
         default:
             return state
     }
