@@ -17,7 +17,7 @@ const itemSchema =
 
 async function getData()
 {
-    let data: iItem[] = [];
+    let data: iShopItem[] = [];
 
     await fetch(`http://${backendURL.host}:${backendURL.port}/fetch`)
     .then((res) =>
@@ -40,7 +40,7 @@ async function getData()
 export default function Shop()
 {
     const state: any = useSelector((state: tRootState) => state);
-    const items: iItem[] = state.shopItems.items;
+    const items: iShopItem[] = state.shopItems.items;
 
     if(items)
         return (

@@ -1,20 +1,9 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
 
-declare global
+export default (props: {item: iShopItem}) =>
 {
-    interface iItem
-    {
-        _id: string,
-        title: string,
-        category: string,
-        description: string,
-        price: number
-    }
-}
-
-export default (props: {item: iItem}) =>
-{
+    console.log(props.item)
     return (
         <div className='appListItem'>
             <img/>

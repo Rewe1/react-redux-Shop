@@ -1,6 +1,9 @@
 import React from 'react'
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux'
 import {RouteComponentProps} from 'react-router-dom'
+
+import shopItemsStore from '../redux/shopItems'
+import cartItemsStore from '../redux/cartItems'
 
 export interface Props extends RouteComponentProps<MatchParams> {}
 
@@ -10,25 +13,14 @@ interface MatchParams {
 
 export default (props: Props) =>
 {
-    const getItem = (id: string, items: iItem[]) =>
+    const dispatch = useDispatch()
+    let item: iShopItem = shopItemsStore.methods.getItemById(props.match.params.id);
+
+    let thisCartItem: iCartItem =
     {
-        for(let i = 0; i < items.length; i++)
-            if(items[i]._id === id)
-                return items[i];
-        return {
-            _id: '-1',
-            title: '',
-            category: '',
-            description: '',
-            price: -1
-        }
+        itemID: `${item._id}`,
+        amount: 1
     }
-
-    let state: any = useSelector<tRootState>((state: tRootState) => state)
-    let items: iItem[] = state.shopItems.items
-    let item: iItem = getItem(props.match.params.id, items);
-
-    console.log('ShopItem item', item)
 
     if(item)
         return (
@@ -43,6 +35,13 @@ export default (props: Props) =>
                         <span id='category'>{item.category}</span><br/>
                         <span id='price'>{`$${item.price ? item.price.toFixed(2) : "The price wasn't specified :c"}`}</span>
                         <p>{item.description ? item.description : "The description wasn't specified :c"}</p>
+
+                        <button onClick={() =>
+                        {
+                            dispatch(cartItemsStore.actions.addItems([thisCartItem]))
+                        }}>
+                            Add to Cart
+                        </button>
                     </div>
             }
             </div>

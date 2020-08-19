@@ -1,20 +1,20 @@
-import counter from './counter';
 import shopItems from './shopItems'
+import cartItems from './cartItems'
 import {combineReducers} from 'redux';
 
 declare global
 {
     type tRootState =
     {
-        counter: number
         shopItems: iShopItemsState
+        cartItems: iCartItemsState
     }
 }
 
 let root = combineReducers(
     {
-        counter: counter.reducer,
-        shopItems: shopItems.reducer
+        shopItems: shopItems.reducer,
+        cartItems: cartItems.reducer
     }
 );
 
@@ -23,7 +23,11 @@ export default
     reducers: root,
     actions:
     {
-        counter: counter.actions,
+        cartItems: cartItems.actions,
         shopItems: shopItems.actions
+    },
+    methods:
+    {
+        shopItems: shopItems.methods
     }
 };

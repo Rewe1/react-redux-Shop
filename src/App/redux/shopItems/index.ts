@@ -1,5 +1,10 @@
 import reducer from './shopItems'
+
+// Actions
 import setItems from './actions/setItems'
+
+// Methods
+import getItemById from './methods/getItemById'
 
 export default
 {
@@ -7,5 +12,9 @@ export default
     actions: 
     {
         setItems
+    },
+    methods:
+    {
+        getItemById
     }
 }

@@ -1,4 +1,4 @@
-export default (items: iItem[]): iShopItemsAction =>
+export default (items: iShopItem[]): iShopItemsAction =>
 {
     return (
         {

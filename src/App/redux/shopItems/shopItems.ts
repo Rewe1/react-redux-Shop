@@ -2,18 +2,27 @@ import actions from '.'
 
 declare global
 {
+    interface iShopItem
+    {
+        _id: string,
+        title: string,
+        category: string,
+        description: string,
+        price: number
+    }
+
     interface iShopItemsAction
     {
         type: string,
         payload: 
         { 
-            items: iItem[]
+            items: iShopItem[]
         }
     }
 
     interface iShopItemsState
     {
-        items: iItem[]
+        items: iShopItem[]
     }
 }
 
