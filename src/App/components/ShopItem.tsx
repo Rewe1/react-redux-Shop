@@ -1,5 +1,5 @@
-import React from 'react'
-import {useSelector, useDispatch} from 'react-redux'
+import React, {useState} from 'react'
+import {useDispatch} from 'react-redux'
 import {RouteComponentProps} from 'react-router-dom'
 
 import shopItemsStore from '../redux/shopItems'
@@ -11,8 +11,15 @@ interface MatchParams {
     id: string;
 }
 
+interface iCompState
+{
+    itemAmount: number
+}
+
 export default (props: Props) =>
 {
+    let [compState, setCompState] = useState<iCompState>(() => { return {itemAmount: 0}})
+
     const dispatch = useDispatch()
     let item: iShopItem = shopItemsStore.methods.getItemById(props.match.params.id);
 
@@ -35,10 +42,34 @@ export default (props: Props) =>
                         <span id='category'>{item.category}</span><br/>
                         <span id='price'>{`$${item.price ? item.price.toFixed(2) : "The price wasn't specified :c"}`}</span>
                         <p>{item.description ? item.description : "The description wasn't specified :c"}</p>
+                        <button onClick={() => 
+                        {
+                            setCompState(
+                                {
+                                    itemAmount: (compState.itemAmount === 0 ? 0 : compState.itemAmount -1)
+                                })
+                        }}>-</button>
+
+                        <input value={compState.itemAmount} readOnly/>
+
+                        <button onClick={() => 
+                        {
+                            setCompState({itemAmount: compState.itemAmount +1})
+                        }}>+</button>
 
                         <button onClick={() =>
                         {
-                            dispatch(cartItemsStore.actions.addItems([thisCartItem]))
+                            dispatch(cartItemsStore.actions.addItems([
+                                {
+                                    itemID: `${item._id}`,
+                                    amount: compState.itemAmount
+                                }
+                            ]))
+                            setCompState(
+                                {
+                                    itemAmount: 0
+                                }
+                            )
                         }}>
                             Add to Cart
                         </button>

@@ -19,13 +19,13 @@ export default function Cart()
         return (
             <div className='appCart'>
                 {
-                    cartItemsState.items.map((cartItem) =>
+                    cartItemsState.items.map((cartItem, i) =>
                     {
                         console.log('Cart cartItem', cartItem)
                         if(shopItemsStore.methods.getItemById(cartItem.itemID)._id === '-1')
                             return 'Item not found :c'
                         else
-                            return <ListShopItem item={shopItemsStore.methods.getItemById(cartItem.itemID)}/>
+                            return <ListShopItem key={i} item={shopItemsStore.methods.getItemById(cartItem.itemID)}/>
                     })
                 }
             </div>
