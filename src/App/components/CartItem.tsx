@@ -11,7 +11,6 @@ export default (props: {item: iCartItem}) =>
 {
     const dispatch = useDispatch()
 
-    console.log('cartItem item', props.item)
     let cartItem = shopItemsStore.methods.getItemById(props.item._id)
 
     if(cartItem._id === '-1')

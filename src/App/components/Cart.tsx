@@ -6,11 +6,25 @@ import {Link} from 'react-router-dom'
 import CartItem from './CartItem'
 
 // Stores
+import shopItemsStore from '../redux/shopItems'
 
 export default function Cart()
 {
     let state = useSelector((state: tRootState) => state)
     let cartItemsState = state.cartItems
+
+    const getTotal = () =>
+    {
+        let price: number = 0;
+
+        cartItemsState.items.map((cartItem) =>
+        {
+            let item = shopItemsStore.methods.getItemById(cartItem._id)
+            price += item.price * cartItem.amount;
+        })
+
+        return price
+    }
 
     if(cartItemsState.items.length)
         return (
@@ -22,6 +36,10 @@ export default function Cart()
                             return <CartItem key={i} item={cartItem}/>
                         })
                     }
+                </div>
+                <hr></hr>
+                <div>
+                <span>Total: {getTotal()}</span>
                 </div>
             </div>
         )
