@@ -1,6 +1,9 @@
 .appCart
 {
-    margin-top: 32px;
+    .items
+    {
+        border-top: 1px solid #333;
+    }
 
     a
     {

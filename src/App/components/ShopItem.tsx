@@ -29,35 +29,17 @@ export default (props: Props) =>
         amount: 1
     }
 
-    if(item)
+    if(item && item._id !== '-1')
         return (
             <div className='appItem'>
-            {
-                item._id === '-1' ?
-                    'Item not found :c'
-                :
-                    <div>
-                        <img/>
-                        <h2>{`${item.title ? item.title : "The title wasn't specified :c"}`}</h2>
-                        <span id='category'>{item.category}</span><br/>
-                        <span id='price'>{`$${item.price ? item.price.toFixed(2) : "The price wasn't specified :c"}`}</span>
-                        <p>{item.description ? item.description : "The description wasn't specified :c"}</p>
-                        <button onClick={() => 
-                        {
-                            setCompState(
-                                {
-                                    itemAmount: (compState.itemAmount === 0 ? 0 : compState.itemAmount -1)
-                                })
-                        }}>-</button>
-
-                        <input value={compState.itemAmount} readOnly/>
-
-                        <button onClick={() => 
-                        {
-                            setCompState({itemAmount: compState.itemAmount +1})
-                        }}>+</button>
-
-                        <button onClick={() =>
+                <div>
+                    <img/>
+                    <h2>{`${item.title ? item.title : "The title wasn't specified :c"}`}</h2>
+                    <span id='category'>{item.category}</span><br/>
+                    <span id='price'>{`$${item.price ? item.price.toFixed(2) : "The price wasn't specified :c"}`}</span>
+                    <p>{item.description ? item.description : "The description wasn't specified :c"}</p>
+                    <div id='addItemToCart'>
+                        <button id='add' onClick={() =>
                         {
                             dispatch(cartItemsStore.actions.addItems([
                                 {
@@ -69,12 +51,26 @@ export default (props: Props) =>
                                 {
                                     itemAmount: 0
                                 }
-                            )
-                        }}>
-                            Add to Cart
+                                )
+                            }}>
+                            Add
                         </button>
+                        <div id='setAmount'>
+                            <button id='decreaseAmount' onClick={() => 
+                            {
+                                setCompState(
+                                    {
+                                        itemAmount: (compState.itemAmount === 0 ? 0 : compState.itemAmount -1)
+                                    })
+                            }}>-</button>
+                            <input id='amount' value={compState.itemAmount} readOnly/>
+                            <button id='increaseAmount' onClick={() => 
+                            {
+                                setCompState({itemAmount: compState.itemAmount +1})
+                            }}>+</button>
+                        </div>
                     </div>
-            }
+                </div>
             </div>
         )
     else

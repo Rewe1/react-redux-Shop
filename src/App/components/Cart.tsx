@@ -15,12 +15,14 @@ export default function Cart()
     if(cartItemsState.items.length)
         return (
             <div className='appCart'>
-                {
-                    cartItemsState.items.map((cartItem, i) =>
+                <div className='items'>
                     {
-                        return <CartItem key={i} item={cartItem}/>
-                    })
-                }
+                        cartItemsState.items.map((cartItem, i) =>
+                        {
+                            return <CartItem key={i} item={cartItem}/>
+                        })
+                    }
+                </div>
             </div>
         )
     else

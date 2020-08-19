@@ -1,7 +1,6 @@
 .appItem
 {
     background-color: #0C3040;
-    margin-top: 64px;
     text-align: left;
     padding: 16px;
     color: $lightFontColor;
@@ -34,6 +33,50 @@
     p
     {
         font-weight: normal;
+    }
+
+    #addItemToCart
+    {
+        display: flex;
+        align-items: center;
+        flex-direction: row-reverse;
+    }
+
+    #setAmount
+    {
+        width: max-content;
+        height: 24px;
+        background-color: $lightFontColor;
+        border: 1px solid #333;
+        border-radius: 4px;
+    }
+
+    #amount, #increaseAmount, #decreaseAmount
+    {
+        width: 24px;
+        height: 24px;
+        text-align: center;
+        font-weight: bold;
+        background-color: transparent;
+        border: 0;
+    }
+    
+    #increaseAmount, #decreaseAmount, #add
+    {
+        cursor: pointer;
+    }
+
+    #add
+    {
+        width: 48px;
+        height: 48px;
+        text-align: center;
+        background-color: $lightPriceColor;
+        border-radius: 100%;
+        border: 0;
+        color: $lightFontColor;
+        font-weight: bold;
+        margin-left: 16px;
     }
 
     @media only screen and (max-width: 804px)

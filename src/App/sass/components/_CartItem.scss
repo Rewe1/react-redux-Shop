@@ -3,7 +3,6 @@
     $imgWidth: 32px;
     $imgMargin: 16px;
 
-    max-height: calc(#{$imgWidth} + #{$imgMargin});
     text-align: left;
     display: flex;
     flex-direction: row;
@@ -34,9 +33,53 @@
         align-items: center;
     }
 
-    span
+    #price
     {
         font-weight: bold;
         color: $priceColor;
+    }
+
+    #cartItemAmount
+    {
+        display: flex;
+        align-items: center;
+        flex-direction: row-reverse;
+    }
+
+    #setCartItemAmount
+    {
+        width: max-content;
+        height: 24px;
+        background-color: $lightFontColor;
+        border: 1px solid #333;
+        border-radius: 4px;
+    }
+
+    #amount, #increaseAmount, #decreaseAmount
+    {
+        width: 24px;
+        height: 24px;
+        text-align: center;
+        font-weight: bold;
+        background-color: transparent;
+        border: 0;
+    }
+    
+    #increaseAmount, #decreaseAmount, #removeItem
+    {
+        cursor: pointer;
+    }
+
+    #removeItem
+    {
+        width: 32px;
+        height: 32px;
+        text-align: center;
+        background-color: #c93939;
+        border-radius: 100%;
+        border: 0;
+        color: $lightFontColor;
+        font-weight: bold;
+        margin-left: 16px;
     }
 }

@@ -28,20 +28,24 @@ export default (props: {item: iCartItem}) =>
                     <Link to={`/shop/item/${cartItem._id}`}>
                         <h2>{`${cartItem.title ? cartItem.title : "The title wasn't specified :c"}`}</h2>
                     </Link>
-                    <span>{`$${cartItem.price ? cartItem.price.toFixed(2) : "The price wasn't specified :c"}`}</span>
-                    <span>{props.item.amount}</span>
-                    <button onClick={() =>
-                    {
-                        dispatch(cartItemsStore.actions.addItems([{...props.item, amount: -1}]))
-                    }}>-</button>
-                    <button onClick={() =>
-                    {
-                        dispatch(cartItemsStore.actions.addItems([{...props.item, amount: 1}]))
-                    }}>+</button>
-                    <button onClick={() =>
-                    {
-                        dispatch(cartItemsStore.actions.removeItems([{...props.item}]))
-                    }}>X</button>
+                    <span id='price'>{`${cartItem.price ? `$${cartItem.price.toFixed(2)}` : "The price wasn't specified :c"}`}</span>
+                    <div id='cartItemAmount'>
+                        <button id='removeItem' onClick={() =>
+                        {
+                            dispatch(cartItemsStore.actions.removeItems([{...props.item}]))
+                        }}>X</button>
+                        <div id='setCartItemAmount'>
+                            <button id='decreaseAmount' onClick={() =>
+                            {
+                                dispatch(cartItemsStore.actions.addItems([{...props.item, amount: -1}]))
+                            }}>-</button>
+                            <span id='amount'>{props.item.amount}</span>
+                            <button id='increaseAmount' onClick={() =>
+                            {
+                                dispatch(cartItemsStore.actions.addItems([{...props.item, amount: 1}]))
+                            }}>+</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         )
