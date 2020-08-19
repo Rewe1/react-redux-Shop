@@ -1,8 +1,11 @@
 @import './globals';
+
 @import './App';
-@import './components/Nav';
-@import './components/PostItem';
-@import './components/Shop';
-    @import './components/ShopItem';
-@import './components/Home';
-@import './components/ListShopItem';
+    @import './components/Nav';
+    @import './components/PostItem';
+    @import './components/Shop';
+        @import './components/ListShopItem';
+        @import './components/ShopItem';
+    @import './components/Home';
+    @import './components/Cart';
+        @import './components/CartItem';

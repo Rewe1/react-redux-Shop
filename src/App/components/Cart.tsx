@@ -1,17 +1,14 @@
 import * as React from "react";
-import {useSelector, useDispatch} from 'react-redux';
-import cartItems from '../redux/cartItems'
+import {useSelector} from 'react-redux';
 import {Link} from 'react-router-dom'
 
 // Components
-import ListShopItem from './ListShopItem'
+import CartItem from './CartItem'
 
 // Stores
-import shopItemsStore from '../redux/shopItems'
 
 export default function Cart()
 {
-    const dispatch = useDispatch();
     let state = useSelector((state: tRootState) => state)
     let cartItemsState = state.cartItems
 
@@ -21,11 +18,7 @@ export default function Cart()
                 {
                     cartItemsState.items.map((cartItem, i) =>
                     {
-                        console.log('Cart cartItem', cartItem)
-                        if(shopItemsStore.methods.getItemById(cartItem.itemID)._id === '-1')
-                            return 'Item not found :c'
-                        else
-                            return <ListShopItem key={i} item={shopItemsStore.methods.getItemById(cartItem.itemID)}/>
+                        return <CartItem key={i} item={cartItem}/>
                     })
                 }
             </div>

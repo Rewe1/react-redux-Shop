@@ -1,0 +1,42 @@
+.appCartItem
+{
+    $imgWidth: 32px;
+    $imgMargin: 16px;
+
+    max-height: calc(#{$imgWidth} + #{$imgMargin});
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid $darkFontColor;
+    border-top-width: 0;
+    padding: 16px;
+    font-size: 18px;
+
+    h2
+    {
+        font-size: 20px;
+        margin: 0;
+    }
+
+    img
+    {
+        min-width: $imgWidth;
+        height: 32px;
+        margin: 0 $imgMargin 0 0;
+        background-color: #333;
+    }
+
+    .head
+    {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    span
+    {
+        font-weight: bold;
+        color: $priceColor;
+    }
+}

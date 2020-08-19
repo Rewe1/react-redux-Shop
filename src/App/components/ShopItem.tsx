@@ -25,7 +25,7 @@ export default (props: Props) =>
 
     let thisCartItem: iCartItem =
     {
-        itemID: `${item._id}`,
+        _id: `${item._id}`,
         amount: 1
     }
 
@@ -61,7 +61,7 @@ export default (props: Props) =>
                         {
                             dispatch(cartItemsStore.actions.addItems([
                                 {
-                                    itemID: `${item._id}`,
+                                    _id: `${item._id}`,
                                     amount: compState.itemAmount
                                 }
                             ]))
