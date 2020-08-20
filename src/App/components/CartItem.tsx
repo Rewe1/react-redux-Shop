@@ -24,7 +24,7 @@ export default (props: {item: iCartItem}) =>
         return (
             <div className='appCartItem'>
                 <img/>
-                <div>
+                <div className='itemInfo'>
                     <Link to={`/shop/item/${cartItem._id}`}>
                         <h2>{`${cartItem.title ? cartItem.title : "The title wasn't specified :c"}`}</h2>
                     </Link>
