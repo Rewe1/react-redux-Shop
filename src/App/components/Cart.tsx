@@ -12,19 +12,16 @@ export default function Cart()
 {
     let state = useSelector((state: tRootState) => state)
     let cartItemsState = state.cartItems
+    let shopItemsState = state.shopItems
+    let price: number = 0;
 
-    const getTotal = () =>
+    let getItemById = shopItemsStore.methods.getItemById;
+
+    cartItemsState.items.map((cartItem) =>
     {
-        let price: number = 0;
-
-        cartItemsState.items.map((cartItem) =>
-        {
-            let item = shopItemsStore.methods.getItemById(cartItem._id)
-            price += item.price * cartItem.amount;
-        })
-
-        return price
-    }
+        let item = getItemById(shopItemsState.items, cartItem._id)
+        price += item.price * cartItem.amount;
+    })
 
     if(cartItemsState.items.length)
         return (
@@ -39,7 +36,7 @@ export default function Cart()
                 </div>
                 <hr></hr>
                 <div>
-                <span>Total: {getTotal()}</span>
+                <span>Total: ${(Math.round(price*100)/100).toFixed(2)}</span>
                 </div>
             </div>
         )

@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {useDispatch} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
 import {RouteComponentProps} from 'react-router-dom'
 
 import shopItemsStore from '../redux/shopItems'
@@ -18,10 +18,11 @@ interface iCompState
 
 export default (props: Props) =>
 {
+    const state: tRootState = useSelector((state: tRootState) => state)
     let [compState, setCompState] = useState<iCompState>(() => { return {itemAmount: 0}})
 
     const dispatch = useDispatch()
-    let item: iShopItem = shopItemsStore.methods.getItemById(props.match.params.id);
+    let item: iShopItem = shopItemsStore.methods.getItemById(state.shopItems.items, props.match.params.id);
 
     let thisCartItem: iCartItem =
     {

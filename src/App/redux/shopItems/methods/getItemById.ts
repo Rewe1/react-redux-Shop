@@ -1,10 +1,5 @@
-import {useSelector} from 'react-redux'
-
-export default (id: string): iShopItem =>
+export default (items: iShopItem[], id: string): iShopItem =>
 {
-    const state: tRootState = useSelector((state: tRootState) => state)
-    const items: iShopItem[] = state.shopItems.items
-
     for(let i = 0; i < items.length; i++)
         if(items[i]._id === id)
             return items[i];

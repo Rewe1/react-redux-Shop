@@ -1,5 +1,5 @@
 import React from 'react'
-import {useDispatch} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
 import {Link} from 'react-router-dom'
 
 
@@ -9,9 +9,10 @@ import cartItemsStore from '../redux/cartItems'
 
 export default (props: {item: iCartItem}) =>
 {
+    const state: tRootState = useSelector((state: tRootState) => state)
     const dispatch = useDispatch()
 
-    let cartItem = shopItemsStore.methods.getItemById(props.item._id)
+    let cartItem = shopItemsStore.methods.getItemById(state.shopItems.items, props.item._id)
 
     if(cartItem._id === '-1')
         return (
