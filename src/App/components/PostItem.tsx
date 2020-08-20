@@ -18,7 +18,7 @@ export default function PostItem()
                 <textarea form='itemForm' name='description' maxLength={128} placeholder="Type the item's description..." required/>
                 <input name='price' maxLength={8} type='text' pattern="[.0-9]{1,8}" placeholder="Type the item's price..." required />
             </form>
-                <button form='itemForm' type='submit'>Submit</button>
+                <button form='itemForm' type='submit'>Post item</button>
         </div>
     )
 }
