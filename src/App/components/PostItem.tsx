@@ -10,7 +10,6 @@ export default function PostItem()
             <form id='itemForm' action={`http://${backendURL.host}:${backendURL.port}/postItem`} method='post'>
                 <input name='title' maxLength={32} type='text' placeholder="Type the post's title..." required/>
                 <select name='category' required>
-                    <option selected={true} disabled>Select a category...</option>
                     <option value='Clothes'>Clothes</option>
                     <option value='Tools'>Tools</option>
                     <option value='Hobby'>Hobby</option>
