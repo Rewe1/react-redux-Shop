@@ -5,7 +5,6 @@ import backendURL from "./../../backend/serverURL"
 import {useDispatch} from 'react-redux'
 import shopItems from './redux/shopItems'
 
-import Home from './components/Home';
 import Nav from './components/Nav';
 import Shop from './components/Shop';
     import ShopItem from './components/ShopItem'
@@ -37,8 +36,7 @@ export default function App()
                 <Nav/>
                 <div className='appBody'>
                     <Switch>
-                        <Route exact path='/' component={Home}/>
-                        <Route exact path='/shop' component={Shop}/>
+                        <Route exact path='/' component={Shop}/>
                             <Route path='/shop/item/:id' component={ShopItem}/>
                         <Route path='/cart' component={Cart}/>
                         <Route path='/postItem' component={PostItem}/>

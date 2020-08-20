@@ -44,7 +44,7 @@ export default function Cart()
         return(
             <div className='appCart'>
                 You have no items in your cart :c
-                <Link to='/shop'><h1>Buy something NOW</h1></Link>
+                <Link to='/'><h1>Buy something NOW</h1></Link>
             </div>
         )
 }
