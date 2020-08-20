@@ -35,15 +35,15 @@ export default function App()
         <Router>
             <div className='App'>
                 <Nav/>
-                <Switch>
-                    <div className='appBody'>
+                <div className='appBody'>
+                    <Switch>
                         <Route exact path='/' component={Home}/>
                         <Route exact path='/shop' component={Shop}/>
                             <Route path='/shop/item/:id' component={ShopItem}/>
                         <Route path='/cart' component={Cart}/>
                         <Route path='/postItem' component={PostItem}/>
-                    </div>
-                </Switch>
+                    </Switch>
+                </div>
             </div>
         </Router>
     )
