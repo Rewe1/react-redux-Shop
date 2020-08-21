@@ -24,12 +24,6 @@ export default (props: Props) =>
     const dispatch = useDispatch()
     let item: iShopItem = shopItemsStore.methods.getItemById(state.shopItems.items, props.match.params.id);
 
-    let thisCartItem: iCartItem =
-    {
-        _id: `${item._id}`,
-        amount: 1
-    }
-
     if(item && item._id !== '-1')
         return (
             <div className='appItem'>
