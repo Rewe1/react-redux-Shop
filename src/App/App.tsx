@@ -25,7 +25,8 @@ export default function App()
 
     const fetchItems = async () =>
     {
-        let data = await fetch(`http://${backendURL.host}:${backendURL.port}/fetch`);
+        let data = await fetch(backendURL.fetchURL);
+        console.log(backendURL.fetchURL);
         let items: iShopItem[] = await data.json();
         dispatch(shopItemsStore.actions.setItems(items));
     }

@@ -7,7 +7,7 @@ export default function PostItem()
     return (
         <div className='appPostItem'>
             <h1>Post item</h1>
-            <form id='itemForm' action={`http://${backendURL.host}:${backendURL.port}/postItem`} method='post'>
+            <form id='itemForm' action={backendURL.postURL} method='post'>
                 <input name='title' maxLength={32} type='text' placeholder="Type the post's title..." required/>
                 <select name='category' required>
                     <option value='Clothes'>Clothes</option>
