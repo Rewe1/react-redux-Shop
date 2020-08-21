@@ -3,7 +3,6 @@ import backendURL from "../../../backend/serverURL";
 
 export default function PostItem()
 {
-    console.log(backendURL.host);
     return (
         <div className='appPostItem'>
             <h1>Post item</h1>
