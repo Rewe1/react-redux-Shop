@@ -1,7 +1,7 @@
 {
-  "name": "reduxtrial",
+  "name": "shop-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "Shop App made with React-router and Redux",
   "main": "index.js",
   "scripts": {
     "start": "npm-run-all -p start-backend start-frontend",
