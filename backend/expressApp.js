@@ -5,7 +5,7 @@ const app = express();
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', ['http://192.168.1.7:8080']);
+    res.setHeader('Access-Control-Allow-Origin', [`http://${serverURL.host}:8080`]);
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET');
@@ -40,5 +40,5 @@ app.use('/postItem', postItem);
 const serverURL = require('./serverURL');
 app.listen(serverURL.port, serverURL.host, () =>
 {
-    console.log(`Listening on ${serverURL.host}:${serverURL.port}`);
+    console.log(`Backend: Listening on http://${serverURL.host}:${serverURL.port}`);
 })

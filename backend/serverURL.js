@@ -1,6 +1,6 @@
 // Backend variables to sync the urls of get/post requests from frontend
 
-let host = '192.168.1.7'
+let host = 'localhost'
 let port = 8081
 let url = `${host}${port ? `:${port}` : ''}`
 

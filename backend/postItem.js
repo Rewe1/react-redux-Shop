@@ -11,7 +11,6 @@ const urlencodedParser = bodyParser.urlencoded({ extended: true });
 
 router.post('/', urlencodedParser, (req, res) =>
 {
-    console.log('posting');
     items(req.body).save((err) =>
     {
         if(err)
