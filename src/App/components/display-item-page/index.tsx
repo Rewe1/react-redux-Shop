@@ -32,7 +32,7 @@ export default (props: Props) =>
                 <span className='item-category' id='category'>{item.category}</span><br/>
                 <span className='item-price' id='price'>{`$${item.price ? item.price.toFixed(2) : "The price wasn't specified :c"}`}</span>
                 <p className='item-description'>{item.description ? item.description : "The description wasn't specified :c"}</p>
-                <div id='addItemToCart'>
+                <div id='add-item-to-cart'>
                     <button id='add' onClick={() =>
                     {
                         dispatch(cartItemsStore.actions.addItems([
@@ -49,16 +49,16 @@ export default (props: Props) =>
                         }}>
                         Add
                     </button>
-                    <div id='setAmount'>
-                        <button id='decreaseAmount' onClick={() => 
+                    <div id='set-amount'>
+                        <button id='decrease-amount' onClick={() => 
                         {
                             setCompState(
                                 {
                                     itemAmount: (compState.itemAmount === 0 ? 0 : compState.itemAmount -1)
                                 })
                         }}>-</button>
-                        <input id='amount' value={compState.itemAmount} readOnly/>
-                        <button id='increaseAmount' onClick={() => 
+                        <input id='item-amount' value={compState.itemAmount} readOnly/>
+                        <button id='increase-amount' onClick={() => 
                         {
                             setCompState({itemAmount: compState.itemAmount +1})
                         }}>+</button>
@@ -68,7 +68,7 @@ export default (props: Props) =>
         )
     else
         return (
-            <div className='appItem'>
+            <div className='display-item-div'>
                 Loading item...
             </div>
         )

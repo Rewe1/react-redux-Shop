@@ -36,14 +36,14 @@
         font-weight: normal;
     }
 
-    #addItemToCart
+    #add-item-to-cart
     {
         display: flex;
         align-items: center;
         flex-direction: row-reverse;
     }
 
-    #setAmount
+    #set-amount
     {
         width: max-content;
         height: 24px;
@@ -52,7 +52,7 @@
         border-radius: 4px;
     }
 
-    #amount, #increaseAmount, #decreaseAmount
+    #item-amount, #increase-amount, #decrease-amount
     {
         width: 24px;
         height: 24px;
@@ -62,7 +62,7 @@
         border: 0;
     }
     
-    #increaseAmount, #decreaseAmount, #add
+    #increase-amount, #decrease-amount, #add
     {
         cursor: pointer;
     }
