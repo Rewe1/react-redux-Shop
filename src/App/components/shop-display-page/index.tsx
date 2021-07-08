@@ -11,7 +11,7 @@ export default function Shop()
 
     if(items)
         return (
-            <div className='items-display'>
+            <div className='items-display-div'>
                 <h1>Shop</h1>
                 <Link className='post-item-a' to='/postItem'><span id='postItem'>Post an item</span></Link>
                 <div className='items-list'>

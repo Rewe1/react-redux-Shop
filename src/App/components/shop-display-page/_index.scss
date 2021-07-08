@@ -1,5 +1,7 @@
-.items-display
+.items-display-div
 {
+    @import './shop-item/index';
+    
     .post-item-a
     {
         font: $anchorFont;

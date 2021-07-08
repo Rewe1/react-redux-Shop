@@ -26,7 +26,7 @@ export default (props: Props) =>
 
     if(item && item._id !== '-1')
         return (
-            <div className='appItem'>
+            <div className='display-item-div'>
                 <div>
                     <img src='https://via.placeholder.com/512x288'/>
                     <h2>{`${item.title ? item.title : "The title wasn't specified :c"}`}</h2>
