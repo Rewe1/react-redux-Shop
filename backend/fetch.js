@@ -4,7 +4,6 @@ const handleError = require('./handleError');
 
 router.get('/', (req, res) =>
 {
-    console.log('Fetching');
     items.find((err, resp) =>
     {
         if(err)
@@ -13,7 +12,6 @@ router.get('/', (req, res) =>
         }
         else
         {
-            console.log('Fetched')
             res.status(200).end(JSON.stringify(resp));
         }
     })

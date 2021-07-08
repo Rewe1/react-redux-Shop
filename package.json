@@ -1,13 +1,13 @@
 {
   "name": "shop-app",
-  "version": "1.0.2",
+  "version": "0.0.2",
   "description": "Shop App made with React-router and Redux",
   "main": "app.js",
   "scripts": {
     "start": "npm-run-all -p start-backend start-frontend",
     "start-frontend": "node app.js",
     "start-backend": "node backend/expressApp",
-    "start-dev": "npm-run-all -p start-backend-dev start-frontend-dev",
+    "dev": "npm-run-all -p start-backend-dev start-frontend-dev",
     "start-frontend-dev": "webpack-dev-server --host 0.0.0.0",
     "start-backend-dev": "nodemon backend/expressApp",
     "build": "webpack"
