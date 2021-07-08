@@ -6,10 +6,10 @@ import {useDispatch} from 'react-redux'
 import shopItems from './redux/shopItems'
 
 import AppNav from './components/app-nav';
-import Shop from './components/Shop/index';
-    import ShopItem from './components/ShopItem/index'
-import PostItem from './components/PostItem/index';
-import Cart from './components/Cart/index';
+import Shop from './components/shop-display-page/index';
+import ShopItem from './components/display-item-page/index'
+import PostItem from './components/post-item-page/index';
+import Cart from './components/cart-page/index';
 
 import shopItemsStore from './redux/shopItems'
 

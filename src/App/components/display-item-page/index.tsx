@@ -28,7 +28,7 @@ export default (props: Props) =>
         return (
             <div className='appItem'>
                 <div>
-                    <img src='https://via.placeholder.com/128'/>
+                    <img src='https://via.placeholder.com/512x288'/>
                     <h2>{`${item.title ? item.title : "The title wasn't specified :c"}`}</h2>
                     <span id='category'>{item.category}</span><br/>
                     <span id='price'>{`$${item.price ? item.price.toFixed(2) : "The price wasn't specified :c"}`}</span>

@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux';
 import {Link} from 'react-router-dom'
 
 // Components
-import CartItem from '../CartItem/index'
+import CartItem from './cart-item/index'
 
 // Stores
 import shopItemsStore from '../../redux/shopItems'
