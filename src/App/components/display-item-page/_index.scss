@@ -1,36 +1,37 @@
 .display-item-div
 {
+    padding: 16px;
+    margin-bottom: 32px;
+
     background-color: #0C3040;
     text-align: left;
-    padding: 16px;
     color: $colorWhite;
 
-    h2
+    .item-title
     {
         margin-bottom: -6px;
     }
 
-    #category
+    .item-category
     {
         font-size: 14px;
         margin-left: 16px;
         font-weight: normal;
     }
 
-    img
+    .item-img
     {
         width: 512px;
         height: 288px;
-        background-color: #333;
     }
 
-    #price
+    .item-price
     {
         color: $colorPriceLight;
         font-weight: bold;
     }
 
-    p
+    .item-description
     {
         font-weight: normal;
     }
