@@ -8,14 +8,14 @@ export default function Nav()
     const state: tRootState = useSelector((state: tRootState) => state)
 
     return (
-        <nav className='appNav'>
+        <nav className='app-nav'>
             <img className='app-logo' src='https://via.placeholder.com/48'/>
-            <Link to='/'>
+            <Link className='home-page-a' to='/'>
                 Shop
             </Link>
-            <Link id='cart' to='/cart'>
-                <img className='cart-img' src={cartImg}/>
-                <span className='items-number'>{state.cartItems.items.length}</span>
+            <Link className='cart-page-a' to='/cart'>
+                <img className='cart-a-img' src={cartImg}/>
+                <span className='cart-items-number'>{state.cartItems.items.length}</span>
             </Link>
         </nav>
     )

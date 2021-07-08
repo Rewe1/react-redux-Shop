@@ -13,3 +13,23 @@ $anchorFont: bold $font;
         $colorWhite: #eee;
         $colorPrice: #257E52;
         $colorPriceLight: #76D6A6;
+
+html
+{
+    background-color: $colorWhite;
+    font: $font;
+    color: black;
+    text-align: center;
+}
+
+body
+{
+    width: auto;
+    margin: 0;
+}
+
+a
+{
+    color: black;
+    text-decoration: none;
+}

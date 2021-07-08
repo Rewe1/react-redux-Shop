@@ -1,77 +1,53 @@
-
-.appNav
+.app-nav
 {
-    $imageWidth: 48px;
-    $imageMargin: 16px;
+    width: calc(100% - 32px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
 
-    width: 100%;
     background-color: $colorPrimary;
-    padding: 32px 0 16px 0;
+}
 
-    img
+.app-logo
+{
+    width: 48px;
+    height: auto;
+}
+
+.home-page-a
+{
+    font-weight: bold;
+}
+
+.cart-page-a
+{
+    $size: 32px;
+    width: $size;
+    height: $size;
+
+    display: block;
+
+    .cart-a-img
     {
-        float: left;
-        margin-left: $imageMargin;
-        width: $imageWidth;
+        width: $size;
         height: auto;
     }
     
-    ul
+    .cart-items-number
     {
-        position: relative;
-        
-        padding: 0;
-        margin: 0;
-        list-style-type: none;
-    }
+        width: 24px;
+        height: 24px;
     
-    li
-    {
-        display: inline;
-        padding: 16px;
-    }
-
-    a
-    {
-        font: $anchorFont;
-        color: black;
-        left: calc((-#{$imageWidth} - #{$imageMargin})/2);
-    }
-
-    #cart
-    {
-        $size: 48px;
-        width: $size;
-        height: $size;
-        border-radius: 100%;
-        float: right;
-        margin-right: 16px;
         display: flex;
-        align-items: flex-end;
-        justify-content: flex-end;
-        text-decoration: none;
-
-        .items-number
-        {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            $size: 28px;
-            min-width: $size;
-            min-height: $size;
-            position: relative;
-            top: 4px;
-            left: 4px;
-            border-radius: 100%;
-            background-color: $colorLightRed;
-            color: black;
-        }
-    }
-
-    .cart-img
-    {
+        justify-content: center;
+        align-items: center;
+    
         position: relative;
-        top: 0;
-        left: 0;
+        top: calc(-1 * #{$size} /2);
+        left: calc(#{$size} /2);
+    
+        border-radius: 100%;
+        background-color: adjust-color($color: $colorLightRed, $alpha: -.2);
     }
 }
