@@ -1,19 +1,22 @@
 const router = require('express').Router();
 const items = require('./mongoDb');
-const handleError = require('./handleError');
 
 router.get('/', (req, res) =>
 {
-    items.find((err, resp) =>
+    items.find((err, data) =>
     {
-        if(err)
+        try
         {
-            handleError(err, res);
+            if(err)
+                throw err
         }
-        else
+        catch(exc)
         {
-            res.status(200).end(JSON.stringify(resp));
+            console.error(exc);
+            if(res)
+                res.status(500).end();
         }
+            res.status(200).end(JSON.stringify(data));
     })
 });
 
