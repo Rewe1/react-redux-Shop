@@ -86,7 +86,7 @@
         img
         {
             width: $imageSize;
-            height: ($imageSize /16 * 9)
+            height: calc($imageSize /16 * 9)
         }
     }
 }

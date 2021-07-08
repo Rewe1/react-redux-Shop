@@ -6,7 +6,7 @@ export default function PostItem()
     return (
         <div className='post-item-div'>
             <h1>Post item</h1>
-            <form className='post-item-form' id='itemForm' action={backendURL.postURL} method='post'>
+            <form className='post-item-form' id='itemForm' action={backendURL.shopItems.postURL} method='post'>
                 <input className='title-input' name='title' maxLength={32} type='text' placeholder="Type the post's title..." required/>
                 <select className='category-input' name='category' required>
                     <option value='Clothes'>Clothes</option>

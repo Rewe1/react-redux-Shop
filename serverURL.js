@@ -8,6 +8,12 @@ module.exports =
 {
     host,
     port,
-    fetchURL: `http://${url}/fetch`,
-    postURL: `http://${url}/postItem`
+    url,
+    shopItems:
+    {
+        fetchPath: `shop-items/fetch`,
+        postPath: `shop-items/post`,
+        fetchURL: `http://${url}/shop-items/fetch`,
+        postURL: `http://${url}/shop-items/post`
+    }
 };
