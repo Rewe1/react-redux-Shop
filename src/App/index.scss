@@ -1,0 +1,10 @@
+@import './globals';
+
+@import './App';
+    @import './components/app-nav/index';
+    @import './components/PostItem/index';
+    @import './components/Shop/index';
+        @import './components/ListShopItem/index';
+        @import './components/ShopItem/index';
+    @import './components/Cart/index';
+        @import './components/CartItem/index';

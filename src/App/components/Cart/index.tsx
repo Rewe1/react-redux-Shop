@@ -3,10 +3,10 @@ import {useSelector} from 'react-redux';
 import {Link} from 'react-router-dom'
 
 // Components
-import CartItem from './CartItem'
+import CartItem from '../CartItem/index'
 
 // Stores
-import shopItemsStore from '../redux/shopItems'
+import shopItemsStore from '../../redux/shopItems'
 
 export default function Cart()
 {

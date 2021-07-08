@@ -2,7 +2,7 @@ import React from "react"
 import {Link} from 'react-router-dom'
 import {useSelector} from 'react-redux'
 
-import ListShopItem from './ListShopItem'
+import ListShopItem from '../ListShopItem/index'
 
 export default function Shop()
 {

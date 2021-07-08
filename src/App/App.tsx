@@ -1,15 +1,15 @@
 import React, {useEffect} from "react";
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import './sass/index.scss';
+import './index.scss';
 import backendURL from "./../../backend/serverURL"
 import {useDispatch} from 'react-redux'
 import shopItems from './redux/shopItems'
 
-import Nav from './components/Nav';
-import Shop from './components/Shop';
-    import ShopItem from './components/ShopItem'
-import PostItem from './components/PostItem';
-import Cart from './components/Cart';
+import AppNav from './components/app-nav';
+import Shop from './components/Shop/index';
+    import ShopItem from './components/ShopItem/index'
+import PostItem from './components/PostItem/index';
+import Cart from './components/Cart/index';
 
 import shopItemsStore from './redux/shopItems'
 
@@ -33,7 +33,7 @@ export default function App()
     return (
         <Router>
             <div className='App'>
-                <Nav/>
+                <AppNav/>
                 <div className='appBody'>
                     <Switch>
                         <Route exact path='/' component={Shop}/>

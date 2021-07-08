@@ -4,8 +4,8 @@ import {Link} from 'react-router-dom'
 
 
 // Stores
-import shopItemsStore from '../redux/shopItems'
-import cartItemsStore from '../redux/cartItems'
+import shopItemsStore from '../../redux/shopItems'
+import cartItemsStore from '../../redux/cartItems/index'
 
 export default (props: {item: iCartItem}) =>
 {

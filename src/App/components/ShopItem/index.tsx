@@ -2,8 +2,8 @@ import React, {useState} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {RouteComponentProps} from 'react-router-dom'
 
-import shopItemsStore from '../redux/shopItems'
-import cartItemsStore from '../redux/cartItems'
+import shopItemsStore from '../../redux/shopItems'
+import cartItemsStore from '../../redux/cartItems'
 
 export interface Props extends RouteComponentProps<MatchParams> {}
 
