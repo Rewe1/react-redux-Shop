@@ -19,6 +19,12 @@ const post = require('./routes/shopItems/post');
 app.use(`/${serverURL.shopItems.fetchPath}`, fetch);
 app.use(`/${serverURL.shopItems.postPath}`, post);
 
+// accounts
+
+const register = require('./routes/accounts/registerAcc')
+
+app.use(`/${serverURL.accounts.registerPath}`, register)
+
 app.listen(serverURL.port, serverURL.host, () =>
 {
     console.log(`Backend: Listening on http://${serverURL.host}:${serverURL.port}`);
