@@ -29,15 +29,15 @@ app.get('/', (req, res) =>
 })
 
 // Fetch route
-const fetch = require('./fetch');
+const fetch = require('./routes/fetch');
 app.use('/fetch', fetch);
 
 // Post Route
-const postItem = require('./postItem');
+const postItem = require('./routes/postItem');
 app.use('/postItem', postItem);
 
 // Start server
-const serverURL = require('./serverURL');
+const serverURL = require('../serverURL');
 app.listen(serverURL.port, serverURL.host, () =>
 {
     console.log(`Backend: Listening on http://${serverURL.host}:${serverURL.port}`);

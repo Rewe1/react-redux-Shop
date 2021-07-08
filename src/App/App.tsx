@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import './index.scss';
-import backendURL from "./../../backend/serverURL"
+import backendURL from "../../serverURL"
 import {useDispatch} from 'react-redux'
 import shopItems from './redux/shopItems'
 

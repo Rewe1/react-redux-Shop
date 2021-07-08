@@ -1,7 +1,7 @@
 const app = require('express')()
 const os = require('os')
 const fs = require('fs')
-const serverURL = require('./backend/serverURL');
+const serverURL = require('./serverURL');
 
 let errorMsg = 'An error occurred :c'
 

@@ -1,5 +1,5 @@
 import * as React from "react";
-import backendURL from "../../../../backend/serverURL";
+import backendURL from "../../../../serverURL";
 
 export default function PostItem()
 {

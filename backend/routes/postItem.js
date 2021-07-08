@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const items = require('./mongoDb');
-const serverURL = require('./serverURL')
+const items = require('../mongoDB').items;
+const serverURL = require('../../serverURL')
 
 // bodyParser parses post form data to json, which can be saved into db
 const bodyParser = require('body-parser');

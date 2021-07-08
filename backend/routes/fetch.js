@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const items = require('./mongoDb');
+const items = require('../mongoDB').items;
 
 router.get('/', (req, res) =>
 {

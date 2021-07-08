@@ -18,17 +18,11 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, (err)
     }
 });
 
-// Create schema
-const itemSchema = new mongoose.Schema(
-    {
-        title: String,
-        category: String,
-        description: String,
-        price: Number
-    }
-);
-
 // Create model
-const items = mongoose.model('items', itemSchema);
+const account = mongoose.model('accounts', require('./schemas/account'));
+const items = mongoose.model('items', require('./schemas/shopItem'));
 
-module.exports = items;
+module.exports = 
+{
+    account, items,
+}
