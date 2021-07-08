@@ -11,10 +11,10 @@ export default function Shop()
 
     if(items)
         return (
-            <div className='appShop'>
+            <div className='items-display'>
                 <h1>Shop</h1>
-                <Link to='/postItem'><span id='postItem'>Post an item</span></Link>
-                <div className='items'>
+                <Link className='post-item-a' to='/postItem'><span id='postItem'>Post an item</span></Link>
+                <div className='items-list'>
                     {
                         items.map((item, i) =>
                             <ListShopItem item={item} key={i} />

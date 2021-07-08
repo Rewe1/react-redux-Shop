@@ -1,4 +1,4 @@
-.appListItem
+.item-div
 {
     $imgWidth: 128px;
     $imgMargin: 16px;
@@ -12,13 +12,13 @@
     padding: 16px;
     font-size: 18px;
 
-    h2
+    .item-title
     {
         font-size: 20px;
         margin: 0;
     }
 
-    img
+    .item-img
     {
         min-width: $imgWidth;
         height: 128px;
@@ -26,15 +26,7 @@
         background-color: #333;
     }
 
-    .head
-    {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    span
+    .item-price
     {
         font-weight: bold;
         color: $colorPrice;
