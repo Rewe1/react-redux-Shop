@@ -1,4 +1,4 @@
-.appCartItem
+.cart-item-div
 {
     $imgWidth: 32px;
     $imgMargin: 16px;
@@ -11,13 +11,13 @@
     padding: 16px;
     font-size: 18px;
 
-    h2
+    .item-title
     {
         font-size: 20px;
         margin: 0;
     }
 
-    img
+    .item-img
     {
         min-width: $imgWidth;
         height: 32px;
@@ -25,7 +25,7 @@
         background-color: #333;
     }
 
-    .itemInfo
+    .item-info-div
     {
         width: 100%;
     }
@@ -38,20 +38,20 @@
         align-items: center;
     }
 
-    #price
+    .item-price
     {
         font-weight: bold;
         color: $colorPrice;
     }
 
-    #cartItemAmount
+    #cart-item-amount
     {
         display: flex;
         align-items: center;
         flex-direction: row-reverse;
     }
 
-    #setCartItemAmount
+    #set-cart-item-amount
     {
         width: max-content;
         height: 24px;
@@ -60,7 +60,7 @@
         border-radius: 4px;
     }
 
-    #amount, #increaseAmount, #decreaseAmount
+    #item-amount, #increase-amount, #decrease-amount
     {
         width: 24px;
         height: 24px;
@@ -70,12 +70,12 @@
         border: 0;
     }
     
-    #increaseAmount, #decreaseAmount, #removeItem
+    #increase-amount, #decrease-amount, #remove-item
     {
         cursor: pointer;
     }
 
-    #removeItem
+    #remove-item
     {
         width: 32px;
         height: 32px;

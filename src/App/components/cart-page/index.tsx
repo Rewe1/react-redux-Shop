@@ -25,8 +25,8 @@ export default function Cart()
 
     if(cartItemsState.items.length)
         return (
-            <div className='appCart'>
-                <div className='items'>
+            <div className='cart-page-div'>
+                <div className='cart-items-list'>
                     {
                         cartItemsState.items.map((cartItem, i) =>
                         {

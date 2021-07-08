@@ -22,25 +22,25 @@ export default (props: {item: iCartItem}) =>
         )
     else
         return (
-            <div className='appCartItem'>
-                <img src='https://via.placeholder.com/128'/>
-                <div className='itemInfo'>
+            <div className='cart-item-div'>
+                <img className='item-img' src='https://via.placeholder.com/128'/>
+                <div className='item-info-div'>
                     <Link to={`/shop/item/${cartItem._id}`}>
-                        <h2>{`${cartItem.title ? cartItem.title : "The title wasn't specified :c"}`}</h2>
+                        <h2 className='item-title'>{`${cartItem.title ? cartItem.title : "The title wasn't specified :c"}`}</h2>
                     </Link>
-                    <span id='price'>{`${cartItem.price ? `$${cartItem.price.toFixed(2)}` : "The price wasn't specified :c"}`}</span>
-                    <div id='cartItemAmount'>
-                        <button id='removeItem' onClick={() =>
+                    <span className='item-price' id='price'>{`${cartItem.price ? `$${cartItem.price.toFixed(2)}` : "The price wasn't specified :c"}`}</span>
+                    <div id='cart-item-amount'>
+                        <button id='remove-item' onClick={() =>
                         {
                             dispatch(cartItemsStore.actions.removeItems([{...props.item}]))
                         }}>X</button>
-                        <div id='setCartItemAmount'>
-                            <button id='decreaseAmount' onClick={() =>
+                        <div id='set-cart-item-amount'>
+                            <button id='decrease-amount' onClick={() =>
                             {
                                 dispatch(cartItemsStore.actions.addItems([{...props.item, amount: -1}]))
                             }}>-</button>
-                            <span id='amount'>{props.item.amount}</span>
-                            <button id='increaseAmount' onClick={() =>
+                            <span id='item-amount'>{props.item.amount}</span>
+                            <button id='increase-amount' onClick={() =>
                             {
                                 dispatch(cartItemsStore.actions.addItems([{...props.item, amount: 1}]))
                             }}>+</button>
