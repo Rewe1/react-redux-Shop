@@ -4,7 +4,7 @@
     {
         width: 256px;
         display: grid;
-        background-color: $primary;
+        background-color: $colorPrimary;
         padding: 32px;
         border-radius: 4px;
         margin-bottom: 16px;
@@ -37,7 +37,7 @@
 
     button
     {
-        background-color: $primary;
+        background-color: $colorPrimary;
         font-weight: bold;
         border: 0;
         border-radius: 4px;

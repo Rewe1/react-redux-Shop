@@ -6,7 +6,7 @@
     text-align: left;
     display: flex;
     flex-direction: row;
-    border: 1px solid $darkFontColor;
+    border: 1px solid black;
     border-top-width: 0;
     padding: 16px;
     font-size: 18px;
@@ -41,7 +41,7 @@
     #price
     {
         font-weight: bold;
-        color: $priceColor;
+        color: $colorPrice;
     }
 
     #cartItemAmount
@@ -55,7 +55,7 @@
     {
         width: max-content;
         height: 24px;
-        background-color: $lightFontColor;
+        background-color: $colorWhite;
         border: 1px solid #333;
         border-radius: 4px;
     }
@@ -80,10 +80,10 @@
         width: 32px;
         height: 32px;
         text-align: center;
-        background-color: $paletteLightRed;
+        background-color: $colorLightRed;
         border-radius: 100%;
         border: 0;
-        color: $lightFontColor;
+        color: $colorWhite;
         font-weight: bold;
         margin-left: 16px;
     }

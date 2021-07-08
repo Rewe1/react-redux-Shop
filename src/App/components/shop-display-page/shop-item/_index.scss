@@ -7,7 +7,7 @@
     text-align: left;
     display: flex;
     flex-direction: row;
-    border: 1px solid $darkFontColor;
+    border: 1px solid black;
     border-top-width: 0;
     padding: 16px;
     font-size: 18px;
@@ -37,6 +37,6 @@
     span
     {
         font-weight: bold;
-        color: $priceColor;
+        color: $colorPrice;
     }
 }

@@ -3,7 +3,7 @@
     background-color: #0C3040;
     text-align: left;
     padding: 16px;
-    color: $lightFontColor;
+    color: $colorWhite;
 
     h2
     {
@@ -26,7 +26,7 @@
 
     #price
     {
-        color: $lightPriceColor;
+        color: $colorPriceLight;
         font-weight: bold;
     }
 
@@ -46,7 +46,7 @@
     {
         width: max-content;
         height: 24px;
-        background-color: $lightFontColor;
+        background-color: $colorWhite;
         border: 1px solid #333;
         border-radius: 4px;
     }
@@ -71,10 +71,10 @@
         width: 48px;
         height: 48px;
         text-align: center;
-        background-color: $lightPriceColor;
+        background-color: $colorPriceLight;
         border-radius: 100%;
         border: 0;
-        color: $lightFontColor;
+        color: $colorWhite;
         font-weight: bold;
         margin-left: 16px;
     }
