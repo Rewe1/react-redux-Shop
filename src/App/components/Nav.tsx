@@ -1,6 +1,7 @@
 import * as React from "react";
 import {Link} from 'react-router-dom';
 import {useSelector} from 'react-redux'
+import cartImg from './res/cart.png'
 
 export default function Nav()
 {
@@ -8,12 +9,13 @@ export default function Nav()
 
     return (
         <nav className='appNav'>
-            <img></img>
+            <img className='app-logo' src='https://via.placeholder.com/48'/>
             <Link to='/'>
                 Shop
             </Link>
             <Link id='cart' to='/cart'>
-                <span>{state.cartItems.items.length}</span>
+                <img className='cart-img' src={cartImg}/>
+                <span className='items-number'>{state.cartItems.items.length}</span>
             </Link>
         </nav>
     )

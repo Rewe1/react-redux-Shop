@@ -1,7 +1,7 @@
 
 .appNav
 {
-    $imageWidth: 32px;
+    $imageWidth: 48px;
     $imageMargin: 16px;
 
     width: 100%;
@@ -13,8 +13,7 @@
         float: left;
         margin-left: $imageMargin;
         width: $imageWidth;
-        height: 32px;
-        background-color: #333;
+        height: auto;
     }
     
     ul
@@ -44,7 +43,6 @@
         $size: 48px;
         width: $size;
         height: $size;
-        background-color: $lightFontColor;
         border-radius: 100%;
         float: right;
         margin-right: 16px;
@@ -53,7 +51,7 @@
         justify-content: flex-end;
         text-decoration: none;
 
-        span
+        .items-number
         {
             display: flex;
             justify-content: center;
@@ -68,5 +66,12 @@
             background-color: $paletteLightRed;
             color: black;
         }
+    }
+
+    .cart-img
+    {
+        position: relative;
+        top: 0;
+        left: 0;
     }
 }

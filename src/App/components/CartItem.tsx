@@ -23,7 +23,7 @@ export default (props: {item: iCartItem}) =>
     else
         return (
             <div className='appCartItem'>
-                <img/>
+                <img src='https://via.placeholder.com/128'/>
                 <div className='itemInfo'>
                     <Link to={`/shop/item/${cartItem._id}`}>
                         <h2>{`${cartItem.title ? cartItem.title : "The title wasn't specified :c"}`}</h2>

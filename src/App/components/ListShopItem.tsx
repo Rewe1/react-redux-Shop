@@ -5,7 +5,7 @@ export default (props: {item: iShopItem}) =>
 {
     return (
         <div className='appListItem'>
-            <img/>
+            <img src='https://via.placeholder.com/128'/>
             <div>
                 <Link to={`/shop/item/${props.item._id}`}>
                     <h2>{`${props.item.title ? props.item.title : "The title wasn't specified :c"}`}</h2>
