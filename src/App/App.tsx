@@ -11,6 +11,7 @@ import ShopItem from './components/display-item-page/index'
 import PostItem from './components/post-item-page/index';
 import Cart from './components/cart-page/index';
 import RegisterPage from './components/register-page/index';
+import LoginPage from './components/login-page/index';
 
 import shopItemsStore from './redux/shopItems'
 
@@ -42,6 +43,7 @@ export default function App()
                         <Route path='/cart' component={Cart}/>
                         <Route path='/postItem' component={PostItem}/>
                         <Route path='/register-account' component={RegisterPage}/>
+                        <Route path='/login' component={LoginPage}/>
                     </Switch>
                 </div>
             </div>

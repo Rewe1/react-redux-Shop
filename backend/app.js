@@ -22,8 +22,10 @@ app.use(`/${serverURL.shopItems.postPath}`, post);
 // accounts
 
 const register = require('./routes/accounts/registerAcc')
+const login = require('./routes/accounts/login')
 
 app.use(`/${serverURL.accounts.registerPath}`, register)
+app.use(`/${serverURL.accounts.loginPath}`, login)
 
 app.listen(serverURL.port, serverURL.host, () =>
 {

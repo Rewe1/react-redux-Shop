@@ -2,10 +2,10 @@ const router = require('express').Router();
 const accountModel = require('../../mongoDB').accounts;
 let serverURL = require('../../../serverURL')
 var bcrypt = require('bcryptjs');
-var CryptoJS = require('Crypto-js')
+let crypto = require('../../CryptoJs/index')
 
 // TEMPORARILY HARDCODED
-let iv = CryptoJS.enc.Hex.parse('lw9YQ8lRpTeR0HOhJgiXiDXJIytmCzsx')
+let iv = 'lw9YQ8lRpTeR0HOhJgiXiDXJIytmCzsx'
 
 // bodyParser parses post form data to json, which can be saved into db
 const bodyParser = require('body-parser');
@@ -15,13 +15,10 @@ router.post('/', urlencodedParser, (req, res) =>
 {
     const newAcc = req.body
 
-    let secret = newAcc.password
-    let key = CryptoJS.PBKDF2(secret, '', {
-        keySize: 128 / 32
-    });
+    let key = crypto.genKey(newAcc.password)
 
-    newAcc.email = CryptoJS.AES.encrypt(newAcc.email, key, {iv}).toString();
-    newAcc.password = CryptoJS.AES.encrypt(bcrypt.hashSync(newAcc.password, 10), key, {iv}).toString();
+    newAcc.email = crypto.encrypt(newAcc.email, key)
+    newAcc.password = crypto.encrypt(bcrypt.hashSync(newAcc.password, 10), key)
 
     accountModel(newAcc).save((err) =>
     {
@@ -35,7 +32,7 @@ router.post('/', urlencodedParser, (req, res) =>
             console.error(exc);
             res.status(500).end('An error occurred :c');
         }
-            res.status(200).redirect(`http://${serverURL.host}:8080/`)
+            res.status(200).redirect(`http://${serverURL.host}:${serverURL.port ? serverURL.port : ''}/`)
     })
 })
 

@@ -16,6 +16,9 @@ export default function Nav()
             <Link className='home-page-a' to='/register-account'>
                 Register
             </Link>
+            <Link className='home-page-a' to='/login'>
+                Login
+            </Link>
             <Link className='cart-page-a' to='/cart'>
                 <img className='cart-a-img' src={cartImg}/>
                 <span className='cart-items-number'>{state.cartItems.items.length}</span>
