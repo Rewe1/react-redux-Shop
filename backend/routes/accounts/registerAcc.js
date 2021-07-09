@@ -5,7 +5,7 @@ var bcrypt = require('bcryptjs');
 var CryptoJS = require('Crypto-js')
 
 // TEMPORARILY HARDCODED
-let secret = 'taFwIAFlpSMDJR01T2G5iG1p8J18nVHN'
+let iv = CryptoJS.enc.Hex.parse('lw9YQ8lRpTeR0HOhJgiXiDXJIytmCzsx')
 
 // bodyParser parses post form data to json, which can be saved into db
 const bodyParser = require('body-parser');
@@ -15,8 +15,13 @@ router.post('/', urlencodedParser, (req, res) =>
 {
     const newAcc = req.body
 
-    newAcc.email = CryptoJS.AES.encrypt(newAcc.email, secret).toString();
-    newAcc.password = CryptoJS.AES.encrypt(bcrypt.hashSync(newAcc.password, 10), secret).toString();
+    let secret = newAcc.password
+    let key = CryptoJS.PBKDF2(secret, '', {
+        keySize: 128 / 32
+    });
+
+    newAcc.email = CryptoJS.AES.encrypt(newAcc.email, key, {iv}).toString();
+    newAcc.password = CryptoJS.AES.encrypt(bcrypt.hashSync(newAcc.password, 10), key, {iv}).toString();
 
     accountModel(newAcc).save((err) =>
     {
