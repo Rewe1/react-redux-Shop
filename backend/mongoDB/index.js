@@ -19,10 +19,10 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, (err)
 });
 
 // Create model
-const account = mongoose.model('accounts', require('./schemas/account'));
-const items = mongoose.model('items', require('./schemas/shopItem'));
+const accounts = require('./models/accounts')
+const items = require('./models/items')
 
 module.exports = 
 {
-    account, items,
+    accounts, items,
 }

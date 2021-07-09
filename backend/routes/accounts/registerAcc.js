@@ -1,6 +1,8 @@
 const router = require('express').Router();
-const accountSchema = require('../../mongoDB').account;
-const serverURL = require('../../../serverURL')
+const accountModel = require('../../mongoDB').accounts;
+let serverURL = require('../../../serverURL')
+let hashPassword = require('../../bcryptjs')
+var bcrypt = require('bcryptjs');
 
 // bodyParser parses post form data to json, which can be saved into db
 const bodyParser = require('body-parser');
@@ -8,9 +10,9 @@ const urlencodedParser = bodyParser.urlencoded({ extended: true });
 
 router.post('/', urlencodedParser, (req, res) =>
 {
-    console.log(req.body)
-    /* 
-    accountSchema(req.body).save((err) =>
+    const newAcc = req.body
+
+    bcrypt.hash(newAcc.password, 10, (err, hash) => 
     {
         try
         {
@@ -19,12 +21,27 @@ router.post('/', urlencodedParser, (req, res) =>
         }
         catch(exc)
         {
-            console.error(exc);
-            res.status(500).end('An error occurred :c');
+            console.exception(exc)
+            res.status(500).end()
         }
-            res.status(200).redirect(`http://${serverURL.host}:8080/postItem`)
-    });
- */
+
+        newAcc.password = hash
+
+        accountModel(newAcc).save((err) =>
+        {
+            try
+            {
+                if(err)
+                    throw err
+            }
+            catch(exc)
+            {
+                console.error(exc);
+                res.status(500).end('An error occurred :c');
+            }
+                res.status(200).redirect(`http://${serverURL.host}:8080/`)
+        })
+    })
 })
 
 module.exports = router;

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-module.exports = new mongoose.Schema(
+let schema = new mongoose.Schema(
     {
         title: String,
         category: String,
@@ -8,3 +8,5 @@ module.exports = new mongoose.Schema(
         price: Number
     }
 );
+
+module.exports = mongoose.model('items', schema);
