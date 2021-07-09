@@ -6,9 +6,47 @@ import serverURL from '../../../../serverURL'
 
 export default function RegisterPage()
 {
+
+    let postRegister = async () => 
+    {
+        let formData = new FormData(document.getElementById('register-form') as HTMLFormElement)
+
+        fetch(`${serverURL.url}/${serverURL.accounts.registerPath}`, {
+            headers:{          
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+            method: 'POST',
+            body: JSON.stringify(
+                {
+                    email: formData.get('email'),
+                    password: formData.get('password')
+                }
+            )
+        })
+        .then(res =>
+        {
+            if(res.status === 400)
+            {
+                console.log('Invalid request')
+            }
+
+            if(res.status === 401)
+            {
+                console.log('Unauthorized')
+            }
+
+            console.log(res)
+        })
+        .catch(exc =>
+        {
+            console.error(exc)
+        })
+    }
+
     return(
         <div className='register-page-div'>
-            <form className='register-form' id='register-account' action={`${serverURL.url}/${serverURL.accounts.registerPath}`} method='post'>
+            <form className='register-form' id='register-form' method='post'>
                 <label>Email:
                     <input name='email' className='email-input'></input>
                 </label>
@@ -16,7 +54,7 @@ export default function RegisterPage()
                     <input name='password' className='password-input'></input>
                 </label>
             </form>
-            <button type='submit' form='register-account'>Submit</button>
+            <button onClick={() => postRegister()}>Submit</button>
         </div>
     )
 }

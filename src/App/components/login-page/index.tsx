@@ -13,10 +13,11 @@ export default function loginPage()
         let formData = new FormData(document.getElementById('login-form') as HTMLFormElement)
 
         fetch(`${serverURL.url}/${serverURL.accounts.loginPath}`, {
-            headers:{          
+            headers:
+            {          
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
-              },
+            },
             method: 'POST',
             body: JSON.stringify(
                 {

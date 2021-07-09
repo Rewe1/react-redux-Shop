@@ -4,17 +4,25 @@ let serverURL = require('../../../serverURL')
 var bcrypt = require('bcryptjs');
 let crypto = require('../../CryptoJs/index')
 
-// TEMPORARILY HARDCODED
-let iv = 'lw9YQ8lRpTeR0HOhJgiXiDXJIytmCzsx'
-
 // bodyParser parses post form data to json, which can be saved into db
 const bodyParser = require('body-parser');
+router.use(bodyParser.json());
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
 
 router.post('/', urlencodedParser, (req, res) =>
 {
+    try
+    {
+        if(!Object.keys(req.body).length)
+        throw new Error('Request body is empty')
+    }
+    catch(exc)
+    {
+        res.status(400).end()
+        return;
+    }
+    
     const newAcc = req.body
-
     let key = crypto.genKey(newAcc.password)
 
     newAcc.email = crypto.encrypt(newAcc.email, key)
@@ -30,9 +38,10 @@ router.post('/', urlencodedParser, (req, res) =>
         catch(exc)
         {
             console.error(exc);
-            res.status(500).end('An error occurred :c');
+            res.status(500).end();
+            return;
         }
-            res.status(200).redirect(`http://${serverURL.host}:${serverURL.port ? serverURL.port : ''}/`)
+            res.status(200).end()
     })
 })
 
