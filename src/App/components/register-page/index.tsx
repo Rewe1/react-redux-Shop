@@ -26,17 +26,7 @@ export default function RegisterPage()
         })
         .then(res =>
         {
-            if(res.status === 400)
-            {
-                console.log('Invalid request')
-            }
-
-            if(res.status === 401)
-            {
-                console.log('Unauthorized')
-            }
-
-            console.log(res)
+            return;
         })
         .catch(exc =>
         {

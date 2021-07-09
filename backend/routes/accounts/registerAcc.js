@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const accountModel = require('../../mongoDB').accounts;
+const accounts = require('../../mongoDB').accounts;
 let serverURL = require('../../../serverURL')
 var bcrypt = require('bcryptjs');
 let crypto = require('../../CryptoJs/index')
@@ -23,25 +23,37 @@ router.post('/', urlencodedParser, (req, res) =>
     }
     
     const newAcc = req.body
-    let key = crypto.genKey(newAcc.password)
 
-    newAcc.email = crypto.encrypt(newAcc.email, key)
-    newAcc.password = crypto.encrypt(bcrypt.hashSync(newAcc.password, 10), key)
-
-    accountModel(newAcc).save((err) =>
+    // Check if email is already in use
+    accounts.findOne({email: newAcc.email}, (err, data) =>
     {
-        try
+        if(data != null)
         {
-            if(err)
-                throw err
-        }
-        catch(exc)
-        {
-            console.error(exc);
-            res.status(500).end();
+            res.status(401).end()
             return;
         }
-            res.status(200).end()
+        else
+        {
+            let key = crypto.genKey(newAcc.password)
+
+            newAcc.password = crypto.encrypt(bcrypt.hashSync(newAcc.password, 10), key)
+
+            accounts(newAcc).save((err) =>
+            {
+                try
+                {
+                    if(err)
+                        throw err
+                }
+                catch(exc)
+                {
+                    console.error(exc);
+                    res.status(500).end();
+                    return;
+                }
+                res.status(200).end()
+            })   
+        }
     })
 })
 

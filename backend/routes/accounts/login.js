@@ -24,9 +24,9 @@ router.post('/', urlencodedParser, (req, res) =>
     let account = req.body
 
     let key = crypto.genKey(account.password)
-    let encEmail = crypto.encrypt(account.email, key)
 
-    accounts.findOne({email: encEmail}, (err, data) =>
+    // Look for an account with the email
+    accounts.findOne({email: account.email}, (err, data) =>
     {
         try
         {

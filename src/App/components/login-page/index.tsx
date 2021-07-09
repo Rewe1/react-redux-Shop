@@ -30,23 +30,18 @@ export default function loginPage()
         {
             if(res.status === 400)
             {
-                console.log('Invalid request')
                 setLogin(true)
             }
 
             if(res.status === 401)
             {
-                console.log('Unauthorized')
                 setLogin(true)
             }
             
             if(res.status === 200)
             {
-                console.log('Successful login')
                 setLogin(false)
             }
-
-            console.log(res)
         })
         .catch(exc =>
         {
