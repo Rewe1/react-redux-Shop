@@ -4,9 +4,9 @@ let serverURL = require('../serverURL')
 
 // Enable cross origin resource sharing
 app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', [`http://${serverURL.host}:8080`]);
-    res.setHeader('Access-Control-Allow-Methods', 'GET');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,PATCH,OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type,Accept');
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
 })
