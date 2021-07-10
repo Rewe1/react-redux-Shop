@@ -19,4 +19,11 @@
         padding: 32px;
         border-radius: 16px;
     }
+
+    .logout-btn
+    {
+        background-color: adjust-color($color: $colorWhite, $alpha: -.2);
+        border: none;
+        border-radius: 4px;
+    }
 }

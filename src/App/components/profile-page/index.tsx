@@ -1,11 +1,20 @@
 import React, {useState} from 'react'
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
 import {Link} from 'react-router-dom'
+
+import stateRoot from '../../redux'
 
 export default function ProfilePage()
 {
     const state: any = useSelector((state: tRootState) => state);
     const account: iAccount = state.account
+
+    let dispatch = useDispatch()
+
+    let logout = () =>
+    {
+        dispatch(stateRoot.actions.account.logout())
+    }
 
     return (
         <div className='profile-div'>
@@ -30,6 +39,7 @@ export default function ProfilePage()
                         <span className='email-span'>Email:</span>
                         <span className='email-span'>{account.email}</span>
                     </div>
+                    <button className='logout-btn' onClick={() => logout()}>Logout</button>
                 </div>
             }
         </div>
