@@ -14,12 +14,16 @@ import RegisterPage from './components/register-page/index';
 import LoginPage from './components/login-page/index';
 import ProfilePage from './components/profile-page/index';
 
+import stateRoot from './redux'
 import shopItemsStore from './redux/shopItems'
 
 export default function App()
 {
-    
     let dispatch = useDispatch();
+
+    let account: iAccount = JSON.parse(window.sessionStorage.getItem('account'))
+    if(account != null)
+        dispatch(stateRoot.actions.account.login(account))
 
     useEffect(() =>
     {
