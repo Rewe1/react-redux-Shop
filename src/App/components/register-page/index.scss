@@ -1,10 +1,60 @@
-.register-form
+.register-page-div
 {
+    padding: 32px;
+
     display: flex;
     flex-direction: column;
+
+    background-color: $colorPrimary;
+    border-radius: 16px;
+
+    .error-span
+    {
+        width: max-content;
+        padding: 4px;
+        font-size: 16px;
+        background-color: $colorLightRed;
+        border-radius: 4px;
+        margin-bottom: 8px;
+    }
+
+    .register-form
+    {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    
+        input
+        {
+            background-color: adjust-color($color: $colorWhite, $alpha: -.2);
+            border: none;
+            border-radius: 8px;
+            padding: 8px;
+            font-size: 18px;
+        }
+        
+        .password-input
+        {
+            margin-top: 8px;
+            -webkit-text-security: disc;
+        }
+    }
+
+    .btn-div
+    {
+        display: flex;
+        justify-content: center;
+
+        .submit-btn
+        {
+            width: min-content;
+            margin-top: 16px;
+    
+            background-color: adjust-color($color: $colorWhite, $alpha: -.2);
+            border: none;
+            border-radius: 8px;
+        }
+    }
 }
 
-.password-input
-{
-    -webkit-text-security: disc;
-}
+

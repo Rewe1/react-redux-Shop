@@ -20,6 +20,7 @@ html
     font: $font;
     color: black;
     text-align: center;
+    font-size: 22px;
 }
 
 body
@@ -32,4 +33,15 @@ a
 {
     color: black;
     text-decoration: none;
+}
+
+button, input
+{
+    user-select: none;
+    font-size: 22px;
+}
+
+button
+{
+    cursor: pointer;
 }

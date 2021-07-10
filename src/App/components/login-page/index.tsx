@@ -1,12 +1,14 @@
 import React, {useState} from "react"
-import {Link} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 import {useSelector} from 'react-redux'
 
 import serverURL from '../../../../serverURL'
 
 export default function loginPage()
 {
-    let [loginFailed, setLogin] = useState(false)
+    let [login400, set400] = useState(false)
+    let [login401, set401] = useState(false)
+    let [success, setSuccess] = useState(false)
 
     let postLogin = async () => 
     {
@@ -30,17 +32,19 @@ export default function loginPage()
         {
             if(res.status === 400)
             {
-                setLogin(true)
+                set400(true)
             }
 
             if(res.status === 401)
             {
-                setLogin(true)
+                set401(true)
             }
             
             if(res.status === 200)
             {
-                setLogin(false)
+                set400(false)
+                set401(false)
+                setSuccess(true)
             }
         })
         .catch(exc =>
@@ -52,18 +56,24 @@ export default function loginPage()
     return(
         <div className='login-page-div'>
             {
-                loginFailed && 
-                <span>Login failed!</span>
+                login400 && 
+                <span className='error-span'>The was an error while trying to login.</span>
             }
-            <form className='login-form' id='login-form' action={`${serverURL.url}/${serverURL.accounts.loginPath}`} method='post'>
-                <label>Email:
-                    <input name='email' className='email-input'></input>
-                </label>
-                <label>Password:
-                    <input name='password' className='password-input'></input>
-                </label>
+            {
+                login401 && 
+                <span className='error-span'>The information provided does not match</span>
+            }
+            {
+                success &&
+                <Redirect to='/'></Redirect>
+            }
+            <form className='login-form' id='login-form'>
+                <input name='email' className='email-input' placeholder='Email'></input>
+                <input name='password' className='password-input' placeholder='Password'></input>
             </form>
-            <button onClick={() => postLogin()}>Submit</button>
+            <div className='btn-div'>
+                <button className='submit-btn' onClick={() => postLogin()}>Submit</button>
+            </div>
         </div>
     )
 }
