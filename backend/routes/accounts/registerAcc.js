@@ -34,7 +34,7 @@ router.post('/', urlencodedParser, (req, res) =>
         }
         else
         {
-            let key = crypto.genKey(account.password)
+            let key = crypto.genKey(account.password, account.email)
 
             account.password = crypto.encrypt(bcrypt.hashSync(account.password, 10), key)
 

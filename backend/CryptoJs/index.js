@@ -1,9 +1,9 @@
 let CryptoJS = require('Crypto-js')
 let iv = CryptoJS.enc.Hex.parse('lw9YQ8lRpTeR0HOhJgiXiDXJIytmCzsx')
 
-let genKey = (password) =>
+let genKey = (email, password) =>
 {
-    return CryptoJS.PBKDF2(password, '', {
+    return CryptoJS.PBKDF2(password, email, {
         keySize: 128 / 32
     });
 }
