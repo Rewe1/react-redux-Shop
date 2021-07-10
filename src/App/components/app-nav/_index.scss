@@ -8,53 +8,62 @@
 
     background-color: $colorPrimary;
 
+    .app-logo
+    {
+        width: 48px;
+        height: auto;
+    }
+
     .app-nav
     {
         width: 100%;
         display: flex;
         justify-content: space-evenly;
+
+        .home-page-a
+        {
+            font-weight: bold;
+        }
     }
-}
 
-.app-logo
-{
-    width: 48px;
-    height: auto;
-}
-
-.home-page-a
-{
-    font-weight: bold;
-}
-
-.cart-page-a
-{
-    $size: 32px;
-    width: $size;
-    height: $size;
-
-    display: block;
-
-    .cart-a-img
+    .right-menu
     {
-        width: $size;
-        height: auto;
-    }
-    
-    .cart-items-number
-    {
-        width: 24px;
-        height: 24px;
-    
         display: flex;
-        justify-content: center;
         align-items: center;
-    
-        position: relative;
-        top: calc(-1 * #{$size} /2);
-        left: calc(#{$size} /2);
-    
-        border-radius: 100%;
-        background-color: adjust-color($color: $colorLightRed, $alpha: -.2);
+        
+        $size: 32px;
+
+        .menu-img
+        {
+            width: $size;
+            height: auto;
+        }
+                
+        .right-menu-a
+        {
+            width: $size;
+            height: $size;
+            margin-left: 8px;
+
+            display: block;
+            
+            .cart-items-number
+            {
+                width: 24px;
+                height: 24px;
+            
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            
+                position: relative;
+                top: calc(-1 * #{$size} /2);
+                left: calc(#{$size} /2);
+            
+                border-radius: 100%;
+                background-color: adjust-color($color: $colorLightRed, $alpha: -.2);
+            }
+        }
     }
 }
+

@@ -1,0 +1,22 @@
+.profile-div
+{
+    .login-div
+    {
+        display: flex;
+        flex-direction: column;
+
+        ul
+        {
+            display: flex;
+            justify-content: space-evenly;
+            font-weight: bold;
+        }
+    }
+
+    .profile-info
+    {
+        background-color: $colorPrimary;
+        padding: 32px;
+        border-radius: 16px;
+    }
+}
