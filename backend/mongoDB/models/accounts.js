@@ -2,14 +2,19 @@ const mongoose = require('mongoose');
 
 let schema = new mongoose.Schema(
     {
-        email: 
+        email: String,
+        password: String,
+        CNPJ: String,
+        phone: String,
+        whatsapp: String,
+        address:
         {
-            type: String
+            CEP: String,
+            state: String,
+            city: String,
+            district: String,
+            optional: String
         },
-        password: 
-        {
-            type: String
-        }
     }
 );
 

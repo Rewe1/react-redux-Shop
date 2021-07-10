@@ -7,6 +7,17 @@ export default (): iAccountAction =>
         {
             _id: '',
             email: '',
+            CNPJ: '',
+            phone: '',
+            whatsapp: '',
+            address:
+            {
+                CEP: '',
+                state: '',
+                city: '',
+                district: '',
+                optional: ''
+            },
         }
     }
 }

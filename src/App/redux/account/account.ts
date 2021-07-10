@@ -3,7 +3,18 @@ declare global
     interface iAccount
     {
         _id: string,
-        email: string
+        email: string,
+        CNPJ: string,
+        phone: string,
+        whatsapp: string,
+        address:
+        {
+            CEP: string,
+            state: string,
+            city: string,
+            district: string,
+            optional: string
+        },
     }
 
     interface iAccountAction
@@ -16,7 +27,18 @@ declare global
 let defaultState: iAccount =
 {
     _id: '',
-    email: ''
+    email: '',
+    CNPJ: '',
+    phone: '',
+    whatsapp: '',
+    address:
+    {
+        CEP: '',
+        state: '',
+        city: '',
+        district: '',
+        optional: ''
+    },
 }
 
 export default (state: iAccount = defaultState, action: iAccountAction) =>

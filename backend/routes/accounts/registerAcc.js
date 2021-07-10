@@ -22,7 +22,22 @@ router.post('/', urlencodedParser, (req, res) =>
         return;
     }
     
-    const account = req.body
+    const account = 
+    {
+        email: req.body.email,
+        password: req.body.password,
+        CNPJ: req.body.CNPJ,
+        phone: req.body.phone,
+        whatsapp: req.body.whatsapp,
+        address:
+        {
+            CEP: req.body.CEP,
+            state: req.body.state,
+            city: req.body.city,
+            district: req.body.district,
+            optional: req.body.optional
+        },
+    }
 
     // Check if email is already in use
     accounts.findOne({email: account.email}, (err, data) =>
@@ -34,9 +49,24 @@ router.post('/', urlencodedParser, (req, res) =>
         }
         else
         {
-            let key = crypto.genKey(account.password, account.email)
+            let key = crypto.genKey(account.email, account.password)
+            account.password = bcrypt.hashSync(account.password, 10)
+            
+            Object.keys(account).map(objKey =>
+            {
+                if(typeof(account[objKey]) != 'object' && objKey != 'email')
+                account[objKey] = crypto.encrypt(account[objKey], key)
 
-            account.password = crypto.encrypt(bcrypt.hashSync(account.password, 10), key)
+                if(typeof(account[objKey] === 'object'))
+                {
+                    Object.keys(account[objKey]).map(objKey2 =>
+                        {
+                            if(typeof(account[objKey][objKey2] != 'object'))
+                                account[objKey][objKey2] = crypto.encrypt(account[objKey][objKey2], key)
+
+                        })
+                }
+            })
 
             accounts(account).save((err) =>
             {
@@ -68,10 +98,11 @@ router.post('/', urlencodedParser, (req, res) =>
                     }
 
                     res.status(200).end(JSON.stringify(
-                    {
-                         _id: data._id,
-                        email: data.email,
-                    }))
+                        {
+                            ...data._doc,
+                            password: undefined
+                        })
+                    )
                 })
             })   
         }

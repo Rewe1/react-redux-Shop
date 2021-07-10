@@ -21,9 +21,13 @@ router.post('/', urlencodedParser, (req, res) =>
         return;
     }
 
-    let account = req.body
+    const account = 
+    {
+        email: req.body.email,
+        password: req.body.password
+    }
 
-    let key = crypto.genKey(account.password, account.email)
+    let key = crypto.genKey(account.email, account.password)
 
     // Look for an account with the email
     accounts.findOne({email: account.email}, (err, data) =>
@@ -58,8 +62,8 @@ router.post('/', urlencodedParser, (req, res) =>
 
         res.status(200).end(JSON.stringify(
             {
-                _id: data._id,
-                email: data.email,
+                ...data._doc,
+                password: undefined
             }
         ))
     })
