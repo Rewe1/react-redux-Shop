@@ -1,5 +1,6 @@
 import shopItems from './shopItems'
 import cartItems from './cartItems'
+import account from './account'
 import {combineReducers} from 'redux';
 
 declare global
@@ -8,13 +9,15 @@ declare global
     {
         shopItems: iShopItemsState
         cartItems: iCartItemsState
+        account: iAccount
     }
 }
 
 let root = combineReducers(
     {
         shopItems: shopItems.reducer,
-        cartItems: cartItems.reducer
+        cartItems: cartItems.reducer,
+        account: account.reducer,
     }
 );
 
@@ -24,7 +27,8 @@ export default
     actions:
     {
         cartItems: cartItems.actions,
-        shopItems: shopItems.actions
+        shopItems: shopItems.actions,
+        account: account.actions,
     },
     methods:
     {

@@ -1,10 +1,11 @@
-export default (account: iAccount): iAccountAction =>
+export default (): iAccountAction =>
 {
     return {
         type: 'LOGOUT',
         payload:
         {
-            ...account
+            _id: '',
+            email: '',
         }
     }
 }

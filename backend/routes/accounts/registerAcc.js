@@ -22,10 +22,10 @@ router.post('/', urlencodedParser, (req, res) =>
         return;
     }
     
-    const newAcc = req.body
+    const account = req.body
 
     // Check if email is already in use
-    accounts.findOne({email: newAcc.email}, (err, data) =>
+    accounts.findOne({email: account.email}, (err, data) =>
     {
         if(data != null)
         {
@@ -34,11 +34,11 @@ router.post('/', urlencodedParser, (req, res) =>
         }
         else
         {
-            let key = crypto.genKey(newAcc.password)
+            let key = crypto.genKey(account.password)
 
-            newAcc.password = crypto.encrypt(bcrypt.hashSync(newAcc.password, 10), key)
+            account.password = crypto.encrypt(bcrypt.hashSync(account.password, 10), key)
 
-            accounts(newAcc).save((err) =>
+            accounts(account).save((err) =>
             {
                 try
                 {
@@ -51,7 +51,28 @@ router.post('/', urlencodedParser, (req, res) =>
                     res.status(500).end();
                     return;
                 }
-                res.status(200).end()
+
+                
+                accounts.findOne({email: account.email}, (err, data) =>
+                {
+                    try
+                    {
+                        if(err)
+                            throw err
+                    }
+                    catch(exc)
+                    {
+                        console.error(exc);
+                        res.status(500).end();
+                        return;
+                    }
+
+                    res.status(200).end(JSON.stringify(
+                    {
+                         _id: data._id,
+                        email: data.email,
+                    }))
+                })
             })   
         }
     })

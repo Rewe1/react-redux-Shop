@@ -1,6 +1,7 @@
 import React, {useState} from "react"
 import {Link, Redirect} from 'react-router-dom'
-import {useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
+import stateRoot from '../../redux'
 
 import serverURL from '../../../../serverURL'
 
@@ -9,10 +10,12 @@ export default function RegisterPage()
     let [isEmailUsed, setEmailUsed] = useState(false)
     let [success, setSuccess] = useState(false)
 
+    let dispatch = useDispatch()
+
     let postRegister = async () => 
     {
         let formData = new FormData(document.getElementById('register-form') as HTMLFormElement)
-        fetch(`${serverURL.url}/${serverURL.accounts.registerPath}`, {
+        let res = await fetch(`${serverURL.url}/${serverURL.accounts.registerPath}`, {
             headers:{          
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -25,25 +28,18 @@ export default function RegisterPage()
                 }
             )
         })
-        .then(res =>
+        if(res.status === 401)
         {
-            if(res.status === 401)
-            {
-                setEmailUsed(true)
-                setSuccess(false)
-            }
-            
-            if(res.status === 200)
-            {
-                setEmailUsed(false)
-                setSuccess(true)
-            }
-            return;
-        })
-        .catch(exc =>
+            setEmailUsed(true)
+            setSuccess(false)
+        }
+        
+        if(res.status === 200)
         {
-            console.error(exc)
-        })
+            setEmailUsed(false)
+            dispatch(stateRoot.actions.account.login(await res.json()))
+            setSuccess(true)
+        }
     }
 
     return(

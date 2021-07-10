@@ -56,7 +56,12 @@ router.post('/', urlencodedParser, (req, res) =>
             return;
         }
 
-        res.status(200).end(JSON.stringify(data))
+        res.status(200).end(JSON.stringify(
+            {
+                _id: data._id,
+                email: data.email,
+            }
+        ))
     })
 });
 

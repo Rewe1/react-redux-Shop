@@ -1,6 +1,7 @@
 import React, {useState} from "react"
 import {Redirect} from 'react-router-dom'
-import {useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
+import stateRoot from '../../redux'
 
 import serverURL from '../../../../serverURL'
 
@@ -10,11 +11,13 @@ export default function loginPage()
     let [login401, set401] = useState(false)
     let [success, setSuccess] = useState(false)
 
+    let dispatch = useDispatch()
+
     let postLogin = async () => 
     {
         let formData = new FormData(document.getElementById('login-form') as HTMLFormElement)
 
-        fetch(`${serverURL.url}/${serverURL.accounts.loginPath}`, {
+        let res = await fetch(`${serverURL.url}/${serverURL.accounts.loginPath}`, {
             headers:
             {          
                 'Accept': 'application/json',
@@ -28,29 +31,24 @@ export default function loginPage()
                 }
             )
         })
-        .then(res =>
-        {
-            if(res.status === 400)
-            {
-                set400(true)
-            }
 
-            if(res.status === 401)
-            {
-                set401(true)
-            }
-            
-            if(res.status === 200)
-            {
-                set400(false)
-                set401(false)
-                setSuccess(true)
-            }
-        })
-        .catch(exc =>
+        if(res.status === 400)
         {
-            console.error(exc)
-        })
+            set400(true)
+        }
+        if(res.status === 401)
+        {
+            set401(true)
+        }
+        
+        if(res.status === 200)
+        {
+            set400(false)
+            set401(false)
+            setSuccess(true)
+            dispatch(stateRoot.actions.account.login(await res.json()))
+        }
+    
     }
 
     return(

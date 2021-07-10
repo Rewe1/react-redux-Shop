@@ -2,20 +2,24 @@ declare global
 {
     interface iAccount
     {
+        _id: string,
         email: string
     }
 
     interface iAccountAction
     {
         type: string
-        payload:
-        {
-            email: string
-        }
+        payload: iAccount
     }
 }
 
-export default (state: iAccount, action: iAccountAction) =>
+let defaultState: iAccount =
+{
+    _id: '',
+    email: ''
+}
+
+export default (state: iAccount = defaultState, action: iAccountAction) =>
 {
     let newState: iAccount
 
@@ -29,7 +33,7 @@ export default (state: iAccount, action: iAccountAction) =>
             return newState
             
         case 'LOGOUT':
-            newState = null
+            newState = defaultState
             return newState
 
         default:
