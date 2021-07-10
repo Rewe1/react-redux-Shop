@@ -66,8 +66,8 @@ export default function loginPage()
                 <Redirect to='/'></Redirect>
             }
             <form className='login-form' id='login-form'>
-                <input name='email' className='email-input' placeholder='Email'></input>
-                <input name='password' className='password-input' placeholder='Password'></input>
+                <input type='email' name='email' className='email-input' placeholder='Email'></input>
+                <input type='password' name='password' className='password-input' placeholder='Password'></input>
             </form>
             <div className='btn-div'>
                 <button className='submit-btn' onClick={() => postLogin()}>Submit</button>
