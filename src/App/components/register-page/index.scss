@@ -1,12 +1,19 @@
 .register-page-div
 {
-    padding: 32px;
-
+    padding: $defaultMargin 0 $defaultMargin;
     display: flex;
-    flex-direction: column;
-
-    background-color: $colorPrimary;
-    border-radius: 16px;
+    justify-content: center;
+    
+    .form-div
+    {
+        padding: 32px;
+        
+        display: flex;
+        flex-direction: column;
+    
+        background-color: $colorPrimary;
+        border-radius: 16px;
+    }
 
     .error-span
     {

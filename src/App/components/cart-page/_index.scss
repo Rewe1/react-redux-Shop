@@ -2,6 +2,10 @@
 
 .cart-page-div
 {
+    padding: $defaultMargin 0 $defaultMargin;
+    display: flex;
+    justify-content: center;
+
     .cart-items-list
     {
         margin: 0 0 32px 0;

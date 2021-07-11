@@ -1,5 +1,9 @@
 .profile-div
 {
+    padding: $defaultMargin 0 $defaultMargin;
+    display: flex;
+    justify-content: center;
+
     .login-div
     {
         display: flex;

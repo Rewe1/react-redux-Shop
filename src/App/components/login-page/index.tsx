@@ -53,24 +53,26 @@ export default function loginPage()
 
     return(
         <div className='login-page-div'>
-            {
-                login400 && 
-                <span className='error-span'>The was an error while trying to login.</span>
-            }
-            {
-                login401 && 
-                <span className='error-span'>The information provided does not match</span>
-            }
-            {
-                success &&
-                <Redirect to='/'></Redirect>
-            }
-            <form className='login-form' id='login-form'>
-                <input type='email' name='email' className='email-input' placeholder='Email'></input>
-                <input type='password' name='password' className='password-input' placeholder='Password'></input>
-            </form>
-            <div className='btn-div'>
-                <button className='submit-btn' onClick={() => postLogin()}>Submit</button>
+            <div className='form-div'>
+                {
+                    login400 && 
+                    <span className='error-span'>The was an error while trying to login.</span>
+                }
+                {
+                    login401 && 
+                    <span className='error-span'>The information provided does not match</span>
+                }
+                {
+                    success &&
+                    <Redirect to='/'></Redirect>
+                }
+                <form className='login-form' id='login-form'>
+                    <input type='email' name='email' className='email-input' placeholder='Email'></input>
+                    <input type='password' name='password' className='password-input' placeholder='Password'></input>
+                </form>
+                <div className='btn-div'>
+                    <button className='submit-btn' onClick={() => postLogin()}>Submit</button>
+                </div>
             </div>
         </div>
     )

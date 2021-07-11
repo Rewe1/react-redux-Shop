@@ -39,9 +39,9 @@ export default function App()
 
     return (
         <Router>
-            <div className='App'>
+            <div className='app'>
                 <AppNav/>
-                <div className='appBody'>
+                <main className='app-body'>
                     <Switch>
                         <Route exact path='/' component={Shop}/>
                             <Route path='/shop/item/:id' component={ShopItem}/>
@@ -51,7 +51,7 @@ export default function App()
                         <Route path='/login' component={LoginPage}/>
                         <Route path='/profile' component={ProfilePage}/>
                     </Switch>
-                </div>
+                </main>
             </div>
         </Router>
     )

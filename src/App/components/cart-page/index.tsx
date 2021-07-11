@@ -42,9 +42,11 @@ export default function Cart()
         )
     else
         return(
-            <div className='appCart'>
-                You have no items in your cart :c
-                <Link to='/'><h1>Buy something NOW</h1></Link>
+            <div className='cart-page-div'>
+                <div className='app-cart'>
+                    You have no items in your cart :c
+                    <Link to='/'><h1>Buy something NOW</h1></Link>
+                </div>
             </div>
         )
 }

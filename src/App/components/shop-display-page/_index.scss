@@ -1,6 +1,10 @@
 .items-display-div
 {
     @import './shop-item/index';
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     
     .post-item-a
     {
