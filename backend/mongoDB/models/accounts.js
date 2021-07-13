@@ -15,6 +15,7 @@ let schema = new mongoose.Schema(
             district: String,
             optional: String
         },
+        key: String
     }
 );
 

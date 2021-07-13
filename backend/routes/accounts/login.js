@@ -1,8 +1,8 @@
 const router = require('express').Router();
 const accounts = require('../../mongoDB').accounts;
 var bcrypt = require('bcryptjs');
-let crypto = require('../../CryptoJs/index')
-let serverURL = require('../../../serverURL')
+let CryptoJs = require('../../crypto-functions/index')
+let mapAccount = require('./mapAccount')
 
 const bodyParser = require('body-parser');
 router.use(bodyParser.json());
@@ -21,16 +21,14 @@ router.post('/', urlencodedParser, (req, res) =>
         return;
     }
 
-    const account = 
+    let formData = 
     {
         email: req.body.email,
         password: req.body.password
     }
 
-    let key = crypto.genKey(account.email, account.password)
-
     // Look for an account with the email
-    accounts.findOne({email: account.email}, (err, data) =>
+    accounts.findOne({email: formData.email}, (err, data) =>
     {
         try
         {
@@ -49,8 +47,8 @@ router.post('/', urlencodedParser, (req, res) =>
                 throw new Error('Email does not match with any information in the database')
             else
             {
-                let passHash = crypto.decrypt(data.password, key)
-                if(!bcrypt.compareSync(account.password, passHash))
+                let passHash = data.password
+                if(!bcrypt.compareSync(formData.password, passHash))
                     throw new Error("Password hash does not match the database's")
             }
         }
@@ -60,10 +58,17 @@ router.post('/', urlencodedParser, (req, res) =>
             return;
         }
 
+        let account = JSON.parse(JSON.stringify(data));
+        let derivatedKey = CryptoJs.derivateKey(account.email, formData.password)
+        let encryptionKey = CryptoJs.decrypt(account.key, derivatedKey)
+
+        mapAccount(CryptoJs.decrypt, account, encryptionKey)
+
         res.status(200).end(JSON.stringify(
             {
-                ...data._doc,
-                password: undefined
+                ...account,
+                password: undefined,
+                key: undefined
             }
         ))
     })

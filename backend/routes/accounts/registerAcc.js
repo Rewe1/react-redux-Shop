@@ -2,7 +2,8 @@ const router = require('express').Router();
 const accounts = require('../../mongoDB').accounts;
 let serverURL = require('../../../serverURL')
 var bcrypt = require('bcryptjs');
-let crypto = require('../../CryptoJs/index')
+let CryptoJs = require('../../crypto-functions/index')
+let mapAccount = require('./mapAccount')
 
 // bodyParser parses post form data to json, which can be saved into db
 const bodyParser = require('body-parser');
@@ -22,7 +23,7 @@ router.post('/', urlencodedParser, (req, res) =>
         return;
     }
     
-    const account = 
+    let account = 
     {
         email: req.body.email,
         password: req.body.password,
@@ -49,24 +50,14 @@ router.post('/', urlencodedParser, (req, res) =>
         }
         else
         {
-            let key = crypto.genKey(account.email, account.password)
+            let encryptionKey = CryptoJs.genRandomKey()
+            let derivatedKey = CryptoJs.derivateKey(account.email, account.password)
+
             account.password = bcrypt.hashSync(account.password, 10)
             
-            Object.keys(account).map(objKey =>
-            {
-                if(typeof(account[objKey]) != 'object' && objKey != 'email')
-                account[objKey] = crypto.encrypt(account[objKey], key)
-
-                if(typeof(account[objKey] === 'object'))
-                {
-                    Object.keys(account[objKey]).map(objKey2 =>
-                        {
-                            if(typeof(account[objKey][objKey2] != 'object'))
-                                account[objKey][objKey2] = crypto.encrypt(account[objKey][objKey2], key)
-
-                        })
-                }
-            })
+            account = mapAccount(CryptoJs.encrypt, account, encryptionKey)
+            
+            account.key = CryptoJs.encrypt(encryptionKey, derivatedKey)
 
             accounts(account).save((err) =>
             {
@@ -100,7 +91,8 @@ router.post('/', urlencodedParser, (req, res) =>
                     res.status(200).end(JSON.stringify(
                         {
                             ...data._doc,
-                            password: undefined
+                            password: undefined,
+                            key: undefined
                         })
                     )
                 })
