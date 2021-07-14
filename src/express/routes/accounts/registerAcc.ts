@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const accounts = require('../../mongoDB').accounts;
-let serverURL = require('../../../serverURL')
 var bcrypt = require('bcryptjs');
 let CryptoJs = require('../../crypto-functions/index')
 import mapAccount from './mapAccount'

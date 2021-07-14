@@ -6,7 +6,7 @@ module.exports = {
     entry: 
     {
         bundle: `${__dirname}/src/index.tsx`,
-        app: `${__dirname}/app.ts`
+        app: `${__dirname}/src/express/app.ts`
     },
     output: {
         path: `${__dirname}/dist`,
