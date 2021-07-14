@@ -1,7 +1,7 @@
 // Backend variables to sync the urls of get/post requests from frontend
 
 let host = 'localhost'
-let port = 8081
+let port = 8080
 let url = `http://${host}${port ? `:${port}` : ''}`
 
 module.exports =
