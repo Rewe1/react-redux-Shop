@@ -1,4 +1,4 @@
-let crypto = require('crypto')
+import crypto from 'crypto'
 let iv = Buffer.from('89aba9e0f9bf19283534fa20d2f28408', 'hex')
 
 let genRandomKey = () =>
@@ -6,10 +6,10 @@ let genRandomKey = () =>
     return crypto.randomBytes(24).toString('hex')
 }
 
-let derivateKey = (email, password) =>
+let derivateKey = (email: string, password: string) =>
 {
     let derivatedKey = crypto.pbkdf2Sync(password, email, 10, 24, 'sha256').toString('hex')
-
+/* 
     console.log('derivateKey: ',
         {
             email,
@@ -17,10 +17,11 @@ let derivateKey = (email, password) =>
             derivatedKey
         }
     )
+     */
     return derivatedKey
 }
 
-let encrypt = (str, key) =>
+let encrypt = (str: string, key: string) =>
 {
     const cipher = crypto.createCipheriv('aes-192-cbc', Buffer.from(key, 'hex'), iv);
     let encrypted = cipher.update(str)
@@ -37,11 +38,10 @@ let encrypt = (str, key) =>
     return encrypted.toString('hex')
 }
 
-let decrypt = (str, key) =>
+let decrypt = (str: string, key: string) =>
 {
     let decipher = crypto.createDecipheriv('aes-192-cbc', Buffer.from(key, 'hex'), iv)
-    let decrypted = decipher.update(Buffer.from(str, 'hex'))
-    decrypted = Buffer.concat([decrypted, decipher.final()]).toString()
+    let decrypted = Buffer.concat([decipher.update(Buffer.from(str, 'hex')), decipher.final()]).toString()
     /* 
     console.log('decrypt: ',
         {
@@ -55,7 +55,7 @@ let decrypt = (str, key) =>
     
 }
 
-module.exports = 
+export default
 {
     genRandomKey,
     derivateKey,

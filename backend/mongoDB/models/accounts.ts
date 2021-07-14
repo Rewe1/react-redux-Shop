@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose'
 
 let schema = new mongoose.Schema(
     {
@@ -19,4 +19,4 @@ let schema = new mongoose.Schema(
     }
 );
 
-module.exports = mongoose.model('accounts', schema);
+export default mongoose.model('accounts', schema);

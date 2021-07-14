@@ -1,14 +1,16 @@
-const router = require('express').Router();
-const accounts = require('../../mongoDB').accounts;
+import express from 'express'
+import models from '../../mongoDB'
 var bcrypt = require('bcryptjs');
-let CryptoJs = require('../../crypto-functions/index')
-let mapAccount = require('./mapAccount')
+import cryptoF from '../../crypto-functions/index'
+import mapAccount from './mapAccount'
+
+const router = express.Router()
 
 const bodyParser = require('body-parser');
 router.use(bodyParser.json());
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
 
-router.post('/', urlencodedParser, (req, res) =>
+router.post('/', urlencodedParser, (req: any, res: any) =>
 {
     try
     {
@@ -28,7 +30,7 @@ router.post('/', urlencodedParser, (req, res) =>
     }
 
     // Look for an account with the email
-    accounts.findOne({email: formData.email}, (err, data) =>
+    models.accounts.findOne({email: formData.email}, (err: Error, data: any) =>
     {
         try
         {
@@ -59,10 +61,10 @@ router.post('/', urlencodedParser, (req, res) =>
         }
 
         let account = JSON.parse(JSON.stringify(data));
-        let derivatedKey = CryptoJs.derivateKey(account.email, formData.password)
-        let encryptionKey = CryptoJs.decrypt(account.key, derivatedKey)
+        let derivatedKey = cryptoF.derivateKey(account.email, formData.password)
+        let encryptionKey = cryptoF.decrypt(account.key, derivatedKey)
 
-        mapAccount(CryptoJs.decrypt, account, encryptionKey)
+        mapAccount(cryptoF.decrypt, account, encryptionKey)
 
         res.status(200).end(JSON.stringify(
             {

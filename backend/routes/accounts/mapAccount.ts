@@ -1,6 +1,6 @@
 const cryptoF = require('../../crypto-functions/index')
 
-let mapAccount = (func, account, encryptionKey) =>
+let mapAccount = (func: any, account: any, encryptionKey: string) =>
 {
    account.CNPJ = func(account.CNPJ, encryptionKey)
    account.phone = func(account.phone, encryptionKey)
@@ -14,6 +14,6 @@ let mapAccount = (func, account, encryptionKey) =>
     return account
 }
 
-module.exports = mapAccount
+export default mapAccount
 
 

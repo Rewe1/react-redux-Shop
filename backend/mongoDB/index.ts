@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose'
 
 const uri = 'mongodb+srv://rewe:WSVwD9zJGjhL@cluster0-lojkm.gcp.mongodb.net/shopAppDb?retryWrites=true&w=majority';
 
 // Connect to database
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, (err) =>
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, (err: Error) =>
 {
     try
     {
@@ -18,11 +18,11 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, (err)
     }
 });
 
-// Create model
-const accounts = require('./models/accounts')
-const items = require('./models/items')
+import accounts from './models/accounts'
+import items from './models/items'
 
-module.exports = 
+export default
 {
-    accounts, items,
+    accounts,
+    items
 }

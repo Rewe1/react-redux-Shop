@@ -1,9 +1,10 @@
-const router = require('express').Router();
-const items = require('../../mongoDB').items;
+import express from 'express'
+const router = express.Router();
+import models from '../../mongoDB'
 
-router.get('/', (req, res) =>
+router.get('/', (req: any, res: any) =>
 {
-    items.find((err, data) =>
+    models.items.find((err: Error, data: any) =>
     {
         try
         {

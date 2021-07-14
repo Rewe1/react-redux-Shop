@@ -3,14 +3,14 @@ const accounts = require('../../mongoDB').accounts;
 let serverURL = require('../../../serverURL')
 var bcrypt = require('bcryptjs');
 let CryptoJs = require('../../crypto-functions/index')
-let mapAccount = require('./mapAccount')
+import mapAccount from './mapAccount'
 
 // bodyParser parses post form data to json, which can be saved into db
 const bodyParser = require('body-parser');
 router.use(bodyParser.json());
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
 
-router.post('/', urlencodedParser, (req, res) =>
+router.post('/', urlencodedParser, (req: any, res: any) =>
 {
     try
     {
@@ -38,10 +38,11 @@ router.post('/', urlencodedParser, (req, res) =>
             district: req.body.district,
             optional: req.body.optional
         },
+        key: ''
     }
 
     // Check if email is already in use
-    accounts.findOne({email: account.email}, (err, data) =>
+    accounts.findOne({email: account.email}, (err: Error, data: any) =>
     {
         if(data != null)
         {
@@ -59,7 +60,7 @@ router.post('/', urlencodedParser, (req, res) =>
             
             account.key = CryptoJs.encrypt(encryptionKey, derivatedKey)
 
-            accounts(account).save((err) =>
+            accounts(account).save((err: Error) =>
             {
                 try
                 {
@@ -74,7 +75,7 @@ router.post('/', urlencodedParser, (req, res) =>
                 }
 
                 
-                accounts.findOne({email: account.email}, (err, data) =>
+                accounts.findOne({email: account.email}, (err: Error, data: any) =>
                 {
                     try
                     {
