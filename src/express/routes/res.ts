@@ -1,10 +1,10 @@
 const router = require('express').Router()
 
-let distPath = `${__dirname}/../dist`
+let resPath = `${__dirname}/../dist/res`
 
 router.get('/ca97dffa3bf757477c786488adc0ae31.png', (req: any, res: any) =>
 {
-    fs.readFile(`${distPath}/ca97dffa3bf757477c786488adc0ae31.png`, (err: Error, data: any) =>
+    fs.readFile(`${resPath}/ca97dffa3bf757477c786488adc0ae31.png`, (err: Error, data: any) =>
     {
         try
         {
@@ -22,7 +22,7 @@ router.get('/ca97dffa3bf757477c786488adc0ae31.png', (req: any, res: any) =>
 
 router.get('/abc69b88d253da8e14b36becb0e6a6df.png', (req: any, res: any) =>
 {
-    fs.readFile(`${distPath}/abc69b88d253da8e14b36becb0e6a6df.png`, (err: Error, data: any) =>
+    fs.readFile(`${resPath}/abc69b88d253da8e14b36becb0e6a6df.png`, (err: Error, data: any) =>
     {
         try
         {

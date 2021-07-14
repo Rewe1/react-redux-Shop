@@ -858,7 +858,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (__webpack_require__.p + \"abc69b88d253da8e14b36becb0e6a6df.png\");\n\n//# sourceURL=webpack:///./src/App/components/app-nav/res/cart.png?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (__webpack_require__.p + \"res/abc69b88d253da8e14b36becb0e6a6df.png\");\n\n//# sourceURL=webpack:///./src/App/components/app-nav/res/cart.png?");
 
 /***/ }),
 
@@ -870,7 +870,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (__webpack_require__.p + \"ca97dffa3bf757477c786488adc0ae31.png\");\n\n//# sourceURL=webpack:///./src/App/components/app-nav/res/profile.png?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (__webpack_require__.p + \"res/ca97dffa3bf757477c786488adc0ae31.png\");\n\n//# sourceURL=webpack:///./src/App/components/app-nav/res/profile.png?");
 
 /***/ }),
 

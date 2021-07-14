@@ -69,7 +69,7 @@ app.use(`/${serverURL.accounts.loginPath}`, login)
 
 // assets
 
-const res = require('./res')
+const res = require('./routes/res')
 app.use('/', res)
 
 // 404
