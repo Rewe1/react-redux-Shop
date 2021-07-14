@@ -1,4 +1,7 @@
+import express from 'express'
+const router = express.Router()
 const items = require('../../mongoDB').items;
+import serverURL from '../../../../serverURL'
 
 // bodyParser parses post form data to json, which can be saved into db
 const bodyParser = require('body-parser');
@@ -22,4 +25,4 @@ router.post('/', urlencodedParser, (req: any, res: any) =>
     });
 })
 
-module.exports = router;
+export default router;

@@ -1,12 +1,12 @@
 import express from 'express'
-import models from '../../mongoDB'
+import {accounts} from '../../mongoDB'
 var bcrypt = require('bcryptjs');
 import cryptoF from '../../crypto-functions/index'
 import mapAccount from './mapAccount'
 
 const router = express.Router()
 
-const bodyParser = require('body-parser');
+import bodyParser from 'body-parser'
 router.use(bodyParser.json());
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
 
@@ -30,7 +30,7 @@ router.post('/', urlencodedParser, (req: any, res: any) =>
     }
 
     // Look for an account with the email
-    models.accounts.findOne({email: formData.email}, (err: Error, data: any) =>
+    accounts.findOne({email: formData.email}, (err: Error, data: any) =>
     {
         try
         {
@@ -76,4 +76,4 @@ router.post('/', urlencodedParser, (req: any, res: any) =>
     })
 });
 
-module.exports = router;
+export default router

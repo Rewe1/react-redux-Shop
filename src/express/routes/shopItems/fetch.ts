@@ -1,10 +1,10 @@
 import express from 'express'
 const router = express.Router();
-import models from '../../mongoDB'
+import {items} from '../../mongoDB'
 
 router.get('/', (req: any, res: any) =>
 {
-    models.items.find((err: Error, data: any) =>
+    items.find((err: Error, data: any) =>
     {
         try
         {
@@ -21,4 +21,4 @@ router.get('/', (req: any, res: any) =>
     })
 });
 
-module.exports = router;
+export default router;

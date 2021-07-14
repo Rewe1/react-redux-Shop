@@ -1,7 +1,7 @@
-const express = require('express');
+import express from 'express'
 const app = express();
-const fs = require('fs')
-let serverURL = require('../../serverURL')
+import fs from 'fs'
+import serverURL from '../../serverURL'
 let errorMsg = 'An error occurred :c'
 // Frontend
 
@@ -53,24 +53,24 @@ app.use(function (req: any, res: any, next: any) {
 
 // shopItems
 
-const get = require('./routes/shopItems/fetch');
-const post = require('./routes/shopItems/post');
+import get from './routes/shopItems/fetch'
+import post from './routes/shopItems/post'
 
 app.use(`/${serverURL.shopItems.fetchPath}`, get);
 app.use(`/${serverURL.shopItems.postPath}`, post);
 
 // accounts
 
-const register = require('./routes/accounts/registerAcc')
-const login = require('./routes/accounts/login')
+import register from './routes/accounts/registerAcc'
+import login from'./routes/accounts/login'
 
 app.use(`/${serverURL.accounts.registerPath}`, register)
 app.use(`/${serverURL.accounts.loginPath}`, login)
 
 // assets
 
-const res = require('./routes/res')
-app.use('/', res)
+import res from './routes/res'
+app.use('/res', res)
 
 // 404
 

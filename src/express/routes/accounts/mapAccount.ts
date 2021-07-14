@@ -1,4 +1,4 @@
-const cryptoF = require('../../crypto-functions/index')
+import cryptoF from '../../crypto-functions/index'
 
 let mapAccount = (func: any, account: any, encryptionKey: string) =>
 {

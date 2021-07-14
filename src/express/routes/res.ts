@@ -1,4 +1,7 @@
-const router = require('express').Router()
+import express from 'express'
+import fs from 'fs'
+let errorMsg = 'An error occurred :c'
+const router = express.Router()
 
 let resPath = `${__dirname}/../dist/res`
 
@@ -38,4 +41,4 @@ router.get('/abc69b88d253da8e14b36becb0e6a6df.png', (req: any, res: any) =>
     })
 })
 
-module.exports = router
+export default router

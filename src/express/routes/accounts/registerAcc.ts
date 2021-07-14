@@ -1,7 +1,8 @@
-const router = require('express').Router();
-const accounts = require('../../mongoDB').accounts;
+import express from 'express'
+const router = express.Router();
+import {accounts} from '../../mongoDB'
 var bcrypt = require('bcryptjs');
-let CryptoJs = require('../../crypto-functions/index')
+import CryptoJs from '../../crypto-functions/index'
 import mapAccount from './mapAccount'
 
 // bodyParser parses post form data to json, which can be saved into db
@@ -59,7 +60,7 @@ router.post('/', urlencodedParser, (req: any, res: any) =>
             
             account.key = CryptoJs.encrypt(encryptionKey, derivatedKey)
 
-            accounts(account).save((err: Error) =>
+            new accounts(account).save((err: Error) =>
             {
                 try
                 {
@@ -101,4 +102,4 @@ router.post('/', urlencodedParser, (req: any, res: any) =>
     })
 })
 
-module.exports = router;
+export default router;

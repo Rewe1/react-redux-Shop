@@ -18,11 +18,13 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, (err:
     }
 });
 
-import accounts from './models/accounts'
-import items from './models/items'
+import accountsModel from './models/accounts'
+import itemsModel from './models/items'
 
 export default
 {
-    accounts,
-    items
+    accounts: accountsModel,
+    items: itemsModel
 }
+export let accounts = accountsModel
+export let items = itemsModel
