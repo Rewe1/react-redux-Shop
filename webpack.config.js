@@ -3,11 +3,21 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     mode: 'development',
-    entry: `${__dirname}/src/index.tsx`,
+    entry: 
+    {
+        bundle: `${__dirname}/src/index.tsx`,
+        app: `${__dirname}/app.ts`
+    },
     output: {
         path: `${__dirname}/dist`,
-        filename: 'bundle.js',
+        filename: '[name].js',
         publicPath: '/'
+    },
+    target: 'node',
+    node: {
+        fs: 'empty',
+        net: 'empty',
+        __dirname: false
     },
     module: 
     {
@@ -55,4 +65,7 @@ module.exports = {
       historyApiFallback: true,
     },
     plugins: [new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'src', 'index.html') })],
+    externals: {
+        "saslprep": "require('saslprep')"
+    }
 };
