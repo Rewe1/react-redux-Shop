@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node dist/app",
     "express-dev": "npm-run-all -p build start-express",
-    "dev": "npm-run-all -p start-express start-frontend-dev",
+    "dev": "npm-run-all -p start-express start-frontend-dev build",
     "start-express": "nodemon dist/app",
     "start-frontend-dev": "webpack-dev-server --host 0.0.0.0",
     "build": "webpack --watch"
