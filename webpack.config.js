@@ -13,7 +13,6 @@ module.exports = {
         filename: '[name].js',
         publicPath: '/'
     },
-    target: 'node',
     node: {
         fs: 'empty',
         net: 'empty',
