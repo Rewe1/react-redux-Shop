@@ -19,6 +19,7 @@ module.exports =
     accounts:
     {
         registerPath: `accounts/register`,
-        loginPath: `accounts/login`
+        loginPath: `accounts/login`,
+        fetchPath: `accounts/fetch`
     }
 };

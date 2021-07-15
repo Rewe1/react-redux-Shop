@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+mongoose.set('useFindAndModify', false);
 
 const uri = 'mongodb+srv://rewe:WSVwD9zJGjhL@cluster0-lojkm.gcp.mongodb.net/shopAppDb?retryWrites=true&w=majority';
 

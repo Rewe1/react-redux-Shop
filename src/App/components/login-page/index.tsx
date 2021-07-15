@@ -5,7 +5,7 @@ import stateRoot from '../../redux'
 
 import serverURL from '../../../../serverURL'
 
-export default function loginPage()
+export default function loginPage(props: any)
 {
     let [login400, set400] = useState(false)
     let [login401, set401] = useState(false)
@@ -45,10 +45,9 @@ export default function loginPage()
         {
             set400(false)
             set401(false)
+            props.setToken(true)
             setSuccess(true)
-            dispatch(stateRoot.actions.account.login(await res.json()))
         }
-    
     }
 
     return(

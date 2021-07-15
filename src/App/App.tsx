@@ -1,8 +1,8 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import './index.scss';
 import backendURL from "../../serverURL"
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import shopItems from './redux/shopItems'
 
 import AppNav from './components/app-nav';
@@ -16,14 +16,44 @@ import ProfilePage from './components/profile-page/index';
 
 import stateRoot from './redux'
 import shopItemsStore from './redux/shopItems'
+import serverURL from "../../serverURL";
 
 export default function App()
 {
-    let dispatch = useDispatch();
+    const state: tRootState = useSelector((state: tRootState) => state)
+    let [receivedToken, setToken] = useState(false)
 
-    let account: iAccount = JSON.parse(window.sessionStorage.getItem('account'))
-    if(account != null)
-        dispatch(stateRoot.actions.account.login(account))
+    let dispatch = useDispatch();
+    
+    let continueSession = async () =>
+    {
+        // Check if there is a session token
+        if(Boolean(document.cookie.match('authToken')))
+        {
+            let account: iAccount
+            let res = await fetch(`${serverURL.accounts.fetchPath}`)
+            
+            if(res.status === 500)
+            {
+                console.log(res.status)
+                return;
+            }
+            
+            if(res.status === 404)
+            {
+                document.cookie = "authToken=undefined; expires = Thu, 01 Jan 1970 00:00:00 GMT"
+            }
+
+            if(res.status === 200)
+            {
+                account = await res.json()
+                dispatch(stateRoot.actions.account.login(account))
+            }
+        }
+    }
+    
+    if(state.account.email === '')
+        continueSession()
 
     useEffect(() =>
     {
@@ -47,8 +77,8 @@ export default function App()
                             <Route path='/shop/item/:id' component={ShopItem}/>
                         <Route path='/cart' component={Cart}/>
                         <Route path='/postItem' component={PostItem}/>
-                        <Route path='/register-account' component={RegisterPage}/>
-                        <Route path='/login' component={LoginPage}/>
+                        <Route path='/register-account' render={() => (<RegisterPage setToken={setToken} />)}/>
+                        <Route path='/login' render={() => (<LoginPage setToken={setToken} />)}/>
                         <Route path='/profile' component={ProfilePage}/>
                     </Switch>
                 </main>

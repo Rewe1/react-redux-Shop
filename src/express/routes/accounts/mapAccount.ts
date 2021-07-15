@@ -1,5 +1,3 @@
-import cryptoF from '../../crypto-functions/index'
-
 let mapAccount = (func: any, account: any, encryptionKey: string) =>
 {
    account.CNPJ = func(account.CNPJ, encryptionKey)

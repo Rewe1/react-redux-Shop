@@ -3,12 +3,14 @@ import {accounts} from '../../mongoDB'
 var bcrypt = require('bcryptjs');
 import cryptoF from '../../crypto-functions/index'
 import mapAccount from './mapAccount'
+import cookieParser from 'cookie-parser'
 
 const router = express.Router()
 
 import bodyParser from 'body-parser'
 router.use(bodyParser.json());
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
+router.use(cookieParser())
 
 router.post('/', urlencodedParser, (req: any, res: any) =>
 {
@@ -60,19 +62,27 @@ router.post('/', urlencodedParser, (req: any, res: any) =>
             return;
         }
 
+        let token = cryptoF.genRandomKey()
         let account = JSON.parse(JSON.stringify(data));
         let derivatedKey = cryptoF.derivateKey(account.email, formData.password)
-        let encryptionKey = cryptoF.decrypt(account.key, derivatedKey)
 
-        mapAccount(cryptoF.decrypt, account, encryptionKey)
+        res.cookie('authToken', JSON.stringify({email: account.email, token, derivatedKey}), {maxAge: 8 * 60 * 60 * 1000})
 
-        res.status(200).end(JSON.stringify(
-            {
-                ...account,
-                password: undefined,
-                key: undefined
+        accounts.findOneAndUpdate({email: formData.email}, {token: token}, {}, (err: Error, doc: any) =>
+        {
+            try{
+                if (err)
+                    throw err
             }
-        ))
+            catch(exc)
+            {
+                console.error(exc)
+                res.status(500).end()
+            }
+            doc.save()
+        })
+
+        res.status(200).end()
     })
 });
 

@@ -1,19 +1,16 @@
 import React, {useState} from "react"
 import {Link, Redirect} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
-import stateRoot from '../../redux'
 
 import serverURL from '../../../../serverURL'
 
-export default function RegisterPage()
+export default function RegisterPage(props: any)
 {
     let [isVendor, setVendor] = useState(false)
 
     let [isPassEqual, setPassEqual] = useState(true)
     let [isEmailUsed, setEmailUsed] = useState(false)
     let [success, setSuccess] = useState(false)
-
-    let dispatch = useDispatch()
 
     let postRegister = async () => 
     {
@@ -58,8 +55,8 @@ export default function RegisterPage()
         if(res.status === 200)
         {
             setEmailUsed(false)
-            setPassEqual(true);
-            dispatch(stateRoot.actions.account.login(await res.json()))
+            setPassEqual(true)
+            props.setToken(true)
             setSuccess(true)
         }
     }
@@ -67,7 +64,6 @@ export default function RegisterPage()
     return(
         <div className='register-page-div'>
             <div className='form-div'>
-
                 {
                     success &&
                     <Redirect to="/" />
