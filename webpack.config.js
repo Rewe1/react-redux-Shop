@@ -70,6 +70,8 @@ module.exports = {
     },
     plugins: [new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'src', 'index.html') })],
     externals: {
-        "saslprep": "require('saslprep')"
+        "saslprep": "require('saslprep')",
+        "mongoose": "require('mongoose')",
+        "express": "require('express')"
     }
 };
