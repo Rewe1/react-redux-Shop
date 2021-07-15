@@ -35,7 +35,6 @@ export default function App()
             
             if(res.status === 500)
             {
-                console.log(res.status)
                 return;
             }
             

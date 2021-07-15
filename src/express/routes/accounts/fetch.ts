@@ -31,23 +31,33 @@ router.get('/', (req: Request, res: Response) =>
             return;
         }
 
-        if(!account.token === cookie.token)
+        let clock = new Date()
+
+        if(!account.session.token === cookie.token)
         {
             res.status(401).end('Not authenticated')
             return;
         }
         else
         {
-            let encryptionKey = cryptoF.decrypt(account.key, cookie.derivatedKey)
-            
-            account = mapAccount(cryptoF.decrypt, account, encryptionKey)
-            
-            let body = account
-            body.password = undefined
-            body.token = undefined
-            body.key = undefined
-            
-            res.status(200).end(JSON.stringify(body))
+            if(clock.getTime() > account.session.expiration)
+            {
+                res.status(401).end('Not authenticated')
+                return;
+            }
+            else
+            {
+                let encryptionKey = cryptoF.decrypt(account.key, cookie.derivatedKey)
+                
+                account = mapAccount(cryptoF.decrypt, account, encryptionKey)
+                
+                let body = account
+                body.password = undefined
+                body.token = undefined
+                body.key = undefined
+                
+                res.status(200).end(JSON.stringify(body))
+            }
         }
     })
     

@@ -4,6 +4,7 @@ import {accounts} from '../../mongoDB'
 var bcrypt = require('bcryptjs');
 import cryptoF from '../../crypto-functions/index'
 import mapAccount from './mapAccount'
+import setCookie from './setCookie'
 
 // bodyParser parses post form data to json, which can be saved into db
 const bodyParser = require('body-parser');
@@ -39,7 +40,11 @@ router.post('/', urlencodedParser, (req: any, res: any) =>
             optional: req.body.optional
         },
         key: '',
-        token: ''
+        session:
+        {
+            token: '',
+            expiration: 0
+        }
     }
 
     // Check if email is already in use
@@ -71,9 +76,7 @@ router.post('/', urlencodedParser, (req: any, res: any) =>
             account = mapAccount(cryptoF.encrypt, account, encryptionKey)
             account.key = cryptoF.encrypt(encryptionKey, derivatedKey)
 
-            let token = cryptoF.genRandomKey()
-            res.cookie('authToken', JSON.stringify({email: account.email, token, derivatedKey}), {maxAge: 8 * 60 * 60 * 1000})
-            account.token = token
+            account.session = setCookie(res, account.email, derivatedKey)
 
             new accounts(account).save((err: Error) =>
             {

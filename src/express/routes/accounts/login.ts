@@ -2,8 +2,8 @@ import express from 'express'
 import {accounts} from '../../mongoDB'
 var bcrypt = require('bcryptjs');
 import cryptoF from '../../crypto-functions/index'
-import mapAccount from './mapAccount'
 import cookieParser from 'cookie-parser'
+import setCookie from './setCookie'
 
 const router = express.Router()
 
@@ -62,13 +62,14 @@ router.post('/', urlencodedParser, (req: any, res: any) =>
             return;
         }
 
-        let token = cryptoF.genRandomKey()
         let account = JSON.parse(JSON.stringify(data));
         let derivatedKey = cryptoF.derivateKey(account.email, formData.password)
-
-        res.cookie('authToken', JSON.stringify({email: account.email, token, derivatedKey}), {maxAge: 8 * 60 * 60 * 1000})
-
-        accounts.findOneAndUpdate({email: formData.email}, {token: token}, {}, (err: Error, doc: any) =>
+        
+        accounts.findOneAndUpdate(
+            {email: formData.email}, 
+            {session: setCookie(res, account.email, derivatedKey)}, 
+            {}, 
+            (err: Error, doc: any) =>
         {
             try{
                 if (err)

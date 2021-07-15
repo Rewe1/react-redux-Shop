@@ -16,7 +16,11 @@ let schema = new mongoose.Schema(
             optional: String
         },
         key: String,
-        token: String
+        session:
+        {
+            token: String,
+            expiration: Number
+        }
     }
 );
 
