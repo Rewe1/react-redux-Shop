@@ -75,8 +75,9 @@ router.post('/', urlencodedParser, (req: any, res: any) =>
             account.password = bcrypt.hashSync(account.password, 10)
             account = mapAccount(cryptoF.encrypt, account, encryptionKey)
             account.key = cryptoF.encrypt(encryptionKey, derivatedKey)
+            let rememberMe = req.body.rememberMe === 'on' ? true : false
 
-            account.session = setCookie(res, account.email, derivatedKey)
+            account.session = setCookie(res, account.email, derivatedKey, rememberMe)
 
             new accounts(account).save((err: Error) =>
             {

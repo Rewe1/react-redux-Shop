@@ -3,6 +3,7 @@ import cookieParser from 'cookie-parser'
 import {accounts} from '../../mongoDB/index'
 import mapAccount from './mapAccount'
 import cryptoF from '../../crypto-functions/index'
+import setCookie from './setCookie'
 
 const router = express.Router()
 router.use(cookieParser())
@@ -40,10 +41,33 @@ router.get('/', (req: Request, res: Response) =>
         }
         else
         {
-            if(clock.getTime() > account.session.expiration)
+            let session = account.session
+            if(clock.getTime() > session.expiration)
             {
-                res.status(401).end('Not authenticated')
-                return;
+                if(!session.rememberMe)
+                {
+                    res.status(401).end('Not authenticated')
+                    return;
+                }
+                else
+                {
+                    accounts.findOneAndUpdate(
+                        {email: account.email}, 
+                        {session: setCookie(res, account.email, session.derivatedKey, true)}, {}, 
+                        (err: Error, doc: any) =>
+                    {
+                        try{
+                            if (err)
+                                throw err
+                        }
+                        catch(exc)
+                        {
+                            console.error(exc)
+                            res.status(500).end()
+                        }
+                        doc.save()
+                    })
+                }
             }
             else
             {

@@ -27,6 +27,7 @@ router.post('/', urlencodedParser, (req: any, res: any) =>
 
     let formData = 
     {
+        rememberMe: req.body.rememberMe === 'on' ? true : false,
         email: req.body.email,
         password: req.body.password
     }
@@ -64,11 +65,11 @@ router.post('/', urlencodedParser, (req: any, res: any) =>
 
         let account = JSON.parse(JSON.stringify(data));
         let derivatedKey = cryptoF.derivateKey(account.email, formData.password)
+        let rememberMe = req.body.rememberMe === 'on' ? true : false
         
         accounts.findOneAndUpdate(
             {email: formData.email}, 
-            {session: setCookie(res, account.email, derivatedKey)}, 
-            {}, 
+            {session: setCookie(res, account.email, derivatedKey, rememberMe)}, {}, 
             (err: Error, doc: any) =>
         {
             try{

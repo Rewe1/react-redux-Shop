@@ -26,6 +26,7 @@ export default function loginPage(props: any)
             method: 'POST',
             body: JSON.stringify(
                 {
+                    rememberMe: formData.get('remember-me'),
                     email: formData.get('email'),
                     password: formData.get('password')
                 }
@@ -68,6 +69,10 @@ export default function loginPage(props: any)
                 <form className='login-form' id='login-form'>
                     <input type='email' name='email' className='email-input' placeholder='Email'></input>
                     <input type='password' name='password' className='password-input' placeholder='Password'></input>
+                    <label>
+                        <input type='checkbox' name='remember-me' className='remember-me-input'></input>
+                        Remember me
+                    </label>
                 </form>
                 <div className='btn-div'>
                     <button className='submit-btn' onClick={() => postLogin()}>Submit</button>

@@ -31,6 +31,7 @@ export default function RegisterPage(props: any)
             method: 'POST',
             body: JSON.stringify(
                 {
+                    rememberMe: formData.get('remember-me'),
                     CNPJ: formData.get('CNPJ') ? formData.get('CNPJ') : '',
                     email: formData.get('email'),
                     password: formData.get('password'),
@@ -81,6 +82,10 @@ export default function RegisterPage(props: any)
                         <input type='email' name='email' className='email-input' placeholder='Email' required></input>
                         <input type='password' name='password' className='password-input' placeholder='Password' required></input>
                         <input type='password' name='confirm-password' className='password-input' placeholder='Confirm password' required></input>
+                        <label>
+                            <input type='checkbox' name='remember-me' className='remember-me-input'></input>
+                            Remember me
+                        </label>
                     </div>
 
                     <div className='account-info-div'>

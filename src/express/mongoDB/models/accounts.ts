@@ -19,7 +19,8 @@ let schema = new mongoose.Schema(
         session:
         {
             token: String,
-            expiration: Number
+            expiration: Number,
+            rememberMe: Boolean
         }
     }
 );
