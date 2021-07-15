@@ -1,18 +1,44 @@
 .register-page-div
 {
-    padding: $defaultMargin 0 $defaultMargin;
+    width: 100%;
     display: flex;
-    justify-content: center;
+
+    @media only screen and (max-width: 832px)
+    {
+        flex-direction: column-reverse;
+    }
+    
+    .banner-div
+    {
+        width: calc(40% - 64px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 32px;
+        background-image: url(https://via.placeholder.com/720);
+        background-size: cover;
+
+        @media only screen and (max-width: 832px)
+        {
+            width: calc(100% - 64px);
+        }
+    }
     
     .form-div
     {
+        width: calc(60% - 64px);
         padding: 32px;
         
         display: flex;
         flex-direction: column;
     
-        background-color: $colorPrimary;
-        border-radius: 16px;
+        background-color: $colorSecondary;
+
+        @media only screen and (max-width: 832px)
+        {
+            width: calc(100% - 64px);
+            padding: 64px 32px
+        }
     }
 
     .error-span
@@ -28,46 +54,74 @@
     .register-form
     {
         display: flex;
+        flex-direction: column;
         align-items: center;
-        flex-direction: row;
         justify-content: space-evenly;
-
-        @media only screen and (max-width: 832px)
-        {
-            flex-direction: column;
-        }
 
         .account-id-div
         {
-            width: 40%;
+            margin-bottom: 64px;
             display: flex;
             flex-direction: column;
+            align-items: flex-start;
 
-            @media only screen and (max-width: 832px)
+            .remember-me-label
             {
-                width: 80%;
-                margin-bottom: 32px;
+                font-size: 16px;
             }
         }
     
         .account-info-div
         {
-            width: 40%;
             display: flex;
             flex-direction: column;
+            align-items: center;
 
-            @media only screen and (max-width: 832px)
+            .account-type-div
             {
-                width: 80%;
+                width: 100%;
+                margin-bottom: 32px;
+
+                .account-type-line
+                {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-around;
+
+                    .account-type-btn
+                    {
+                        padding: 8px;
+                        background-color: transparent;
+                        border: none;
+                    }
+                }
+            }
+            
+            .cnpj-input
+            {
+                width: calc(18 * 0.6em);
             }
 
-            .location-div
+            .input-line
             {
+                width: 100%;
                 display: flex;
+                justify-content: space-around;
 
                 input
                 {
-                    width: 33.3%;
+                    width: 42%;
+                }
+            }
+
+            .location-info
+            {
+                margin-top: 32px;
+
+                .cep-input
+                {
+                    width: calc(8 * 0.8em);
                 }
             }
         }
@@ -78,6 +132,7 @@
             border: none;
             border-radius: 8px;
             padding: 8px;
+            margin: 4px 0 4px;
             font-size: 18px;
         }
         
@@ -96,10 +151,15 @@
         {
             width: min-content;
             margin-top: 16px;
+            padding: 8px 16px;
     
             background-color: adjust-color($color: $colorWhite, $alpha: -.2);
             border: none;
             border-radius: 8px;
+
+            font-family: $fontHeader;
+            font-weight: bold;
+            white-space: nowrap;
         }
     }
 }
