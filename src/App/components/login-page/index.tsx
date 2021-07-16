@@ -17,7 +17,7 @@ export default function loginPage(props: any)
     {
         let formData = new FormData(document.getElementById('login-form') as HTMLFormElement)
 
-        let res = await fetch(`${serverURL.url}/${serverURL.accounts.loginPath}`, {
+        let res = await fetch(`/${serverURL.accounts.loginPath}`, {
             headers:
             {          
                 'Accept': 'application/json',

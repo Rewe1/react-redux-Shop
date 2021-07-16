@@ -24,7 +24,7 @@ export default function RegisterPage(props: any)
         if(formData.get('password') != formData.get('confirm-password'))
             return setPassEqual(false)
 
-        let res = await fetch(`${serverURL.url}/${serverURL.accounts.registerPath}`, {
+        let res = await fetch(`/${serverURL.accounts.registerPath}`, {
             headers:{          
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
