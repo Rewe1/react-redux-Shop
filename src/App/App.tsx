@@ -29,6 +29,9 @@ export default function App()
     let continueSession = async () =>
     {   
         // Check if there is a session token]
+        if(state.account._id != '')
+            return;
+        
         if(Boolean(document.cookie.match('authToken')))
         {
             let account: iAccount
