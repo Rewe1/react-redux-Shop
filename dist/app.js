@@ -872,7 +872,7 @@ eval("module.exports = function(module) {\n\tif (!module.webpackPolyfill) {\n\t\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("// Backend variables to sync the urls of get/post requests from frontend\nvar host = '0.0.0.0';\nvar port = 8080;\nvar url = \"http://\".concat(host).concat(port ? \":\".concat(port) : '');\nmodule.exports = {\n  host: host,\n  port: port,\n  url: url,\n  shopItems: {\n    fetchPath: \"shop-items/fetch\",\n    postPath: \"shop-items/post\"\n  },\n  accounts: {\n    registerPath: \"accounts/register\",\n    loginPath: \"accounts/login\",\n    fetchPath: \"accounts/fetch\"\n  }\n};\n\n//# sourceURL=webpack:///./serverURL.js?");
+eval("// Backend variables to sync the urls of get/post requests from frontend\r\n\r\nlet host = '0.0.0.0'\r\nlet port = 8080\r\nlet url = `http://${host}${port ? `:${port}` : ''}`\r\n\r\nmodule.exports =\r\n{\r\n    host,\r\n    port,\r\n    url,\r\n    shopItems:\r\n    {\r\n        fetchPath: `shop-items/fetch`,\r\n        postPath: `shop-items/post`,\r\n    },\r\n    accounts:\r\n    {\r\n        registerPath: `accounts/register`,\r\n        loginPath: `accounts/login`,\r\n        fetchPath: `accounts/fetch`\r\n    }\r\n};\r\n\n\n//# sourceURL=webpack:///./serverURL.js?");
 
 /***/ }),
 
