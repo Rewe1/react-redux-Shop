@@ -55,19 +55,19 @@ export default function loginPage(props: any)
     return(
         <div className='login-page-div'>
             <div className='content-div'>
-                {
-                    login400 && 
-                    <span className='error-span'>The was an error while trying to login.</span>
-                }
-                {
-                    login401 && 
-                    <span className='error-span'>The information provided does not match</span>
-                }
                 <button onClick={() => props.setLogin(false)}>
                     &#10006;
                 </button>
                 <div className='form-div'>
                     <form className='login-form' id='login-form'>
+                        {
+                            login400 && 
+                            <span className='error-span'>The was an error while trying to login.</span>
+                        }
+                        {
+                            login401 && 
+                            <span className='error-span'>The information provided does not match</span>
+                        }
                         <Link className='register-a' to='/register-account' onClick={() => props.setLogin(false)}>Não tenho uma conta</Link>
                         <input type='email' name='email' className='email-input' placeholder='Email'></input>
                         <input type='password' name='password' className='password-input' placeholder='Password'></input>
