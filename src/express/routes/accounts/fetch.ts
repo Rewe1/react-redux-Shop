@@ -76,7 +76,7 @@ router.get('/', (req: Request, res: Response) =>
                 
                 let body = account
                 body.password = undefined
-                body.token = undefined
+                body.session = undefined
                 body.key = undefined
                 
                 res.status(200).end(JSON.stringify(body))
