@@ -27,8 +27,8 @@ export default function App()
     let dispatch = useDispatch();
     
     let continueSession = async () =>
-    {
-        // Check if there is a session token
+    {   
+        // Check if there is a session token]
         if(Boolean(document.cookie.match('authToken')))
         {
             let account: iAccount
@@ -82,7 +82,7 @@ export default function App()
                         <Route path='/cart' component={Cart}/>
                         <Route path='/postItem' component={PostItem}/>
                         <Route path='/register-account' render={() => (<RegisterPage setToken={setToken} />)} />
-                        <Route path='/profile' render={() => (<ProfilePage setLogin={setLogin} />)} />
+                        <Route path='/profile' render={() => (<ProfilePage setToken={setToken} setLogin={setLogin} />)} />
                     </Switch>
                 </main>
             </div>

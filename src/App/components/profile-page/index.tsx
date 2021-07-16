@@ -13,6 +13,7 @@ export default function ProfilePage(props: any)
 
     let logout = () =>
     {
+        props.setToken(false)
         dispatch(stateRoot.actions.account.logout())
     }
 
