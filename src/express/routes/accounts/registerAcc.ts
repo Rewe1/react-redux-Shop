@@ -24,28 +24,7 @@ router.post('/', urlencodedParser, (req: any, res: any) =>
         return;
     }
     
-    let account = 
-    {
-        email: req.body.email,
-        password: req.body.password,
-        CNPJ: req.body.CNPJ,
-        phone: req.body.phone,
-        whatsapp: req.body.whatsapp,
-        address:
-        {
-            CEP: req.body.CEP,
-            state: req.body.state,
-            city: req.body.city,
-            district: req.body.district,
-            optional: req.body.optional
-        },
-        key: '',
-        session:
-        {
-            token: '',
-            expiration: 0
-        }
-    }
+    let account = req.body
 
     // Check if email is already in use
     accounts.findOne({email: account.email}, (err: Error, data: any) =>

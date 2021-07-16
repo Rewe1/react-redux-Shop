@@ -38,13 +38,16 @@ export default function RegisterPage(props: any)
                     password: formData.get('password'),
                     phone: formData.get('phone'),
                     whatsapp: formData.get('whatsapp'),
-                    CEP: formData.get('CEP'),
-                    state: formData.get('state'),
-                    city: formData.get('city'),
-                    district: formData.get('district'),
-                    street: formData.get('street'),
-                    number: formData.get('number'),
-                    optional: formData.get('optional'),
+                    address:
+                    {
+                        CEP: formData.get('CEP'),
+                        state: formData.get('state'),
+                        city: formData.get('city'),
+                        district: formData.get('district'),
+                        street: formData.get('street'),
+                        number: formData.get('number'),
+                        optional: formData.get('optional'),
+                    }
                 }
             )
         })

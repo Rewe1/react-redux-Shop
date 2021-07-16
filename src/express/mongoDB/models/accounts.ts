@@ -13,6 +13,8 @@ let schema = new mongoose.Schema(
             state: String,
             city: String,
             district: String,
+            street: String,
+            number: String,
             optional: String
         },
         key: String,
