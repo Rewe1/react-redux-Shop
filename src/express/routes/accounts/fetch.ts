@@ -33,8 +33,7 @@ router.get('/', (req: Request, res: Response) =>
         }
 
         let clock = new Date()
-
-        if(!account.session.token === cookie.token)
+        if(!(account.session.token === cookie.token))
         {
             res.status(401).end('Not authenticated')
             return;
