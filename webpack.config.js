@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const serverURL = require('./serverURL')
 
 bundleConfig =
 {
@@ -65,7 +66,11 @@ bundleConfig =
         extensions: [ '.ts', '.tsx', '.js'],
     },
     devServer: {
-      historyApiFallback: true,
+        historyApiFallback: true,
+        proxy: 
+        {
+            '*': "http://localhost:8080"
+        }
     },
     plugins: [new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'src', 'index.html') })],
     externals: {
@@ -139,7 +144,7 @@ expressConfig =
         extensions: [ '.ts', '.tsx', '.js'],
     },
     devServer: {
-      historyApiFallback: true,
+        historyApiFallback: true,
     },
     externals: {
         "saslprep": "require('saslprep')",
