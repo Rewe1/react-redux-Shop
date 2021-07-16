@@ -1,65 +1,106 @@
 .login-page-div
 {
-    padding: $defaultMargin 0 $defaultMargin;
+    width: 100%;
+    height: 100vh;
+
     display: flex;
     justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+
+    background-color: #0006;
     
-    .form-div
+    .content-div
     {
-        padding: 32px;
-    
+        height: max-content;
+        
         display: flex;
         flex-direction: column;
-    
+        align-items: flex-end;
+        
         background-color: $colorPrimary;
-        border-radius: 16px;
-    }
-
-    .error-span
-    {
-        width: max-content;
-        padding: 4px;
-        font-size: 16px;
-        background-color: $colorLightRed;
+        border: 1px solid black;
         border-radius: 4px;
-        margin-bottom: 8px;
-    }
 
-    .login-form
-    {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-    
-        input
+        button
         {
-            background-color: adjust-color($color: $colorWhite, $alpha: -.2);
+            width: 32px;
+            height: 32px;
+            background-color: transparent;
             border: none;
-            border-radius: 8px;
-            padding: 8px;
-            font-size: 18px;
         }
         
-        .password-input
+        .form-div
         {
-            margin-top: 8px;
-            -webkit-text-security: disc;
-        }
-    }
+            padding: 0 32px;
+            margin-bottom: 32px;
+            
+            .register-a
+            {
+                text-align: left;
+                font-size: $fontSizeSmall;
+            }
 
-    .btn-div
-    {
-        display: flex;
-        justify-content: center;
+            .error-span
+            {
+                width: max-content;
+                padding: 4px;
+                font-size: $fontSizeSmall;
+                background-color: $colorLightRed;
+                border-radius: 4px;
+                margin-bottom: 8px;
+            }
 
-        .submit-btn
-        {
-            width: min-content;
-            margin-top: 16px;
-    
-            background-color: adjust-color($color: $colorWhite, $alpha: -.2);
-            border: none;
-            border-radius: 8px;
+            .login-form
+            {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+            
+                .email-input, .password-input
+                {
+                    width: calc(100% - 16px);
+                    padding: 8px;
+
+                    border: none;
+                    border-radius: 8px;
+                    background-color: adjust-color($color: $colorWhite, $alpha: -.2);
+                    font-size: $fontSizeSmall;
+                }
+                
+                .password-input
+                {
+                    margin-top: 8px;
+                    -webkit-text-security: disc;
+                }
+
+                .remember-me-div
+                {
+                    font-size: $fontSizeSmall;
+
+                    label
+                    {
+                        margin-right: 16px;
+                    }
+                }
+            }
+
+            .btn-div
+            {
+                display: flex;
+                justify-content: center;
+        
+                .submit-btn
+                {
+                    width: min-content;
+                    margin-top: 16px;
+            
+                    background-color: adjust-color($color: $colorWhite, $alpha: -.2);
+                    border: none;
+                    border-radius: 8px;
+                }
+            }
         }
     }
 }

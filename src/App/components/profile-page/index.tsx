@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 
 import stateRoot from '../../redux'
 
-export default function ProfilePage()
+export default function ProfilePage(props: any)
 {
     const state: any = useSelector((state: tRootState) => state);
     const account: iAccount = state.account
@@ -27,7 +27,7 @@ export default function ProfilePage()
                             <Link to='/register-account'>Register</Link>
                         </li>
                         <li>
-                            <Link to='/login'>Login</Link>
+                            <button onClick={() => props.setLogin(true)}>Login</button>
                         </li>
                     </ul>
                 </div>

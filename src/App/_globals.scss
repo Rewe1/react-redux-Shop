@@ -4,6 +4,17 @@ $fontHeader: georgia;
 $anchorFont: bold $font;
 $defaultMargin: 128px;
 
+// Font
+    // Font Sizes
+
+    $fontSizeSmall: 16px;
+
+    // Font Colors
+
+        $colorWhite: #eee;
+        $colorPrice: #257E52;
+        $colorPriceLight: #76D6A6;
+
 // Colors
 
     $colorWhite: #eee;
@@ -12,11 +23,6 @@ $defaultMargin: 128px;
     $colorTertiary: #0C3040;
     $colorLightRed: #c93939;
 
-    // Font Colors
-
-        $colorWhite: #eee;
-        $colorPrice: #257E52;
-        $colorPriceLight: #76D6A6;
 
 html
 {
@@ -43,6 +49,7 @@ a
     color: black;
     text-decoration: none;
     font-family: $fontHeader;
+    font-weight: bold;
 }
 
 button, input
@@ -54,6 +61,7 @@ button, input
 button
 {
     cursor: pointer;
+    font-weight: bold;
 }
 
 ul

@@ -22,6 +22,7 @@ export default function App()
 {
     const state: tRootState = useSelector((state: tRootState) => state)
     let [receivedToken, setToken] = useState(false)
+    let [showLogin, setLogin] = useState(false)
 
     let dispatch = useDispatch();
     
@@ -69,16 +70,19 @@ export default function App()
     return (
         <Router>
             <div className='app'>
-                <AppNav/>
+                <AppNav setLogin={setLogin} />
                 <main className='app-body'>
+                    {
+                        showLogin &&
+                        <LoginPage setToken={setToken} setLogin={setLogin}/>
+                    }
                     <Switch>
                         <Route exact path='/' component={Shop}/>
                             <Route path='/shop/item/:id' component={ShopItem}/>
                         <Route path='/cart' component={Cart}/>
                         <Route path='/postItem' component={PostItem}/>
-                        <Route path='/register-account' render={() => (<RegisterPage setToken={setToken} />)}/>
-                        <Route path='/login' render={() => (<LoginPage setToken={setToken} />)}/>
-                        <Route path='/profile' component={ProfilePage}/>
+                        <Route path='/register-account' render={() => (<RegisterPage setToken={setToken} />)} />
+                        <Route path='/profile' render={() => (<ProfilePage setLogin={setLogin} />)} />
                     </Switch>
                 </main>
             </div>

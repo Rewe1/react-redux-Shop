@@ -20,9 +20,11 @@
         display: flex;
         justify-content: space-evenly;
 
-        .home-page-a
+        button
         {
-            font-weight: bold;
+            background-color: transparent;
+            border: none;
+            font-family: $fontHeader;
         }
     }
 

@@ -45,7 +45,7 @@
     {
         width: max-content;
         padding: 4px;
-        font-size: 16px;
+        font-size: $fontSizeSmall;
         background-color: $colorLightRed;
         border-radius: 4px;
         margin-bottom: 8px;
@@ -67,7 +67,7 @@
 
             .remember-me-label
             {
-                font-size: 16px;
+                font-size: $fontSizeSmall;
             }
         }
     
@@ -158,7 +158,6 @@
             border-radius: 8px;
 
             font-family: $fontHeader;
-            font-weight: bold;
             white-space: nowrap;
         }
     }

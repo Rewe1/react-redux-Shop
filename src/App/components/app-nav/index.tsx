@@ -3,8 +3,9 @@ import {Link} from 'react-router-dom';
 import {useSelector} from 'react-redux'
 import cartImg from './res/cart.png'
 import profileImg from './res/profile.png'
+import { SourceMapDevToolPlugin } from "webpack";
 
-export default function Nav()
+export default function Nav(props: any)
 {
     const state: tRootState = useSelector((state: tRootState) => state)
 
@@ -23,9 +24,9 @@ export default function Nav()
                 }
                 {
                     !state.account._id.length &&
-                    <Link className='home-page-a' to='/login'>
+                    <button className='home-page-a' onClick={() => props.setLogin(true)}>
                         Login
-                    </Link>
+                    </button>
                 }
             </nav>
             <div className='right-menu'>

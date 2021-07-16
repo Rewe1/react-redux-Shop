@@ -15,6 +15,12 @@
             justify-content: space-evenly;
             font-weight: bold;
         }
+
+        button
+        {
+            border: none;
+            font-family: $fontHeader;
+        }
     }
 
     .profile-info
