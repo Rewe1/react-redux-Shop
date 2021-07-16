@@ -13,6 +13,8 @@ declare global
             state: string,
             city: string,
             district: string,
+            street: string,
+            number: string,
             optional: string
         },
     }
@@ -37,6 +39,8 @@ let defaultState: iAccount =
         state: '',
         city: '',
         district: '',
+        street:'',
+        number: '',
         optional: ''
     },
 }
@@ -50,6 +54,7 @@ export default (state: iAccount = defaultState, action: iAccountAction) =>
         case 'LOGIN':
             newState =
             {
+                ...defaultState,
                 ...action.payload
             }
             return newState

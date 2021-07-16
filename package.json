@@ -1,6 +1,6 @@
 {
   "name": "shop-app",
-  "version": "0.0.2-42",
+  "version": "0.0.2-43",
   "description": "Shop App made with React-router and Redux",
   "main": "app.js",
   "scripts": {

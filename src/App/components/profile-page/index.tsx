@@ -35,10 +35,44 @@ export default function ProfilePage(props: any)
             }
             {
                 account._id.length != 0 &&
-                <div className='profile-info'>
-                    <div className='email-div'>
-                        <span className='email-span'>Email:</span>
-                        <span className='email-span'>{account.email}</span>
+                <div className='profile-div'>
+                    <div className='profile-info'>
+                        <div className='info-line'>
+                            <span className='info-name'>Email:</span>
+                            <span className='info-span'>{account.email}</span>
+                        </div>
+                        <div className='info-line'>
+                            <span className='info-name'>Phone:</span>
+                            <span className='info-span'>{account.phone}</span>
+                        </div>
+                        <div className='info-line'>
+                            <span className='info-name'>Whatsapp:</span>
+                            <span className='info-span'>{account.whatsapp}</span>
+                        </div>
+                        <div className='info-line'>
+                            <span className='info-name'>CEP:</span>
+                            <span className='info-span'>{account.address.CEP}</span>
+                        </div>
+                        <div className='info-line'>
+                            <span className='info-name'>Estado:</span>
+                            <span className='info-span'>{account.address.state}</span>
+                        </div>
+                        <div className='info-line'>
+                            <span className='info-name'>Cidade:</span>
+                            <span className='info-span'>{account.address.city}</span>
+                        </div>
+                        <div className='info-line'>
+                            <span className='info-name'>Bairro:</span>
+                            <span className='info-span'>{account.address.district}</span>
+                        </div>
+                        <div className='info-line'>
+                            <span className='info-name'>Rua:</span>
+                            <span className='info-span'>{account.address.street}</span>
+                        </div>
+                        <div className='info-line'>
+                            <span className='info-name'>Número:</span>
+                            <span className='info-span'>{account.address.number}</span>
+                        </div>
                     </div>
                     <button className='logout-btn' onClick={() => logout()}>Logout</button>
                 </div>

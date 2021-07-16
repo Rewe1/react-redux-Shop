@@ -23,17 +23,38 @@
         }
     }
 
-    .profile-info
+    .profile-div
     {
-        background-color: $colorPrimary;
         padding: 32px;
-        border-radius: 16px;
-    }
 
-    .logout-btn
-    {
-        background-color: adjust-color($color: $colorWhite, $alpha: -.2);
-        border: none;
-        border-radius: 4px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 16px;
+        background-color: $colorPrimary;
+
+        .profile-info
+        {
+            margin-bottom: 32px;
+            
+            .info-line
+            {
+                width: 100%;
+                display: flex;
+    
+                .info-name
+                {
+                    width: 128px
+                }
+            }
+        }
+    
+        .logout-btn
+        {
+            background-color: adjust-color($color: $colorWhite, $alpha: -.2);
+            border: none;
+            border-radius: 4px;
+            font-family: $fontHeader;
+        }
     }
 }
