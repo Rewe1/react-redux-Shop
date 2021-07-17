@@ -35,6 +35,7 @@ export default function ProfilePage(props: any)
         if(res.status === 200)
         {
             setEdit(false)
+            setDelete(false)
             dispatch(stateRoot.actions.account.logout())
         }
     }
