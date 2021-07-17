@@ -5,6 +5,7 @@ var bcrypt = require('bcryptjs');
 import cryptoF from '../../crypto-functions/index'
 import mapAccount from './functions/mapAccount'
 import setCookie from './functions/setCookie'
+import findByEmail from './functions/findByEmail';
 
 // bodyParser parses post form data to json, which can be saved into db
 const bodyParser = require('body-parser');
@@ -25,22 +26,8 @@ router.post('/', urlencodedParser, (req: any, res: any) =>
     }
     
     let account = req.body
-
-    // Check if email is already in use
-    accounts.findOne({email: account.email}, (err: Error, data: any) =>
+    findByEmail(res, account.email, (data) =>
     {
-        try
-        {
-            if(err)
-                throw err
-        }
-        catch(exc)
-        {
-            console.error(exc)
-            res.status(500).end()
-            return;
-        }
-
         if(data != null)
         {
             res.status(401).end()

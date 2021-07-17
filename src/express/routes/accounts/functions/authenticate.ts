@@ -1,6 +1,7 @@
 import { Response } from 'express';
 import { combineReducers } from 'redux';
 import {accounts} from '../../../mongoDB/index'
+import findByEmail from './findByEmail';
 var bcrypt = require('bcryptjs');
 
 interface accountID
@@ -9,34 +10,22 @@ interface accountID
     password: string
 }
 
-let authenticate = (res: Response, info: accountID, cb: () => any) =>
+let authenticate = (res: Response, info: accountID, cb: (data: any) => any) =>
 {
-    accounts.findOne({email: info.email}, (err: Error, data: any) =>
+    findByEmail(res, info.email, (data) =>
     {
+        let passHash = data.password
         try{
-            if(err)
-                throw err
+            if(!bcrypt.compareSync(info.password, passHash))
+                throw new Error("Password hash does not match the database's")
         }
         catch(exc){
-            res.status(500).end()
+            // It's a 401 but send 404 to not give information if the email is registered.
+            res.status(404).end()
             return;
         }
-        
-        try{
-            if(data === null)
-                throw new Error('Email does not match with any information in the database')
-            else
-            {
-                let passHash = data.password
-                if(!bcrypt.compareSync(info.password, passHash))
-                    throw new Error("Password hash does not match the database's")
-            }
-        }
-        catch(exc){
-            res.status(401).end()
-            return;
-        }
-        cb()
+
+        cb(data)
     })
 }
 

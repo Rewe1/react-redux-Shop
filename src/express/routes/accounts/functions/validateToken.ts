@@ -1,29 +1,12 @@
 import { Request, Response } from 'express'
 import {accounts} from '../../../mongoDB/index'
 import setCookie from './setCookie'
+import findByEmail from './findByEmail'
 
-let validateToken = (cookie: any, res: Response, cb: () => any) =>
+let validateToken = (res: Response, cookie: any, cb: (data: any) => any) =>
 {
-    accounts.find({email: cookie.email}, (err: Error, data: any) =>
+    findByEmail(res, cookie.email, (account) =>
     {
-        let account = data[0]
-        try{
-            if(err)
-                throw err
-        }
-        catch(exc)
-        {
-            console.error(exc)
-            res.status(500).end()
-            return;
-        }
-        
-        if(!data.length)
-        {
-            res.status(404).end()
-            return;
-        }
-
         let clock = new Date()
         if(!(account.session.token === cookie.token))
         {
@@ -62,7 +45,7 @@ let validateToken = (cookie: any, res: Response, cb: () => any) =>
                 }
             }
         }
-        cb()
+        cb(account)
     })
 }
 
