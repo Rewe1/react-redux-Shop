@@ -1,6 +1,7 @@
-export default (): iAccountAction =>
+export default (keepCookies = false): iAccountAction =>
 {
-    document.cookie = "authToken=undefined; expires = Thu, 01 Jan 1970 00:00:00 GMT"
+    if(!keepCookies)
+        document.cookie = "authToken=undefined; expires = Thu, 01 Jan 1970 00:00:00 GMT"
     
     return {
         type: 'LOGOUT',

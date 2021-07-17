@@ -64,10 +64,12 @@ app.use(`/${serverURL.shopItems.postPath}`, post);
 import register from './routes/accounts/registerAcc'
 import login from'./routes/accounts/login'
 import accountFetch from './routes/accounts/fetch'
+import accountEdit from './routes/accounts/edit'
 
 app.use(`/${serverURL.accounts.registerPath}`, register)
 app.use(`/${serverURL.accounts.loginPath}`, login)
 app.use(`/${serverURL.accounts.fetchPath}`, accountFetch)
+app.use(`/${serverURL.accounts.editPath}`, accountEdit)
 
 // assets
 

@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {Link} from 'react-router-dom'
+import serverURL from '../../../../serverURL'
 
 import stateRoot from '../../redux'
 
@@ -9,7 +10,46 @@ export default function ProfilePage(props: any)
     const state: any = useSelector((state: tRootState) => state);
     const account: iAccount = state.account
 
+    let [edit, setEdit] = useState(false)
+    let [success, setSuccess] = useState(false)
+
     let dispatch = useDispatch()
+
+    let submitChanges = async () =>
+    {
+        let formData = new FormData(document.getElementById('profile-info') as HTMLFormElement)
+
+        let res = await fetch(`/${serverURL.accounts.editPath}`,
+        {
+            headers:{          
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+            method: 'POST',
+            body: JSON.stringify(
+            {
+                email: account.email,
+                phone: formData.get('phone') ? formData.get('phone') : '',
+                whatsapp: formData.get('whatsapp') ? formData.get('whatsapp') : '',
+                address:
+                {
+                    CEP: formData.get('CEP'),
+                    state: formData.get('state'),
+                    city: formData.get('city'),
+                    district: formData.get('district'),
+                    street: formData.get('street'),
+                    number: formData.get('number'),
+                    optional: formData.get('optional') ? formData.get('optional') : '',
+                }
+            })
+        })
+
+        if(res.status === 200)
+        {
+            setEdit(false)
+            dispatch(stateRoot.actions.account.logout(true))
+        }
+    }
 
     let logout = () =>
     {
@@ -36,44 +76,123 @@ export default function ProfilePage(props: any)
             {
                 account._id.length != 0 &&
                 <div className='profile-div'>
-                    <div className='profile-info'>
+                    <button className='edit-button' onClick={() => setEdit(!edit)}>{edit? 'Cancelar' : 'Editar'}</button>
+                    <form className='profile-info' id='profile-info'>
                         <div className='info-line'>
                             <span className='info-name'>Email:</span>
                             <span className='info-span'>{account.email}</span>
                         </div>
+                        {
+                            account.CNPJ != '' &&
+                            <div className='info-line'>
+                                <span className='info-name'>CNPJ:</span>
+                                <span className='info-span'>{account.CNPJ}</span>
+                            </div>
+                        }
                         <div className='info-line'>
                             <span className='info-name'>Phone:</span>
-                            <span className='info-span'>{account.phone}</span>
+                            {
+                                !edit &&
+                                <span className='info-span'>{account.phone}</span>
+                            }
+                            {
+                                edit &&
+                                <input name='phone' className='info-span' defaultValue={account.phone}></input>
+                            }
                         </div>
                         <div className='info-line'>
                             <span className='info-name'>Whatsapp:</span>
-                            <span className='info-span'>{account.whatsapp}</span>
+                            {
+                                !edit &&
+                                <span className='info-span'>{account.whatsapp}</span>
+                            }
+                            {
+                                edit &&
+                                <input name='whatsapp' className='info-span' defaultValue={account.whatsapp}></input>
+                            }
                         </div>
                         <div className='info-line'>
                             <span className='info-name'>CEP:</span>
-                            <span className='info-span'>{account.address.CEP}</span>
+                            {
+                                !edit &&
+                                <span className='info-span'>{account.address.CEP}</span>
+                            }
+                            {
+                                edit &&
+                                <input name='CEP' className='info-span' defaultValue={account.address.CEP} required></input>
+                            }
                         </div>
                         <div className='info-line'>
                             <span className='info-name'>Estado:</span>
-                            <span className='info-span'>{account.address.state}</span>
+                            {
+                                !edit &&
+                                <span className='info-span'>{account.address.state}</span>
+                            }
+                            {
+                                edit &&
+                                <input name='state' className='info-span' defaultValue={account.address.state} required></input>
+                            }
                         </div>
                         <div className='info-line'>
                             <span className='info-name'>Cidade:</span>
-                            <span className='info-span'>{account.address.city}</span>
+                            {
+                                !edit &&
+                                <span className='info-span'>{account.address.city}</span>
+                            }
+                            {
+                                edit &&
+                                <input name='city' className='info-span' defaultValue={account.address.city} required></input>
+                            }
                         </div>
                         <div className='info-line'>
                             <span className='info-name'>Bairro:</span>
-                            <span className='info-span'>{account.address.district}</span>
+                            {
+                                !edit &&
+                                <span className='info-span'>{account.address.district}</span>
+                            }
+                            {
+                                edit &&
+                                <input name='district' className='info-span' defaultValue={account.address.district} required></input>
+                            }
                         </div>
                         <div className='info-line'>
                             <span className='info-name'>Rua:</span>
-                            <span className='info-span'>{account.address.street}</span>
+                            {
+                                !edit &&
+                                <span className='info-span'>{account.address.street}</span>
+                            }
+                            {
+                                edit &&
+                                <input name='street' className='info-span' defaultValue={account.address.street} required></input>
+                            }
                         </div>
                         <div className='info-line'>
                             <span className='info-name'>Número:</span>
-                            <span className='info-span'>{account.address.number}</span>
+                            {
+                                !edit &&
+                                <span className='info-span'>{account.address.number}</span>
+                            }
+                            {
+                                edit &&
+                                <input name='number' className='info-span' defaultValue={account.address.number} required></input>
+                            }
                         </div>
-                    </div>
+                        <div className='info-line'>
+                            <span className='info-name'>Complem./Apart.:</span>
+                            {
+                                !edit &&
+                                <span className='info-span'>{account.address.optional}</span>
+                            }
+                            {
+                                edit &&
+                                <input name='optional' className='info-span' defaultValue={account.address.optional} required></input>
+                            }
+                        </div>
+                        {
+                            edit &&
+                            <button type='button' onClick={() => submitChanges()}>Enviar</button>
+                        }
+                    </form>
                     <button className='logout-btn' onClick={() => logout()}>Logout</button>
                 </div>
             }
