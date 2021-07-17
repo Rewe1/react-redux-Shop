@@ -1,5 +1,5 @@
 import { Response } from 'express'
-import cryptoF from '../../crypto-functions/index'
+import cryptoF from '../../../crypto-functions/index'
 
 let setCookie = (res: Response, email: string, derivatedKey: string, rememberMe: boolean) =>
 {

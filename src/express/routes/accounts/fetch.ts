@@ -1,9 +1,9 @@
 import express, { Request, Response } from 'express'
 import cookieParser from 'cookie-parser'
 import {accounts} from '../../mongoDB/index'
-import mapAccount from './mapAccount'
+import mapAccount from './functions/mapAccount'
 import cryptoF from '../../crypto-functions/index'
-import setCookie from './setCookie'
+import setCookie from './functions/setCookie'
 
 const router = express.Router()
 router.use(cookieParser())

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import {accounts} from '../../../mongoDB/index'
-import setCookie from '../setCookie'
+import setCookie from './setCookie'
 
 let validateToken = (cookie: any, res: Response, cb: () => any) =>
 {

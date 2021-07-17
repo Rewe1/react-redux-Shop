@@ -3,8 +3,8 @@ const router = express.Router();
 import {accounts} from '../../mongoDB'
 var bcrypt = require('bcryptjs');
 import cryptoF from '../../crypto-functions/index'
-import mapAccount from './mapAccount'
-import setCookie from './setCookie'
+import mapAccount from './functions/mapAccount'
+import setCookie from './functions/setCookie'
 
 // bodyParser parses post form data to json, which can be saved into db
 const bodyParser = require('body-parser');

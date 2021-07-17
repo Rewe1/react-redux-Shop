@@ -3,7 +3,7 @@ import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import validateToken from './functions/validateToken'
 import {accounts} from '../../mongoDB/index'
-import mapAccount from './mapAccount'
+import mapAccount from './functions/mapAccount'
 import cryptoF from '../../crypto-functions/index'
 
 const router = express.Router()

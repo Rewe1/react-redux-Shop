@@ -3,7 +3,7 @@ import {accounts} from '../../mongoDB'
 var bcrypt = require('bcryptjs');
 import cryptoF from '../../crypto-functions/index'
 import cookieParser from 'cookie-parser'
-import setCookie from './setCookie'
+import setCookie from './functions/setCookie'
 
 const router = express.Router()
 

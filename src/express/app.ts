@@ -1,46 +1,6 @@
 import express from 'express'
 const app = express();
-import fs from 'fs'
 import serverURL from '../../serverURL'
-let errorMsg = 'An error occurred :c'
-// Frontend
-
-
-app.get('/', (req: any, res: any) =>
-{
-    fs.readFile(`${__dirname}/index.html`, (err: any, data: any) =>
-    {
-        try
-        {
-            if(err)
-                throw err
-        }
-        catch(err)
-        {
-            console.error(err)
-            res.status(500).end(errorMsg)
-        }
-        res.status(200).end(data)
-    })
-})
-
-app.get('/bundle.js', (req: any, res: any) =>
-{
-    fs.readFile(`${__dirname}/bundle.js`, (err: any, data: any) =>
-    {
-        try
-        {
-            if(err)
-                throw err
-        }
-        catch(err)
-        {
-            console.error(err)
-            res.status(500).end(errorMsg)
-        }
-        res.status(200).end(data)
-    })
-})
 
 // Enable cross origin resource sharing
 app.use(function (req: any, res: any, next: any) {
@@ -51,29 +11,16 @@ app.use(function (req: any, res: any, next: any) {
     next();
 })
 
-// shopItems
+// routes
 
-import get from './routes/shopItems/fetch'
-import post from './routes/shopItems/post'
+import frontend from './routes/app/index'
+app.use(`/`, frontend);
 
-app.use(`/${serverURL.shopItems.fetchPath}`, get);
-app.use(`/${serverURL.shopItems.postPath}`, post);
+import shopItems from './routes/shopItems/index'
+app.use(`/shop-items`, shopItems);
 
-// accounts
-
-import register from './routes/accounts/registerAcc'
-import login from'./routes/accounts/login'
-import accountFetch from './routes/accounts/fetch'
-import accountEdit from './routes/accounts/edit'
-import accountDelete from './routes/accounts/delete'
-
-app.use(`/${serverURL.accounts.registerPath}`, register)
-app.use(`/${serverURL.accounts.loginPath}`, login)
-app.use(`/${serverURL.accounts.fetchPath}`, accountFetch)
-app.use(`/${serverURL.accounts.editPath}`, accountEdit)
-app.use(`/${serverURL.accounts.deletePath}`, accountDelete)
-
-// assets
+import accounts from './routes/accounts/index'
+app.use('/accounts', accounts)
 
 import res from './routes/res'
 app.use('/res', res)
