@@ -16,6 +16,8 @@ export default (): iAccountAction =>
                 CEP: '',
                 state: '',
                 city: '',
+                street: '',
+                number: '',
                 district: '',
                 optional: ''
             },

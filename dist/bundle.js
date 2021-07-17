@@ -1036,7 +1036,7 @@ eval("__webpack_require__.r(__webpack_exports__);\nvar __assign = (undefined && 
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (function () {\r\n    document.cookie = \"authToken=undefined; expires = Thu, 01 Jan 1970 00:00:00 GMT\";\r\n    return {\r\n        type: 'LOGOUT',\r\n        payload: {\r\n            _id: '',\r\n            email: '',\r\n            CNPJ: '',\r\n            phone: '',\r\n            whatsapp: '',\r\n            address: {\r\n                CEP: '',\r\n                state: '',\r\n                city: '',\r\n                district: '',\r\n                optional: ''\r\n            },\r\n        }\r\n    };\r\n});\r\n\n\n//# sourceURL=webpack:///./src/App/redux/account/actions/logout.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (function () {\r\n    document.cookie = \"authToken=undefined; expires = Thu, 01 Jan 1970 00:00:00 GMT\";\r\n    return {\r\n        type: 'LOGOUT',\r\n        payload: {\r\n            _id: '',\r\n            email: '',\r\n            CNPJ: '',\r\n            phone: '',\r\n            whatsapp: '',\r\n            address: {\r\n                CEP: '',\r\n                state: '',\r\n                city: '',\r\n                street: '',\r\n                number: '',\r\n                district: '',\r\n                optional: ''\r\n            },\r\n        }\r\n    };\r\n});\r\n\n\n//# sourceURL=webpack:///./src/App/redux/account/actions/logout.ts?");
 
 /***/ }),
 
