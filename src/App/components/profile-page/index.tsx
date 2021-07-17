@@ -11,9 +11,33 @@ export default function ProfilePage(props: any)
     const account: iAccount = state.account
 
     let [edit, setEdit] = useState(false)
+    let [isDeleting, setDelete] = useState(false)
     let [success, setSuccess] = useState(false)
 
     let dispatch = useDispatch()
+
+    let deleteAccount = async () =>
+    {
+        let res = await fetch(`/${serverURL.accounts.deletePath}`,
+        {
+            headers:{          
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+            method: 'POST',
+            body: JSON.stringify(
+            {
+                email: account.email,
+                password: (document.getElementById('delete-input') as HTMLInputElement).value
+            })
+        })
+
+        if(res.status === 200)
+        {
+            setEdit(false)
+            dispatch(stateRoot.actions.account.logout())
+        }
+    }
 
     let submitChanges = async () =>
     {
@@ -59,6 +83,19 @@ export default function ProfilePage(props: any)
 
     return (
         <div className='profile-div'>
+            {
+                isDeleting &&
+                <div className='delete-div'>
+                    <div className='delete-popup'>
+                        <button className='close-btn' onClick={() => setDelete(false)}>&#10006;</button>
+                        <div>
+                            <p>Essa ação é permanente, você tem certeza que quer deletar sua conta?</p>
+                            <input id='delete-input' type='password' placeholder='Senha'></input>
+                            <button type='button' onClick={deleteAccount}>Deletar conta</button>
+                        </div>
+                    </div>
+                </div>
+            }
             {
                 account._id.length === 0 &&
                 <div className='login-div'>
@@ -193,6 +230,7 @@ export default function ProfilePage(props: any)
                             <button type='button' onClick={() => submitChanges()}>Enviar</button>
                         }
                     </form>
+                    <button className='delete-btn' onClick={() => {setDelete(true); setEdit(false)}}>Delete account</button>
                     <button className='logout-btn' onClick={() => logout()}>Logout</button>
                 </div>
             }

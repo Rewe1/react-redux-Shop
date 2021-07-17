@@ -20,5 +20,6 @@ module.exports =
         loginPath: `accounts/login`,
         fetchPath: `accounts/fetch`,
         editPath: `accounts/edit`,
+        deletePath: `accounts/delete`,
     }
 };

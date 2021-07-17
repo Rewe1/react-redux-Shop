@@ -55,7 +55,7 @@ export default function loginPage(props: any)
     return(
         <div className='login-page-div'>
             <div className='content-div'>
-                <button onClick={() => props.setLogin(false)}>
+                <button className='close-btn' onClick={() => props.setLogin(false)}>
                     &#10006;
                 </button>
                 <div className='form-div'>
