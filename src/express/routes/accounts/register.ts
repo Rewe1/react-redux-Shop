@@ -14,6 +14,7 @@ const urlencodedParser = bodyParser.urlencoded({ extended: true });
 
 router.post('/', urlencodedParser, (req: any, res: any) =>
 {
+    let account = req.body
     try
     {
         if(!Object.keys(req.body).length)
@@ -24,13 +25,16 @@ router.post('/', urlencodedParser, (req: any, res: any) =>
         res.status(400).end()
         return;
     }
+
+    console.log(account)
+    if(!(account.password.match(/(?=.*[0-9])(?=.*[a-zA-Z]).{8,}/)))
+        return res.status(400).end()
     
-    let account = req.body
     findByEmail(res, account.email, (data) =>
     {
         if(data != null)
         {
-            res.status(401).end()
+            res.status(409).end()
             return;
         }
         else

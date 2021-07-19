@@ -37,6 +37,11 @@ h1, h2, h3, h4, h5, h6
     font-family: $fontHeader;
 }
 
+p
+{
+    margin: 0;
+}
+
 body
 {
     width: auto;
@@ -55,6 +60,7 @@ button, input
 {
     user-select: none;
     font-size: 22px;
+    outline: none;
 }
 
 button

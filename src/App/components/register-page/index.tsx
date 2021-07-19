@@ -4,31 +4,62 @@ import {useDispatch} from 'react-redux'
 
 import serverURL from '../../../../serverURL'
 
+let popups =
+{
+    NONE: '',
+    PASSWORD_REQ: 'PASSWORD_REQ',
+    UNEQUAL_PASS: 'UNEQUAL_PASS',
+    USED_EMAIL: 'USED_EMAIL'
+}
+
 export default function RegisterPage(props: any)
 {
-    
-    let [isPassEqual, setPassEqual] = useState(true)
-    let [isEmailUsed, setEmailUsed] = useState(false)
-    let [success, setSuccess] = useState(false)
-    
-    let [isVendor, setVendor] = useState(false)
+    let initialState =
+    {
+        success: false,
+        isVendor: false,
+        currentPopup: popups.NONE
+    }
+    let [state, setState] = useState(initialState)
 
+    let passwordOnChange = () =>
+    {
+        let formData = new FormData(document.getElementById('register-form') as HTMLFormElement)
+        let password = formData.get('password').toString()
+        
+        if(password.match(/(?=.*[0-9])(?=.*[a-zA-Z]).{8,}/))
+        setState({...state, currentPopup: popups.NONE})
+        else
+        setState({...state, currentPopup: popups.PASSWORD_REQ})
+    }
+    
+    let cPassOnChange = () =>
+    {
+        let formData = new FormData(document.getElementById('register-form') as HTMLFormElement)
+        if(formData.get('password') != formData.get('confirm-password'))
+            setState({...state, currentPopup: popups.UNEQUAL_PASS})
+        else
+            setState({...state, currentPopup: popups.NONE})
+    }
+    
     let postRegister = async () => 
     {
-        setSuccess(false)
-        setEmailUsed(false)
-        setPassEqual(true)
-
         let formData = new FormData(document.getElementById('register-form') as HTMLFormElement)
+        setState({...state, success: false, currentPopup: popups.NONE})
+
+        if(!(formData.get('password').toString().match(/(?=.*[0-9])(?=.*[a-zA-Z]).{8,}/)))
+        {
+            return setState({...state, currentPopup: popups.PASSWORD_REQ})
+        }
 
         if(formData.get('password') != formData.get('confirm-password'))
-            return setPassEqual(false)
+            return setState({...state, currentPopup: popups.UNEQUAL_PASS})
 
         let res = await fetch(`/${serverURL.accounts.registerPath}`, {
             headers:{          
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
-              },
+            },
             method: 'POST',
             body: JSON.stringify(
                 {
@@ -51,18 +82,21 @@ export default function RegisterPage(props: any)
                 }
             )
         })
-        if(res.status === 401)
+        if(res.status === 409)
         {
-            setEmailUsed(true)
-            setSuccess(false)
+            setState({...state, currentPopup: popups.USED_EMAIL, success: false})
+        }
+
+        if(res.status === 400)
+        {
+            setState({...state, currentPopup: popups.PASSWORD_REQ})
         }
         
         if(res.status === 200)
         {
-            setEmailUsed(false)
-            setPassEqual(true)
+            setState({...state, currentPopup: popups.NONE})
             props.setToken(true)
-            setSuccess(true)
+            setState({...state, success: true})
         }
     }
 
@@ -80,22 +114,38 @@ export default function RegisterPage(props: any)
             </div>
             <div className='form-div'>
                 {
-                    success &&
+                    state.success &&
                     <Redirect to="/" />
-                }
-                {
-                    isEmailUsed &&
-                    <span className='error-span'>Email já está em uso</span>
-                }
-                {
-                    !isPassEqual &&
-                    <span className='error-span'>As senhas são diferentes</span>
                 }
                 <form className='register-form' id='register-form' method='post'>
                     <div className='account-id-div'>
-                        <input type='email' name='email' className='email-input' placeholder='Email' required></input>
-                        <input type='password' name='password' className='password-input' placeholder='Senha' required></input>
-                        <input type='password' name='confirm-password' className='password-input' placeholder='Confirmar senha' required></input>
+                        <div className='input-div'>
+                            <input type='email' name='email' className='email-input' placeholder='Email' required></input>
+                            {
+                                state.currentPopup === popups.USED_EMAIL &&
+                                <div className='input-popup-div'>
+                                    <p>Este email já está em uso.</p>
+                                </div>
+                            }
+                        </div>
+                        <div className='input-div'>
+                            <input type='password' name='password' className='password-input' placeholder='Senha' onChange={passwordOnChange} pattern='(?=.*[0-9])(?=.*[a-zA-Z]).{8,}' required></input>
+                            {
+                                state.currentPopup === popups.PASSWORD_REQ &&
+                                <div className='input-popup-div'>
+                                    <p>A senha precisa de pelo menos uma letra e um número e conter no mínimo oito caracteres.</p>
+                                </div>
+                            }
+                        </div>
+                        <div className='input-div'>
+                            <input type='password' name='confirm-password' placeholder='Confirmar senha' onChange={cPassOnChange} required></input>
+                            {
+                                state.currentPopup === popups.UNEQUAL_PASS &&
+                                <div className='input-popup-div'>
+                                    <p>As senhas são diferentes</p>
+                                </div>
+                            }
+                        </div>
                         <label className='remember-me-label'>
                             <input type='checkbox' name='remember-me' className='remember-me-input'></input>
                             &nbsp; Manter login
@@ -106,16 +156,16 @@ export default function RegisterPage(props: any)
                         <div className='account-type-div'>
                             <span>Você é</span>
                             <div className='account-type-line'>
-                                <button className='account-type-btn' type="button" style={(!isVendor ? { fontWeight: 'bold'} : { fontWeight: 'normal'})} onClick={() => setVendor(false)}>
+                                <button className='account-type-btn' type="button" style={(!state.isVendor ? { fontWeight: 'bold'} : { fontWeight: 'normal'})} onClick={() => setState({...state, isVendor: false})}>
                                     &nbsp;consumidor 
                                 </button>
-                                <button className='account-type-btn' type="button" style={(isVendor ? { fontWeight: 'bold'} : { fontWeight: 'normal'})} onClick={() => setVendor(true)}>
+                                <button className='account-type-btn' type="button" style={(state.isVendor ? { fontWeight: 'bold'} : { fontWeight: 'normal'})} onClick={() => setState({...state, isVendor: true})}>
                                     &nbsp;vendedor 
                                 </button>
                             </div>
                         </div>
                         {
-                            isVendor &&
+                            state.isVendor &&
                             <input type='text' name='CNPJ' className='cnpj-input' placeholder='CNPJ'></input>
                         }
                         <div className='input-line'>
