@@ -26,7 +26,6 @@ router.post('/', urlencodedParser, (req: any, res: any) =>
         return;
     }
 
-    console.log(account)
     if(!(account.password.match(/(?=.*[0-9])(?=.*[a-zA-Z]).{8,}/)))
         return res.status(400).end()
     
