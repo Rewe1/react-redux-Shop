@@ -8,6 +8,12 @@ let validateToken = (res: Response, cookie: any, cb: (data: any) => any) =>
     findByEmail(res, cookie.email, (account) =>
     {
         let clock = new Date()
+
+        if(account === null)
+        {
+            res.status(404).end()
+            return;
+        }
         if(!(account.session.token === cookie.token))
         {
             res.status(401).end('Not authenticated')

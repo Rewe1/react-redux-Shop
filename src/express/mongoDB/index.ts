@@ -1,7 +1,8 @@
 import mongoose from 'mongoose'
+import 'dotenv/config'
 mongoose.set('useFindAndModify', false);
 
-const uri = 'mongodb+srv://rewe:WSVwD9zJGjhL@cluster0-lojkm.gcp.mongodb.net/shopAppDb?retryWrites=true&w=majority';
+const uri = process.env.MONGODB_URI;
 
 // Connect to database
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, (err: Error) =>

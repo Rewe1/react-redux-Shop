@@ -341,6 +341,50 @@ eval("/*!\n * depd\n * Copyright(c) 2014-2015 Douglas Christopher Wilson\n * MIT
 
 /***/ }),
 
+/***/ "./node_modules/dotenv/config.js":
+/*!***************************************!*\
+  !*** ./node_modules/dotenv/config.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("/* @flow */\n\n(function () {\n  __webpack_require__(/*! ./lib/main */ \"./node_modules/dotenv/lib/main.js\").config(\n    Object.assign(\n      {},\n      __webpack_require__(/*! ./lib/env-options */ \"./node_modules/dotenv/lib/env-options.js\"),\n      __webpack_require__(/*! ./lib/cli-options */ \"./node_modules/dotenv/lib/cli-options.js\")(process.argv)\n    )\n  )\n})()\n\n\n//# sourceURL=webpack:///./node_modules/dotenv/config.js?");
+
+/***/ }),
+
+/***/ "./node_modules/dotenv/lib/cli-options.js":
+/*!************************************************!*\
+  !*** ./node_modules/dotenv/lib/cli-options.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("/* @flow */\n\nconst re = /^dotenv_config_(encoding|path|debug)=(.+)$/\n\nmodule.exports = function optionMatcher (args /*: Array<string> */) {\n  return args.reduce(function (acc, cur) {\n    const matches = cur.match(re)\n    if (matches) {\n      acc[matches[1]] = matches[2]\n    }\n    return acc\n  }, {})\n}\n\n\n//# sourceURL=webpack:///./node_modules/dotenv/lib/cli-options.js?");
+
+/***/ }),
+
+/***/ "./node_modules/dotenv/lib/env-options.js":
+/*!************************************************!*\
+  !*** ./node_modules/dotenv/lib/env-options.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("/* @flow */\n\n// ../config.js accepts options via environment variables\nconst options = {}\n\nif (process.env.DOTENV_CONFIG_ENCODING != null) {\n  options.encoding = process.env.DOTENV_CONFIG_ENCODING\n}\n\nif (process.env.DOTENV_CONFIG_PATH != null) {\n  options.path = process.env.DOTENV_CONFIG_PATH\n}\n\nif (process.env.DOTENV_CONFIG_DEBUG != null) {\n  options.debug = process.env.DOTENV_CONFIG_DEBUG\n}\n\nmodule.exports = options\n\n\n//# sourceURL=webpack:///./node_modules/dotenv/lib/env-options.js?");
+
+/***/ }),
+
+/***/ "./node_modules/dotenv/lib/main.js":
+/*!*****************************************!*\
+  !*** ./node_modules/dotenv/lib/main.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("/* @flow */\n/*::\n\ntype DotenvParseOptions = {\n  debug?: boolean\n}\n\n// keys and values from src\ntype DotenvParseOutput = { [string]: string }\n\ntype DotenvConfigOptions = {\n  path?: string, // path to .env file\n  encoding?: string, // encoding of .env file\n  debug?: string // turn on logging for debugging purposes\n}\n\ntype DotenvConfigOutput = {\n  parsed?: DotenvParseOutput,\n  error?: Error\n}\n\n*/\n\nconst fs = __webpack_require__(/*! fs */ \"fs\")\nconst path = __webpack_require__(/*! path */ \"path\")\nconst os = __webpack_require__(/*! os */ \"os\")\n\nfunction log (message /*: string */) {\n  console.log(`[dotenv][DEBUG] ${message}`)\n}\n\nconst NEWLINE = '\\n'\nconst RE_INI_KEY_VAL = /^\\s*([\\w.-]+)\\s*=\\s*(.*)?\\s*$/\nconst RE_NEWLINES = /\\\\n/g\nconst NEWLINES_MATCH = /\\r\\n|\\n|\\r/\n\n// Parses src into an Object\nfunction parse (src /*: string | Buffer */, options /*: ?DotenvParseOptions */) /*: DotenvParseOutput */ {\n  const debug = Boolean(options && options.debug)\n  const obj = {}\n\n  // convert Buffers before splitting into lines and processing\n  src.toString().split(NEWLINES_MATCH).forEach(function (line, idx) {\n    // matching \"KEY' and 'VAL' in 'KEY=VAL'\n    const keyValueArr = line.match(RE_INI_KEY_VAL)\n    // matched?\n    if (keyValueArr != null) {\n      const key = keyValueArr[1]\n      // default undefined or missing values to empty string\n      let val = (keyValueArr[2] || '')\n      const end = val.length - 1\n      const isDoubleQuoted = val[0] === '\"' && val[end] === '\"'\n      const isSingleQuoted = val[0] === \"'\" && val[end] === \"'\"\n\n      // if single or double quoted, remove quotes\n      if (isSingleQuoted || isDoubleQuoted) {\n        val = val.substring(1, end)\n\n        // if double quoted, expand newlines\n        if (isDoubleQuoted) {\n          val = val.replace(RE_NEWLINES, NEWLINE)\n        }\n      } else {\n        // remove surrounding whitespace\n        val = val.trim()\n      }\n\n      obj[key] = val\n    } else if (debug) {\n      log(`did not match key and value when parsing line ${idx + 1}: ${line}`)\n    }\n  })\n\n  return obj\n}\n\nfunction resolveHome (envPath) {\n  return envPath[0] === '~' ? path.join(os.homedir(), envPath.slice(1)) : envPath\n}\n\n// Populates process.env from .env file\nfunction config (options /*: ?DotenvConfigOptions */) /*: DotenvConfigOutput */ {\n  let dotenvPath = path.resolve(process.cwd(), '.env')\n  let encoding /*: string */ = 'utf8'\n  let debug = false\n\n  if (options) {\n    if (options.path != null) {\n      dotenvPath = resolveHome(options.path)\n    }\n    if (options.encoding != null) {\n      encoding = options.encoding\n    }\n    if (options.debug != null) {\n      debug = true\n    }\n  }\n\n  try {\n    // specifying an encoding returns a string instead of a buffer\n    const parsed = parse(fs.readFileSync(dotenvPath, { encoding }), { debug })\n\n    Object.keys(parsed).forEach(function (key) {\n      if (!Object.prototype.hasOwnProperty.call(process.env, key)) {\n        process.env[key] = parsed[key]\n      } else if (debug) {\n        log(`\"${key}\" is already defined in \\`process.env\\` and will not be overwritten`)\n      }\n    })\n\n    return { parsed }\n  } catch (e) {\n    return { error: e }\n  }\n}\n\nmodule.exports.config = config\nmodule.exports.parse = parse\n\n\n//# sourceURL=webpack:///./node_modules/dotenv/lib/main.js?");
+
+/***/ }),
+
 /***/ "./node_modules/ee-first/index.js":
 /*!****************************************!*\
   !*** ./node_modules/ee-first/index.js ***!
@@ -908,7 +952,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var cryp
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"accounts\", function() { return accounts; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"items\", function() { return items; });\n/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! mongoose */ \"mongoose\");\n/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _models_accounts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./models/accounts */ \"./src/express/mongoDB/models/accounts.ts\");\n/* harmony import */ var _models_items__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./models/items */ \"./src/express/mongoDB/models/items.ts\");\n\r\nmongoose__WEBPACK_IMPORTED_MODULE_0___default.a.set('useFindAndModify', false);\r\nvar uri = 'mongodb+srv://rewe:WSVwD9zJGjhL@cluster0-lojkm.gcp.mongodb.net/shopAppDb?retryWrites=true&w=majority';\r\n// Connect to database\r\nmongoose__WEBPACK_IMPORTED_MODULE_0___default.a.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {\r\n    try {\r\n        if (err)\r\n            throw err;\r\n        else\r\n            console.log('Connected to mongoDb');\r\n    }\r\n    catch (exc) {\r\n        console.error(exc);\r\n    }\r\n});\r\n\r\n\r\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\r\n    accounts: _models_accounts__WEBPACK_IMPORTED_MODULE_1__[\"default\"],\r\n    items: _models_items__WEBPACK_IMPORTED_MODULE_2__[\"default\"]\r\n});\r\nvar accounts = _models_accounts__WEBPACK_IMPORTED_MODULE_1__[\"default\"];\r\nvar items = _models_items__WEBPACK_IMPORTED_MODULE_2__[\"default\"];\r\n\n\n//# sourceURL=webpack:///./src/express/mongoDB/index.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"accounts\", function() { return accounts; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"items\", function() { return items; });\n/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! mongoose */ \"mongoose\");\n/* harmony import */ var mongoose__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(mongoose__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var dotenv_config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! dotenv/config */ \"./node_modules/dotenv/config.js\");\n/* harmony import */ var dotenv_config__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(dotenv_config__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _models_accounts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./models/accounts */ \"./src/express/mongoDB/models/accounts.ts\");\n/* harmony import */ var _models_items__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./models/items */ \"./src/express/mongoDB/models/items.ts\");\n\r\n\r\nmongoose__WEBPACK_IMPORTED_MODULE_0___default.a.set('useFindAndModify', false);\r\nvar uri = process.env.MONGODB_URI;\r\n// Connect to database\r\nmongoose__WEBPACK_IMPORTED_MODULE_0___default.a.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true }, function (err) {\r\n    try {\r\n        if (err)\r\n            throw err;\r\n        else\r\n            console.log('Connected to mongoDb');\r\n    }\r\n    catch (exc) {\r\n        console.error(exc);\r\n    }\r\n});\r\n\r\n\r\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\r\n    accounts: _models_accounts__WEBPACK_IMPORTED_MODULE_2__[\"default\"],\r\n    items: _models_items__WEBPACK_IMPORTED_MODULE_3__[\"default\"]\r\n});\r\nvar accounts = _models_accounts__WEBPACK_IMPORTED_MODULE_2__[\"default\"];\r\nvar items = _models_items__WEBPACK_IMPORTED_MODULE_3__[\"default\"];\r\n\n\n//# sourceURL=webpack:///./src/express/mongoDB/index.ts?");
 
 /***/ }),
 
@@ -1028,7 +1072,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _cry
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _mongoDB_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../mongoDB/index */ \"./src/express/mongoDB/index.ts\");\n/* harmony import */ var _setCookie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./setCookie */ \"./src/express/routes/accounts/functions/setCookie.ts\");\n/* harmony import */ var _findByEmail__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./findByEmail */ \"./src/express/routes/accounts/functions/findByEmail.ts\");\n\r\n\r\n\r\nvar validateToken = function (res, cookie, cb) {\r\n    Object(_findByEmail__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(res, cookie.email, function (account) {\r\n        var clock = new Date();\r\n        if (!(account.session.token === cookie.token)) {\r\n            res.status(401).end('Not authenticated');\r\n            return;\r\n        }\r\n        else {\r\n            var session = account.session;\r\n            if (clock.getTime() > session.expiration) {\r\n                if (!session.rememberMe) {\r\n                    res.status(401).end('Not authenticated');\r\n                    return;\r\n                }\r\n                else {\r\n                    _mongoDB_index__WEBPACK_IMPORTED_MODULE_0__[\"accounts\"].findOneAndUpdate({ email: account.email }, { session: Object(_setCookie__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(res, account.email, session.derivatedKey, true) }, {}, function (err, doc) {\r\n                        try {\r\n                            if (err)\r\n                                throw err;\r\n                        }\r\n                        catch (exc) {\r\n                            console.error(exc);\r\n                            res.status(500).end();\r\n                            return;\r\n                        }\r\n                        doc.save();\r\n                    });\r\n                }\r\n            }\r\n        }\r\n        cb(account);\r\n    });\r\n};\r\n/* harmony default export */ __webpack_exports__[\"default\"] = (validateToken);\r\n\n\n//# sourceURL=webpack:///./src/express/routes/accounts/functions/validateToken.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _mongoDB_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../mongoDB/index */ \"./src/express/mongoDB/index.ts\");\n/* harmony import */ var _setCookie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./setCookie */ \"./src/express/routes/accounts/functions/setCookie.ts\");\n/* harmony import */ var _findByEmail__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./findByEmail */ \"./src/express/routes/accounts/functions/findByEmail.ts\");\n\r\n\r\n\r\nvar validateToken = function (res, cookie, cb) {\r\n    Object(_findByEmail__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(res, cookie.email, function (account) {\r\n        var clock = new Date();\r\n        if (account === null) {\r\n            res.status(404).end();\r\n            return;\r\n        }\r\n        if (!(account.session.token === cookie.token)) {\r\n            res.status(401).end('Not authenticated');\r\n            return;\r\n        }\r\n        else {\r\n            var session = account.session;\r\n            if (clock.getTime() > session.expiration) {\r\n                if (!session.rememberMe) {\r\n                    res.status(401).end('Not authenticated');\r\n                    return;\r\n                }\r\n                else {\r\n                    _mongoDB_index__WEBPACK_IMPORTED_MODULE_0__[\"accounts\"].findOneAndUpdate({ email: account.email }, { session: Object(_setCookie__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(res, account.email, session.derivatedKey, true) }, {}, function (err, doc) {\r\n                        try {\r\n                            if (err)\r\n                                throw err;\r\n                        }\r\n                        catch (exc) {\r\n                            console.error(exc);\r\n                            res.status(500).end();\r\n                            return;\r\n                        }\r\n                        doc.save();\r\n                    });\r\n                }\r\n            }\r\n        }\r\n        cb(account);\r\n    });\r\n};\r\n/* harmony default export */ __webpack_exports__[\"default\"] = (validateToken);\r\n\n\n//# sourceURL=webpack:///./src/express/routes/accounts/functions/validateToken.ts?");
 
 /***/ }),
 
@@ -1202,6 +1246,17 @@ eval("module.exports = require('mongoose');\n\n//# sourceURL=webpack:///external
 /***/ (function(module, exports) {
 
 eval("module.exports = require(\"net\");\n\n//# sourceURL=webpack:///external_%22net%22?");
+
+/***/ }),
+
+/***/ "os":
+/*!*********************!*\
+  !*** external "os" ***!
+  \*********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"os\");\n\n//# sourceURL=webpack:///external_%22os%22?");
 
 /***/ }),
 
